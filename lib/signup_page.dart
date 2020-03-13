@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
+import 'package:sadaeniswa/privacy_policy.dart';
 
 import 'dashboard.dart';
 
@@ -14,6 +15,7 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
+
     final user = TextFormField(
       keyboardType: TextInputType.text,
       autofocus: false,
@@ -191,7 +193,7 @@ class _SignupPageState extends State<SignupPage> {
               onTap: (){
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context){
-                      return null;
+                      return PrivacyPolicy();
                     }
                     )
                 );

@@ -20,11 +20,20 @@ class _AboutState extends State<About> {
     );
 
     final text_1= Text(
-      "Place of Peace",
+      "Place of Peace\n",
       style: TextStyle(
         fontSize: 45.0,
         color: Colors.black26,
         fontWeight: FontWeight.normal,
+      ),
+    );
+
+    final text_about= Text(
+      "This app is created for the Women's, who could not confess their problems with their families and friends. This app provide the platform which they can use and ask their problems and fine the solution without any identification. They also can post the solution for any problem. \n\n\n\n\n",
+      style: TextStyle(
+        fontSize: 18.0,
+        color: Colors.black,
+        fontWeight: FontWeight.w400,
       ),
     );
 
@@ -38,6 +47,8 @@ class _AboutState extends State<About> {
       ),
 
 
+
+
       backgroundColor: Colors.white,
 
       body: Center(
@@ -48,6 +59,7 @@ class _AboutState extends State<About> {
             SizedBox(height: 20.0,),
             place_of_peace,
             text_1,
+            text_about,
 
           ],
         ),

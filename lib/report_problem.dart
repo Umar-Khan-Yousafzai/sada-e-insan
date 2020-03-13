@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
 
@@ -12,45 +13,73 @@ class _ReportProblemState extends State<ReportProblem> {
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
-      alignment: Alignment.topLeft,
-      child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
-    );
-
-    final text_1= Text(
-      "Place of Peace",
-      style: TextStyle(
-        fontSize: 45.0,
-        color: Colors.black26,
-        fontWeight: FontWeight.normal,
-      ),
-    );
 
 
-    return Scaffold(
 
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Center(child: Text("SADA-E-NISWA")),
-
-      ),
-
-      backgroundColor: Colors.white,
-
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            SizedBox(height: 20.0,),
-            place_of_peace,
-            text_1,
-
-          ],
-        ),
-      ),
-    );
-
-
+//    return MaterialApp(
+//      title: "SADA-E-NISWA",
+//      home: Scaffold(
+//        appBar: AppBar(
+//          backgroundColor: Colors.pinkAccent,
+//          title: Text("SADA-E-NISWA", textAlign: TextAlign.right,),
+//        ),
+//        body: MyCustomForm(),
+//      ),
+//    );
+//  }
+//}
+//
+//// Create a Form widget.
+//class MyCustomForm extends StatefulWidget {
+//  @override
+//  MyCustomFormState createState() {
+//    return MyCustomFormState();
+//  }
+//}
+//
+//// Create a corresponding State class.
+//// This class holds data related to the form.
+//class MyCustomFormState extends State<MyCustomForm> {
+//  // Create a global key that uniquely identifies the Form widget
+//  // and allows validation of the form.
+//  //
+//  // Note: This is a GlobalKey<FormState>,
+//  // not a GlobalKey<MyCustomFormState>.
+//  final _formKey = GlobalKey<FormState>();
+//
+//  @override
+//  Widget build(BuildContext context) {
+//    // Build a Form widget using the _formKey created above.
+//    return Form(
+//        key: _formKey,
+//        child: Column(
+//        crossAxisAlignment: CrossAxisAlignment.start,
+//        children: <Widget>[
+//        TextFormField(
+//        validator: (value) {
+//    if (value.isEmpty) {
+//    return 'Please enter some text';
+//    }
+//    return null;
+//    },
+//    ),
+//    Padding(
+//    padding: const EdgeInsets.symmetric(vertical: 16.0),
+//    child: RaisedButton(
+//    onPressed: () {
+//    // Validate returns true if the form is valid, or false
+//    // otherwise.
+//    if (_formKey.currentState.validate()) {
+//    // If the form is valid, display a Snackbar.
+//    Scaffold.of(context)
+//        .showSnackBar(SnackBar(content: Text('Processing Data')));
+//    }
+//    },
+//    child: Text('Submit'),
+//    ),
+//    ),
+//        ],
+//        ),
+//    );
   }
 }

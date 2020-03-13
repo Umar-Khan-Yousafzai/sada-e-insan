@@ -17,11 +17,21 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     );
 
     final text_1= Text(
-      "Place of Peace",
+      "Place of Peace\n",
       style: TextStyle(
         fontSize: 45.0,
         color: Colors.black26,
         fontWeight: FontWeight.normal,
+      ),
+    );
+
+
+    final text_privacy_policy= Text(
+      "This app provide the full profe security for the users. Developers tried their best to make app properly secure which can't be hack, user privacy will be the safe on their accounts. \n\n\n\n\n",
+      style: TextStyle(
+        fontSize: 18.0,
+        color: Colors.black,
+        fontWeight: FontWeight.w400,
       ),
     );
 
@@ -41,6 +51,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
 
         place_of_peace,
         text_1,
+        text_privacy_policy,
 
       ],
     ),
