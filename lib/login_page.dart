@@ -144,7 +144,8 @@ class _LoginPageState extends State<LoginPage> {
 
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: Center(child: Text("SADA-E-NISWA")),
+       title: Center(child: Text("SADA-E-NISWA")),
+
 
       ),
 

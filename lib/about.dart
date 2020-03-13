@@ -37,6 +37,7 @@ class _AboutState extends State<About> {
 
       ),
 
+
       backgroundColor: Colors.white,
 
       body: Center(

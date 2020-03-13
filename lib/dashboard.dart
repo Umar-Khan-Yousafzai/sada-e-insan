@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
@@ -14,56 +16,48 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
 
-//  bool isSearching = false;
+  bool isSearching = false;
 
 
   @override
   Widget build(BuildContext context) {
-
 
       return Scaffold(
 
         appBar: AppBar(
 
           backgroundColor: Colors.pinkAccent,
-          title: Text('SADA-E-NISWA'),
 
+          title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
 
+              icon: Icon(Icons.search), hintText: "Search here..."),
+          ),
 
-//          title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: (){
+                setState(() {
+                  this.isSearching = !this.isSearching;
+                });
+              },
+            ),
+          ],
+
+            //title: Center(child: Text("SADA-E-NISWA")),
 //
-//              icon: Icon(Icons.search), hintText: "Search here..."),
-//          ),
-
 //          actions: <Widget>[
-//            IconButton(
-//              icon: Icon(Icons.search),
-//              onPressed: (){
-//                setState(() {
-//                  this.isSearching = !this.isSearching;
-//                });
+//         PopupMenuButton(
+//           itemBuilder: (context){
+//             return PopupMenuItem(
 //
+//             );
 //
-//              },
-//            ),
-//          ],
-
-          //title: Center(child: Text("SADA-E-NISWA")),
-
-          /* actions: <Widget>[
-         PopupMenuButton(
-           itemBuilder: (context){
-             return PopupMenuItem(
-
-             );
-
-           },
-         )
-       ],*/
+//           },
+//         )
+//       ],
 
         ),
-
-
 
         drawer: Drawer(
           child: ListView(
@@ -173,35 +167,12 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
 
-
         backgroundColor: Colors.white,
 
         body: Center(
         child: ListView(
           children: <Widget>[
-            ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.white30,
-                child: Icon(Icons.search),
-              ),
-              title: Form(
-                autovalidate: true,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white30,
-                  ),
-
-                  child: TextFormField(
-                    autovalidate: true,
-                    decoration: InputDecoration(
-
-                    ),
-                    keyboardType: TextInputType.text,
-                  ),
-                ),
-              )
-            ),
-
+//
 //          Row(
 //            children: <Widget>[
 //              Container(
@@ -216,7 +187,18 @@ class _DashboardState extends State<Dashboard> {
 //
 //              )
 //            ],
-//          ) ,
+//          )
+
+            ListTile(
+              title: Text(
+                  "Dashboard",
+                style: TextStyle(height: 1, fontSize: 25, color: Colors.green),
+              ),
+              leading: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.dashboard),
+              ),
+            ),
 
             ListTile(
               title: Text("Post Title..."),
@@ -225,7 +207,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -233,7 +217,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -241,7 +227,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -249,7 +237,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -257,7 +247,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -265,7 +257,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -273,7 +267,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -281,22 +277,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
-            ListTile(
-              title: Text("Post Title..."),
-              subtitle: Text("meta data of post..."),
-              leading: CircleAvatar(
-                child: Icon(Icons.person),
-              ),
-            ), Divider(),
-            ListTile(
-              title: Text("Post Title..."),
-              subtitle: Text("meta data of post..."),
-              leading: CircleAvatar(
-                child: Icon(Icons.person),
-              ),
-            ),
-            Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -304,7 +287,9 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -312,7 +297,29 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
               ),
             ),
+
             Divider(),
+
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+
+            Divider(),
+
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+
+            Divider(),
+
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -321,24 +328,40 @@ class _DashboardState extends State<Dashboard> {
 
               ),
             ),
+
           ],
           ),
       ),
 
+//
+//        floatingActionButton: FloatingActionButton(
+//          onPressed: () {
+//            Navigator.push(context,
+//                MaterialPageRoute(builder: (context){
+//                  return PostPage();
+//                }
+//                )
+//            );
+//
+//          },
+//          child: Icon(Icons.add),
+//          backgroundColor: Colors.pinkAccent,
+//
+//        ),
 
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
+       floatingActionButton: FloatingActionButton.extended(
+          icon: Icon(Icons.add),
+         backgroundColor: Colors.pinkAccent,
+          label: Text('Add Post'),
+
+          onPressed: (){
             Navigator.push(context,
                 MaterialPageRoute(builder: (context){
                   return PostPage();
                 }
                 )
             );
-
           },
-          child: Icon(Icons.add),
-          backgroundColor: Colors.pinkAccent,
-
         ),
 
 
