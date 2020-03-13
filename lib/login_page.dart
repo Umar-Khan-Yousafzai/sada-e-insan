@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sadaeniswa/about.dart';
+import 'package:sadaeniswa/catagories.dart';
+import 'package:sadaeniswa/forget_password_email.dart';
+import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
 
@@ -106,9 +110,34 @@ class _LoginPageState extends State<LoginPage> {
 
       ),
       onPressed: () {
-        Navigator.of(context).pushNamed(LoginPage.tag);
+//        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context){
+              return ForgetPasswordEmail();
+            }
+            )
+        );
       },
     );
+
+
+    final test = FlatButton(
+      child: Text(
+        'Catagories',
+        style: TextStyle(color: Colors.purple, fontSize: 15),
+
+      ),
+      onPressed: () {
+//        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context){
+              return Catagories();
+            }
+            )
+        );
+      },
+    );
+
 
 
     return Scaffold(
@@ -129,6 +158,15 @@ class _LoginPageState extends State<LoginPage> {
               ),
               title: Text("About"),
               subtitle: Text("app development"),
+              onTap: (){
+                Navigator.push(context,
+                    // ignore: missing_return
+                    MaterialPageRoute(builder: (context){
+                      return About();
+                    }
+                    )
+                );
+              },
             ),
 
             Divider(),
@@ -141,6 +179,14 @@ class _LoginPageState extends State<LoginPage> {
 
               title: Text("Help"),
               subtitle: Text("any problem?"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return Help();
+                    }
+                    )
+                );
+              },
 
             ),
 
@@ -166,6 +212,9 @@ class _LoginPageState extends State<LoginPage> {
             login_button,
             signup_button,
             forgot_label,
+            test,
+
+
           ],
         ),
       ),

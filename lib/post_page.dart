@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/dashboard.dart';
+import 'package:sadaeniswa/help.dart';
+import 'package:sadaeniswa/login_page.dart';
 
 class PostPage extends StatefulWidget {
   static String tag = 'post-page';
@@ -99,6 +102,14 @@ class _PostPageState extends State<PostPage> {
               ),
               title: Text("Home"),
               subtitle: Text("dashboard"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return Dashboard();
+                    }
+                    )
+                );
+              },
             ),
 
             Divider(),
@@ -109,6 +120,14 @@ class _PostPageState extends State<PostPage> {
               ),
               title: Text("About"),
               subtitle: Text("app development"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return About();
+                    }
+                    )
+                );
+              },
             ),
 
             Divider(),
@@ -121,21 +140,18 @@ class _PostPageState extends State<PostPage> {
 
               title: Text("Help"),
               subtitle: Text("any problem?"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return Help();
+                    }
+                    )
+                );
+              },
 
             ),
 
             Divider(),
-
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.account_box),
-
-              ),
-
-              title: Text("Logout"),
-              subtitle: Text("session will be closed"),
-
-            )
 
 
 

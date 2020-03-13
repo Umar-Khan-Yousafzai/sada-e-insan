@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sadaeniswa/about.dart';
+import 'package:sadaeniswa/help.dart';
+import 'package:sadaeniswa/login_page.dart';
 import 'package:sadaeniswa/post_page.dart';
+import 'package:sadaeniswa/privacy_policy.dart';
+import 'package:sadaeniswa/report_problem.dart';
 
 class Dashboard extends StatefulWidget {
   static String tag = 'dashboard';
@@ -8,160 +13,337 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  bool isSearching = false;
+
+//  bool isSearching = false;
 
 
   @override
   Widget build(BuildContext context) {
 
 
-    return Scaffold(
+      return Scaffold(
 
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
-            icon: Icon(Icons.search), hintText: "Search here..."),
+        appBar: AppBar(
+
+          backgroundColor: Colors.pinkAccent,
+          title: Text('SADA-E-NISWA'),
+
+
+
+//          title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
+//
+//              icon: Icon(Icons.search), hintText: "Search here..."),
+//          ),
+
+//          actions: <Widget>[
+//            IconButton(
+//              icon: Icon(Icons.search),
+//              onPressed: (){
+//                setState(() {
+//                  this.isSearching = !this.isSearching;
+//                });
+//
+//
+//              },
+//            ),
+//          ],
+
+          //title: Center(child: Text("SADA-E-NISWA")),
+
+          /* actions: <Widget>[
+         PopupMenuButton(
+           itemBuilder: (context){
+             return PopupMenuItem(
+
+             );
+
+           },
+         )
+       ],*/
+
         ),
 
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: (){
-              setState(() {
-                this.isSearching = !this.isSearching;
-              });
 
 
-            },
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+
+
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.apps),
+                ),
+                title: Text("About"),
+                subtitle: Text("app development"),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context){
+                        return About();
+                      }
+                      )
+                  );
+                },
+              ),
+
+              Divider(),
+
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.help),
+
+                ),
+
+                title: Text("Help"),
+                subtitle: Text("any problem?"),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context){
+                        return Help();
+                      }
+                      )
+                  );
+                },
+
+              ),
+
+              Divider(),
+
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.print),
+
+                ),
+
+                title: Text("Privacy Policy"),
+                subtitle: Text("we are confident about our application"),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context){
+                        return PrivacyPolicy();
+                      }
+                      )
+                  );
+                },
+
+              ),
+
+              Divider(),
+
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.report_problem),
+
+                ),
+
+                title: Text("Report a Problem"),
+                subtitle: Text("feel free to ask"),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context){
+                        return ReportProblem();
+                      }
+                      )
+                  );
+                },
+
+              ),
+
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.account_box),
+
+                ),
+
+                title: Text("Logout"),
+                subtitle: Text("session will be closed"),
+                onTap: (){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context){
+                        return LoginPage();
+                      }
+                      )
+                  );
+                },
+
+              )
+
+
+            ],
           ),
-        ],
+        ),
 
-        //title: Center(child: Text("SADA-E-NISWA")),
 
-        /* actions: <Widget>[
-       PopupMenuButton(
-         itemBuilder: (context){
-           return PopupMenuItem(
+        backgroundColor: Colors.white,
 
-           );
-
-         },
-       )
-     ],*/
-
-      ),
-      drawer: Drawer(
+        body: Center(
         child: ListView(
           children: <Widget>[
             ListTile(
               leading: CircleAvatar(
-                child: Icon(Icons.home),
+                backgroundColor: Colors.white30,
+                child: Icon(Icons.search),
               ),
-              title: Text("Home"),
-              subtitle: Text("dashboard"),
-            ),
+              title: Form(
+                autovalidate: true,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white30,
+                  ),
 
-            Divider(),
+                  child: TextFormField(
+                    autovalidate: true,
+                    decoration: InputDecoration(
 
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.apps),
-              ),
-              title: Text("About"),
-              subtitle: Text("app development"),
-            ),
-
-            Divider(),
-
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.help),
-
-              ),
-
-              title: Text("Help"),
-              subtitle: Text("any problem?"),
-
-            ),
-
-            Divider(),
-
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.print),
-
-              ),
-
-              title: Text("Privacy Policy"),
-              subtitle: Text("we are confident about our application"),
-
-            ),
-
-            Divider(),
-
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.report_problem),
-
-              ),
-
-              title: Text("Report a Problem"),
-              subtitle: Text("feel free to ask"),
-
-            ),
-
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.account_box),
-
-              ),
-
-              title: Text("Logout"),
-              subtitle: Text("session will be closed"),
-
-            )
-
-
-
-          ],
-        ),
-      ),
-
-      backgroundColor: Colors.white,
-/*
-      body: Center(
-      child: ListView(
-      shrinkWrap: true,
-      padding: EdgeInsets.only(left: 24.0, right: 24.0),
-      children: <Widget>[
-      ],
-        ),
-    ),
- */
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context){
-                return PostPage();
-              }
+                    ),
+                    keyboardType: TextInputType.text,
+                  ),
+                ),
               )
-          );
+            ),
 
-        },
-        child: Icon(Icons.add),
-        backgroundColor: Colors.pinkAccent,
+//          Row(
+//            children: <Widget>[
+//              Container(
+//                margin: EdgeInsets.all(10),
+//                padding: EdgeInsets.all(10),
+//                child: CircleAvatar(
+//                  backgroundColor: Colors.pinkAccent,
+//                  child: Icon(Icons.add),
+//                ),
+//              ),
+//              Container(
+//
+//              )
+//            ],
+//          ) ,
 
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ), Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+            ),
+            Divider(),
+            ListTile(
+              title: Text("Post Title..."),
+              subtitle: Text("meta data of post..."),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+
+              ),
+            ),
+          ],
+          ),
       ),
 
 
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context){
+                  return PostPage();
+                }
+                )
+            );
+
+          },
+          child: Icon(Icons.add),
+          backgroundColor: Colors.pinkAccent,
+
+        ),
 
 
 
-
-    );
-
-
+      );
 
 
 

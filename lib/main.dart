@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget{
          debugShowCheckedModeBanner: false,
          theme: ThemeData(
            primarySwatch: Colors.lightBlue,
+           brightness: Brightness.light,
            fontFamily: 'Canvas',
          ),
          home: LoginPage(),
@@ -24,3 +25,5 @@ class MyApp extends StatelessWidget{
        );
   }
 }
+
+//M A Hafeez

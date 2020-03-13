@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sadaeniswa/about.dart';
+import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
+
+import 'dashboard.dart';
 
 class SignupPage extends StatefulWidget {
   static String tag = 'signup-page';
@@ -62,23 +66,38 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
 
-    final alreadyHaveAccountLabel = FlatButton(
+//    final alreadyHaveAccountLabel = FlatButton(
+//      child: Text(
+//        'Already have account? Login here',
+//        style: TextStyle(color: Colors.purple, fontSize: 15),
+//      ),
+//      onPressed: () {
+//        // Navigator.of(context).pushNamed(LoginPage.tag);
+////        Navigator.push(context,
+////            MaterialPageRoute(builder: (context){
+////              return new LoginPage();
+////            }
+////            )
+////        );
+//      Navigator.push(context, MaterialPageRoute(
+//        builder: (context)=>LoginPage()
+//      ));
+//      },
+//    );
+
+
+    final signupWithGoogle = FlatButton(
       child: Text(
-        'Already have account? Login here',
+        'Signup with Google?',
         style: TextStyle(color: Colors.purple, fontSize: 15),
       ),
       onPressed: () {
-        // Navigator.of(context).pushNamed(LoginPage.tag);
-//        Navigator.push(context,
-//            MaterialPageRoute(builder: (context){
-//              return new LoginPage();
-//            }
-//            )
-//        );
-      Navigator.push(context, MaterialPageRoute(
-        builder: (context)=>LoginPage()
-      ));
+
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context)=>LoginPage()
+        ));
       },
+
     );
 
 
@@ -108,8 +127,34 @@ class _SignupPageState extends State<SignupPage> {
               leading: CircleAvatar(
                 child: Icon(Icons.apps),
               ),
+              title: Text("Login"),
+              subtitle: Text("already have account?"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return LoginPage();
+                    }
+                    )
+                );
+              },
+            ),
+
+              Divider(),
+
+            ListTile(
+              leading: CircleAvatar(
+                child: Icon(Icons.apps),
+              ),
               title: Text("About"),
               subtitle: Text("app development"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return About();
+                    }
+                    )
+                );
+              },
             ),
 
             Divider(),
@@ -122,6 +167,14 @@ class _SignupPageState extends State<SignupPage> {
 
               title: Text("Help"),
               subtitle: Text("any problem?"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return Help();
+                    }
+                    )
+                );
+              },
 
             ),
 
@@ -135,6 +188,14 @@ class _SignupPageState extends State<SignupPage> {
 
               title: Text("Privacy Policy"),
               subtitle: Text("we are confident about our application"),
+              onTap: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context){
+                      return null;
+                    }
+                    )
+                );
+              },
 
             )
 
@@ -160,7 +221,9 @@ class _SignupPageState extends State<SignupPage> {
             SizedBox(height: 24.0),
             SizedBox(height: 24.0),
             signupButton,
-            alreadyHaveAccountLabel,
+//            alreadyHaveAccountLabel,
+            signupWithGoogle
+
           ],
         ),
       ),
