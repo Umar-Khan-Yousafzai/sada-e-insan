@@ -108,16 +108,22 @@ class _SignupPageState extends State<SignupPage> {
       appBar: AppBar(
         backgroundColor: Colors.pink,
         title: Center(child: Text("SADA-E-NISWA")),
-        /* actions: <Widget>[
-       PopupMenuButton(
-         itemBuilder: (context){
-           return PopupMenuItem(
 
-           );
+        actions: <Widget>[
+          PopupMenuButton(
+            // ignore: missing_return
+            itemBuilder: (context){
+              var popupMenuItem = PopupMenuItem(
+                child: ListView(
+                  children: <Widget>[
+                  ],
+                ),
+              );
+            },
+          )
+        ],
 
-         },
-       )
-     ],*/
+
       ),
 
       drawer: Drawer(

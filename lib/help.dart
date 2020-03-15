@@ -33,6 +33,21 @@ class _HelpState extends State<Help> {
         backgroundColor: Colors.pink,
         title: Center(child: Text("SADA-E-NISWA")),
 
+        actions: <Widget>[
+          PopupMenuButton(
+            // ignore: missing_return
+            itemBuilder: (context){
+              var popupMenuItem = PopupMenuItem(
+                child: ListView(
+                  children: <Widget>[
+                  ],
+                ),
+              );
+            },
+          )
+        ],
+
+
       ),
 
       backgroundColor: Colors.white,
