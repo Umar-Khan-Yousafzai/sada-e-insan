@@ -16,9 +16,10 @@ class MyApp extends StatelessWidget{
          title: 'SADA-E-NISWA',
          debugShowCheckedModeBanner: false,
          theme: ThemeData(
-           primarySwatch: Colors.lightBlue,
+           primarySwatch: Colors.green,
            brightness: Brightness.light,
            fontFamily: 'Canvas',
+
          ),
          home: LoginPage(),
          routes: routes,
