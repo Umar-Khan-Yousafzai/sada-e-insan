@@ -29,9 +29,10 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: Colors.pinkAccent,
 
           title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
-
-              icon: Icon(Icons.search), hintText: "Search here..."),
+             /* icon: Icon(Icons.search), */
+              hintText: "Search here..."),
           ),
+
 
           actions: <Widget>[
             IconButton(
@@ -44,21 +45,27 @@ class _DashboardState extends State<Dashboard> {
             ),
           ],
 
-            //title: Center(child: Text("SADA-E-NISWA")),
-//
 //          actions: <Widget>[
 //         PopupMenuButton(
+//           // ignore: missing_return
 //           itemBuilder: (context){
-//             return PopupMenuItem(
-//
+//             var popupMenuItem = PopupMenuItem(
+//                 child: ListView(
+//                     children: <Widget>[
+//                     ],
+//                 ),
 //             );
-//
 //           },
 //         )
 //       ],
 
+
         ),
 
+        persistentFooterButtons: <Widget>[
+
+          Text("SADA-E-NISWA"),
+        ],
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
