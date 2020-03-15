@@ -29,10 +29,10 @@ class _DashboardState extends State<Dashboard> {
           backgroundColor: Colors.pinkAccent,
 
           title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
-             /* icon: Icon(Icons.search), */
+           //  icon: Icon(Icons.search),
+
               hintText: "Search here..."),
           ),
-
 
           actions: <Widget>[
             IconButton(
@@ -44,13 +44,15 @@ class _DashboardState extends State<Dashboard> {
               },
             ),
           ],
-
         ),
 
         persistentFooterButtons: <Widget>[
-
           Text("SADA-E-NISWA"),
         ],
+
+
+
+
 
         drawer: Drawer(
           child: ListView(
@@ -161,37 +163,12 @@ class _DashboardState extends State<Dashboard> {
 
         backgroundColor: Colors.white,
 
+
         body: Center(
+
+
         child: ListView(
           children: <Widget>[
-//
-//          Row(
-//            children: <Widget>[
-//              Container(
-//                margin: EdgeInsets.all(10),
-//                padding: EdgeInsets.all(10),
-//                child: CircleAvatar(
-//                  backgroundColor: Colors.pinkAccent,
-//                  child: Icon(Icons.add),
-//                ),
-//              ),
-//              Container(
-//
-//              )
-//            ],
-//          )
-
-            ListTile(
-              title: Text(
-                  "Dashboard",
-                style: TextStyle(height: 1, fontSize: 25, color: Colors.green),
-              ),
-              leading: CircleAvatar(
-                backgroundColor: Colors.white,
-                child: Icon(Icons.dashboard),
-              ),
-            ),
-
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -355,6 +332,8 @@ class _DashboardState extends State<Dashboard> {
             );
           },
         ),
+
+
 
 
 
