@@ -26,7 +26,7 @@ class _DashboardState extends State<Dashboard> {
 
         appBar: AppBar(
 
-          backgroundColor: Colors.pinkAccent,
+          backgroundColor: Colors.pinkAccent.shade100,
 
           title: !isSearching ? Text('SADA-E-NISWA') : TextField(decoration: InputDecoration(
            //  icon: Icon(Icons.search),
@@ -283,7 +283,7 @@ class _DashboardState extends State<Dashboard> {
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
               leading: CircleAvatar(
-                child: Icon(Icons.person),
+                child: Icon(Icons.add_a_photo),
               ),
             ),
 

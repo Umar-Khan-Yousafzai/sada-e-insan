@@ -17,16 +17,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
 
     final place_of_peace = Container(
-      alignment: Alignment.topLeft,
+      alignment: Alignment.center,
       child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
     );
 
     final text_1= Text(
       "Place of Peace",
+      textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: 45.0,
+        fontSize: 38.0,
         color: Colors.black26,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.normal
       ),
     );
 
