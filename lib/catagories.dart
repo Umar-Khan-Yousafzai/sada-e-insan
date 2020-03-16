@@ -133,12 +133,8 @@ class _CatagoriesState extends State<Catagories> {
           ],
         ),
       ),
-
-
-
     );
-
-
 
   }
 }
+

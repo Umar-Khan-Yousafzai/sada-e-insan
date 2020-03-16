@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
+import 'package:sadaeniswa/login_resource.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
-
+final get_username = TextEditingController();
+final get_password = TextEditingController();
+Authentication auth;
 class LoginPage extends StatefulWidget {
   static String tag = "login-page";
 
@@ -20,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final place_of_peace = Container(
       alignment: Alignment.center,
-
       child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
     );
 
@@ -28,10 +31,7 @@ class _LoginPageState extends State<LoginPage> {
       "Sada-e-Niswan",
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: 38.0,
-          color: Colors.black54,
-          fontWeight: FontWeight.normal
-      ),
+          fontSize: 38.0, color: Colors.black54, fontWeight: FontWeight.normal),
     );
 
     final user = new Theme(
@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
           primaryColorDark: Colors.red,
         ),
         child: TextFormField(
+          controller: get_username,
           keyboardType: TextInputType.text,
           autofocus: false,
           decoration: InputDecoration(
@@ -83,10 +84,22 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          //Navigator.of(context).pushNamed(SignupPage.tag);
+        auth.signInWithGoogle().whenComplete((){
+          Navigator.of(context).pushNamed(SignupPage.tag);
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return Dashboard();
-          }));
+           return Dashboard();
+          }
+          )
+          );
+          // return showDialog(
+          //    context: context,
+          //      builder: (context)
+          //          {
+          //              return AlertDialog(content: Text(get_username.text));
+//              }
+
+          //  );
+    });
         },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
@@ -137,9 +150,9 @@ class _LoginPageState extends State<LoginPage> {
         }));
       },
     );
-    void Sign_in(){
 
-    }
+
+    void _signInButton() {}
 
     return Scaffold(
       appBar: AppBar(
