@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
+import 'package:sadaeniswa/loginwithemail.dart';
 import 'package:sadaeniswa/post_page.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'package:sadaeniswa/report_problem.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sadaeniswa/auth_rss.dart';
 
+auth_resources authr =new auth_resources();
 class Dashboard extends StatefulWidget {
   static String tag = 'dashboard';
   @override
@@ -146,6 +151,7 @@ class _DashboardState extends State<Dashboard> {
                 title: Text("Logout"),
                 subtitle: Text("session will be closed"),
                 onTap: (){
+                authr.signOutGoogle();
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context){
                         return LoginPage();

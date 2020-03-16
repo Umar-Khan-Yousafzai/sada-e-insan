@@ -3,9 +3,9 @@ import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
-
+import 'package:sadaeniswa/auth_rss.dart';
 import 'dashboard.dart';
-
+auth_resources authr = new auth_resources();
 class SignupPage extends StatefulWidget {
   static String tag = 'signup-page';
   @override
@@ -94,37 +94,22 @@ class _SignupPageState extends State<SignupPage> {
         style: TextStyle(color: Colors.purple, fontSize: 15),
       ),
       onPressed: () {
+        authr.signInWithGoogle().whenComplete(() {
+          Navigator.of(context).pushNamed('/dashboard');
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Dashboard();
+          }
+          )
+          );
+        });}
+    );
 
-        Navigator.push(context, MaterialPageRoute(
-            builder: (context)=>LoginPage()
-        ));
-      },
 
     );
 
 
     return Scaffold(
 
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Center(child: Text("SADA-E-NISWA")),
-
-        actions: <Widget>[
-          PopupMenuButton(
-            // ignore: missing_return
-            itemBuilder: (context){
-              var popupMenuItem = PopupMenuItem(
-                child: ListView(
-                  children: <Widget>[
-                  ],
-                ),
-              );
-            },
-          )
-        ],
-
-
-      ),
 
       drawer: Drawer(
         child: ListView(
@@ -214,6 +199,26 @@ class _SignupPageState extends State<SignupPage> {
       ),
 
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.pink,
+        title: Center(child: Text("SADA-E-NISWA")),
+
+        actions: <Widget>[
+          PopupMenuButton(
+            // ignore: missing_return
+            itemBuilder: (context){
+              var popupMenuItem = PopupMenuItem(
+                child: ListView(
+                  children: <Widget>[
+                  ],
+                ),
+              );
+            },
+          )
+        ],
+
+
+      ),
       body: Center(
         child: ListView(
           shrinkWrap: true,

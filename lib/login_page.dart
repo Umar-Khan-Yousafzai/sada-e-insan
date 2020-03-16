@@ -12,50 +12,17 @@ import 'package:sadaeniswa/dashboard.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:sadaeniswa/loginwithemail.dart';
 final get_username = TextEditingController();
 final get_password = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   static String tag = "login-page";
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-
-  Future<String> signInWithGoogle() async {
-    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-    final GoogleSignInAuthentication googleSignInAuthentication =
-    await googleSignInAccount.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
-      accessToken: googleSignInAuthentication.accessToken,
-      idToken: googleSignInAuthentication.idToken,
-    );
-
-    final AuthResult authResult = await _auth.signInWithCredential(credential);
-    final FirebaseUser user = authResult.user;
-
-    assert(!user.isAnonymous);
-    assert(await user.getIdToken() != null);
-
-    final FirebaseUser currentUser = await _auth.currentUser();
-    assert(user.uid == currentUser.uid);
-
-    return 'signInWithGoogle succeeded: $user';
-  }
-
-  void signOutGoogle() async{
-    await googleSignIn.signOut();
-
-    print("User Sign Out");
-  }
-
-
   @override
   Widget build(BuildContext context) {
     final place_of_peace = Container(
@@ -69,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       style: TextStyle(
           fontSize: 38.0, color: Colors.black54, fontWeight: FontWeight.normal),
     );
-
+/*
     final user = new Theme(
         data: new ThemeData(
           primaryColor: Colors.redAccent,
@@ -112,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                 color: Colors.pink,
               ),
             )));
-
+*/
     final login_button = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
@@ -120,7 +87,10 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          signInWithGoogle().whenComplete(() {
+          Navigator.of(context).pushNamed('/loginpage_email');
+
+
+          /* signInWithGoogle().whenComplete(() {
             Navigator.of(context).pushNamed('/dashboard');
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Dashboard();
@@ -128,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
             )
             );
           });
-
+*/
           // return showDialog(
           //    context: context,
           //      builder: (context)
@@ -252,10 +222,10 @@ class _LoginPageState extends State<LoginPage> {
             place_of_peace,
             text_1,
             SizedBox(height: 35.0),
-            user,
-            SizedBox(height: 15.0),
-            password,
-            SizedBox(height: 10.0),
+  //          user,
+           // SizedBox(height: 15.0),
+    //        password,
+//            SizedBox(height: 10.0),
             login_button,
             signup_button,
             forgot_label,
