@@ -6,12 +6,16 @@ import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_resource.dart';
+//import 'package:sadaeniswa/login_resource.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 final get_username = TextEditingController();
 final get_password = TextEditingController();
-Authentication auth;
+
 class LoginPage extends StatefulWidget {
   static String tag = "login-page";
 
@@ -20,6 +24,38 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+  Future<String> signInWithGoogle() async {
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+    await googleSignInAccount.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.getCredential(
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final AuthResult authResult = await _auth.signInWithCredential(credential);
+    final FirebaseUser user = authResult.user;
+
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
+
+    final FirebaseUser currentUser = await _auth.currentUser();
+    assert(user.uid == currentUser.uid);
+
+    return 'signInWithGoogle succeeded: $user';
+  }
+
+  void signOutGoogle() async{
+    await googleSignIn.signOut();
+
+    print("User Sign Out");
+  }
+
+
   @override
   Widget build(BuildContext context) {
     final place_of_peace = Container(
@@ -84,29 +120,29 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-        auth.signInWithGoogle().whenComplete((){
-          Navigator.of(context).pushNamed(SignupPage.tag);
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-           return Dashboard();
-          }
-          )
-          );
+          signInWithGoogle().whenComplete(() {
+            Navigator.of(context).pushNamed(SignupPage.tag);
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Dashboard();
+            }
+            )
+            );
+          });
+
           // return showDialog(
           //    context: context,
           //      builder: (context)
           //          {
           //              return AlertDialog(content: Text(get_username.text));
-//              }
+           },//on pressed
 
-          //  );
-    });
-        },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
         child: Text('Log In',
             style: TextStyle(color: Colors.white, fontSize: 17.0)),
-      ),
+    )
     );
+
     final signup_button = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
