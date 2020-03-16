@@ -104,8 +104,7 @@ class _SignupPageState extends State<SignupPage> {
         });}
     );
 
-
-    );
+    
 
 
     return Scaffold(
