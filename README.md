@@ -1,7 +1,10 @@
 # sadaeniswa
 
 SADA-E-NISWA application will make women&#x27;s life.
+This app is using Flutter and Firebase
 
+It is being developed by Developer Student Club Core-team member
+M.Arslan Hafeez
 ## Getting Started
 
 This project is a starting point for a Flutter application.
