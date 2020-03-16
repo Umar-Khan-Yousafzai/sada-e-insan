@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           signInWithGoogle().whenComplete(() {
-            Navigator.of(context).pushNamed(SignupPage.tag);
+            Navigator.of(context).pushNamed('/dashboard');
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Dashboard();
             }

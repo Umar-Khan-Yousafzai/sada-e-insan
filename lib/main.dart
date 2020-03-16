@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-
-
+import 'dashboard.dart';
+import 'about.dart';
+import 'signup_page.dart';
+import 'post_page.dart';
+import 'help.dart';
+import 'privacy_policy.dart';
+import 'report_problem.dart';
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget{
@@ -22,7 +27,13 @@ class MyApp extends StatelessWidget{
 
          ),
          home: LoginPage(),
-         routes: routes,
+         initialRoute: '/login_route',
+         routes: {
+           '/login_route': (context) => LoginPage(),
+           '/dashboard': (context) => Dashboard(),
+           '/signup':(context) => SignupPage(),
+         },
+
        );
   }
 }
