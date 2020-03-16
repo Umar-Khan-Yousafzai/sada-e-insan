@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
@@ -31,30 +33,49 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final user = TextFormField(
+
+    final user = new Theme(
+      data: new ThemeData(
+        primaryColor: Colors.redAccent,
+        primaryColorDark: Colors.red,
+      ),
+       child: new TextFormField(
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
-        labelText: 'User',
         hintText: 'User Name',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(  borderSide: new BorderSide(color: Colors.teal),borderRadius:BorderRadius.circular(32.0)),
+        prefixIcon: const Icon(
+          Icons.person,
+          color: Colors.pink,
+        ),
 
-      ),
+        ),
 
+    )
     );
 
-    final password = TextFormField(
+    final password = new Theme(
+        data: new ThemeData(
+          primaryColor: Colors.redAccent,
+          primaryColorDark: Colors.red,
+        ),
+        child:TextFormField(
       autofocus: false,
       obscureText: true,
       decoration: InputDecoration(
         labelText: 'Password',
         hintText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(  borderSide: new BorderSide(color: Colors.teal),borderRadius:BorderRadius.circular(32.0)),
+        prefixIcon: const Icon(
+          Icons.security,
+          color: Colors.pink,
+        ),
 
-      ),
-
+      )
+    )
     );
 
 
