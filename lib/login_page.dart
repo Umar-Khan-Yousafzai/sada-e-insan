@@ -10,6 +10,7 @@ import 'package:sadaeniswa/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = "login-page";
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -17,67 +18,63 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-
     final place_of_peace = Container(
       alignment: Alignment.center,
-      child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
+
+      child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
     );
 
-    final text_1= Text(
-      "Place of Peace",
+    final text_1 = Text(
+      "Sada-e-Niswan",
       textAlign: TextAlign.center,
       style: TextStyle(
-        fontSize: 38.0,
-        color: Colors.black26,
-        fontWeight: FontWeight.normal
+          fontSize: 38.0,
+          color: Colors.black54,
+          fontWeight: FontWeight.normal
       ),
     );
-
 
     final user = new Theme(
-      data: new ThemeData(
-        primaryColor: Colors.redAccent,
-        primaryColorDark: Colors.red,
-      ),
-       child: new TextFormField(
-      keyboardType: TextInputType.text,
-      autofocus: false,
-      decoration: InputDecoration(
-        hintText: 'User Name',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(  borderSide: new BorderSide(color: Colors.teal),borderRadius:BorderRadius.circular(32.0)),
-        prefixIcon: const Icon(
-          Icons.person,
-          color: Colors.pink,
+        data: new ThemeData(
+          primaryColor: Colors.redAccent,
+          primaryColorDark: Colors.red,
         ),
-
-        ),
-
-    )
-    );
+        child: TextFormField(
+          keyboardType: TextInputType.text,
+          autofocus: false,
+          decoration: InputDecoration(
+            hintText: 'User Name',
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(
+                borderSide: new BorderSide(color: Colors.teal),
+                borderRadius: BorderRadius.circular(32.0)),
+            prefixIcon: const Icon(
+              Icons.person,
+              color: Colors.pink,
+            ),
+          ),
+        ));
 
     final password = new Theme(
         data: new ThemeData(
           primaryColor: Colors.redAccent,
           primaryColorDark: Colors.red,
         ),
-        child:TextFormField(
-      autofocus: false,
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Password',
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(  borderSide: new BorderSide(color: Colors.teal),borderRadius:BorderRadius.circular(32.0)),
-        prefixIcon: const Icon(
-          Icons.security,
-          color: Colors.pink,
-        ),
-
-      )
-    )
-    );
-
+        child: TextFormField(
+            autofocus: false,
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: 'Password',
+              hintText: 'Password',
+              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              border: OutlineInputBorder(
+                  borderSide: new BorderSide(color: Colors.teal),
+                  borderRadius: BorderRadius.circular(32.0)),
+              prefixIcon: const Icon(
+                Icons.security,
+                color: Colors.pink,
+              ),
+            )));
 
     final login_button = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -87,21 +84,16 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           //Navigator.of(context).pushNamed(SignupPage.tag);
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context){
-                return Dashboard();
-              }
-              )
-          );
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return Dashboard();
+          }));
         },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
-        child: Text(
-            'Log In', style: TextStyle(color: Colors.white, fontSize: 17.0)),
+        child: Text('Log In',
+            style: TextStyle(color: Colors.white, fontSize: 17.0)),
       ),
     );
-
     final signup_button = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
@@ -110,137 +102,104 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           //Navigator.of(context).pushNamed(SignupPage.tag);
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context){
-                return SignupPage();
-              }
-              )
-          );
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return SignupPage();
+          }));
         },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
-        child: Text(
-            'Sign Up', style: TextStyle(color: Colors.white, fontSize: 17.0)),
+        child: Text('Sign Up',
+            style: TextStyle(color: Colors.white, fontSize: 17.0)),
       ),
     );
-
     final forgot_label = FlatButton(
       child: Text(
         'Forget Password?',
         style: TextStyle(color: Colors.purple, fontSize: 15),
-
       ),
       onPressed: () {
 //        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context){
-              return ForgetPasswordEmail();
-            }
-            )
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return ForgetPasswordEmail();
+        }));
       },
     );
-
 
     final test = FlatButton(
       child: Text(
         'Catagories',
         style: TextStyle(color: Colors.purple, fontSize: 15),
-
       ),
       onPressed: () {
 //        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context){
-              return Catagories();
-            }
-            )
-        );
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return Catagories();
+        }));
       },
     );
+    void Sign_in(){
 
-
+    }
 
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Colors.pink,
-      title: Center(child: Text("SADA-E-NISWA")),
-
-
-          actions: <Widget>[
-         PopupMenuButton(
-           // ignore: missing_return
-           itemBuilder: (context){
-             var popupMenuItem = PopupMenuItem(
-                 child: ListView(
-                     children: <Widget>[
-                     ],
-                 ),
-             );
-           },
-         )
-       ],
-
-
+        title: Center(child: Text("SADA-E-NISWA")),
+        actions: <Widget>[
+          PopupMenuButton(
+            // ignore: missing_return
+            itemBuilder: (context) {
+              var popupMenuItem = PopupMenuItem(
+                child: ListView(
+                  children: <Widget>[],
+                ),
+              );
+            },
+          )
+        ],
       ),
-
-
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-
             ListTile(
               leading: CircleAvatar(
                 child: Icon(Icons.apps),
               ),
               title: Text("About"),
               subtitle: Text("app development"),
-              onTap: (){
+              onTap: () {
                 Navigator.push(context,
                     // ignore: missing_return
-                    MaterialPageRoute(builder: (context){
-                      return About();
-                    }
-                    )
-                );
+                    MaterialPageRoute(builder: (context) {
+                  return About();
+                }));
               },
             ),
-
             Divider(),
-
             ListTile(
               leading: CircleAvatar(
                 child: Icon(Icons.help),
-
               ),
-
               title: Text("Help"),
               subtitle: Text("any problem?"),
-              onTap: (){
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context){
-                      return Help();
-                    }
-                    )
-                );
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Help();
+                }));
               },
-
             ),
-
           ],
         ),
       ),
-
       backgroundColor: Colors.white,
-
       body: Center(
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
-            SizedBox(height: 20.0,),
+            SizedBox(
+              height: 20.0,
+            ),
             place_of_peace,
             text_1,
             SizedBox(height: 35.0),
@@ -252,8 +211,6 @@ class _LoginPageState extends State<LoginPage> {
             signup_button,
             forgot_label,
             test,
-
-
           ],
         ),
       ),
