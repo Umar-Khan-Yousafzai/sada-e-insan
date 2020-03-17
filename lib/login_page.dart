@@ -87,6 +87,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
+          dispose();
           Navigator.of(context).pushNamed('/loginpage_email');
 
 
@@ -121,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           //Navigator.of(context).pushNamed(SignupPage.tag);
+          dispose();
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return SignupPage();
           }));
@@ -132,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
     final forgot_label = FlatButton(
-      child: Text(
+      child: Text( 
         'Forget Password?',
         style: TextStyle(color: Colors.purple, fontSize: 15),
       ),
@@ -234,5 +236,6 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+
   }
 }

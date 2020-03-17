@@ -152,6 +152,7 @@ class _DashboardState extends State<Dashboard> {
                 subtitle: Text("session will be closed"),
                 onTap: (){
                 authr.signOutGoogle();
+                dispose();
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context){
                         return LoginPage();

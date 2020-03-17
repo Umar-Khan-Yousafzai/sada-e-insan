@@ -59,7 +59,7 @@ class _SignupPageState extends State<SignupPage> {
 
         onPressed: () {
           Navigator.of(context).pushNamed(LoginPage.tag);
-
+          dispose();
         },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
@@ -95,6 +95,8 @@ class _SignupPageState extends State<SignupPage> {
       ),
       onPressed: () {
         authr.signInWithGoogle().whenComplete(() {
+          AlertDialog(content: Text("Please Wait"));
+          dispose();
           Navigator.of(context).pushNamed('/dashboard');
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Dashboard();
