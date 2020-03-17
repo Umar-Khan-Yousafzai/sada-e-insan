@@ -38,5 +38,55 @@ import 'package:google_sign_in/google_sign_in.dart';
 
     print("User Sign Out");
   }
+//----------------------------------------------------------------SignUp/Sign in With Email and Password--------------------------------//
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<FirebaseUser> handleSignInEmail(String email, String password) async {
+
+    AuthResult result = await auth.signInWithEmailAndPassword(email: email, password: password);
+    final FirebaseUser user = result.user;
+
+    assert(user != null);
+    assert(await user.getIdToken() != null);
+
+    final FirebaseUser currentUser = await auth.currentUser();
+    assert(user.uid == currentUser.uid);
+
+    print('signInEmail succeeded: $user');
+
+    return user;
+
+  }
+
+  Future<FirebaseUser> handleSignUp(email, password) async {
+
+    AuthResult result = await auth.createUserWithEmailAndPassword(email: email, password: password);
+    final FirebaseUser user = result.user;
+
+    assert (user != null);
+    assert (await user.getIdToken() != null);
+    try {
+        await user.sendEmailVerification();
+    }
+    catch (e) {
+    print("An error occured while trying to send email verification");
+    print(e.message);
+    }
+return user;
+
+
+  }
 
 }
+
+class Authenticate_Email_Password
+{
+
+}
+
+
+
+
+
+

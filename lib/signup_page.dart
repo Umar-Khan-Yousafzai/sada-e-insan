@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
+import 'package:sadaeniswa/loginwithemail.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'package:sadaeniswa/auth_rss.dart';
 import 'dashboard.dart';
 auth_resources authr = new auth_resources();
+final get_email = TextEditingController();
+final get_password = TextEditingController();
+
+
 class SignupPage extends StatefulWidget {
   static String tag = 'signup-page';
   @override
@@ -28,8 +33,10 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
 
-    final email = TextFormField(
-      keyboardType: TextInputType.emailAddress,
+    final email = Theme(data: new ThemeData(),
+        child: TextFormField(
+          keyboardType: TextInputType.text,
+      controller: get_email,
       autofocus: false,
       decoration: InputDecoration(
         labelText: 'Email',
@@ -37,9 +44,12 @@ class _SignupPageState extends State<SignupPage> {
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
+    )
     );
 
-    final password = TextFormField(
+    final password =  Theme(data: new ThemeData(),
+    child: TextFormField(
+      controller: get_password,
       autofocus: false,
       obscureText: true,
       decoration: InputDecoration(
@@ -48,6 +58,7 @@ class _SignupPageState extends State<SignupPage> {
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
+    )
     );
 
     final signupButton = Padding(
@@ -58,35 +69,21 @@ class _SignupPageState extends State<SignupPage> {
         ),
 
         onPressed: () {
-          Navigator.of(context).pushNamed(LoginPage.tag);
-          dispose();
-        },
+          authr.handleSignUp(get_email.text.toString(), get_password.text.toString()).whenComplete(() {
+                  Navigator.of(context).pushNamed('/login_route');
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Dashboard();})
+
+            );
+          }
+          );
+          },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
         child: Text(
             'Sign Up', style: TextStyle(color: Colors.white, fontSize: 17.0)),
-      ),
+      )
     );
-
-//    final alreadyHaveAccountLabel = FlatButton(
-//      child: Text(
-//        'Already have account? Login here',
-//        style: TextStyle(color: Colors.purple, fontSize: 15),
-//      ),
-//      onPressed: () {
-//        // Navigator.of(context).pushNamed(LoginPage.tag);
-////        Navigator.push(context,
-////            MaterialPageRoute(builder: (context){
-////              return new LoginPage();
-////            }
-////            )
-////        );
-//      Navigator.push(context, MaterialPageRoute(
-//        builder: (context)=>LoginPage()
-//      ));
-//      },
-//    );
-
 
     final signupWithGoogle = FlatButton(
       child: Text(
@@ -112,8 +109,6 @@ class _SignupPageState extends State<SignupPage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-
-
             ListTile(
               leading: CircleAvatar(
                 child: Icon(Icons.apps),
@@ -123,7 +118,7 @@ class _SignupPageState extends State<SignupPage> {
               onTap: (){
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context){
-                      return LoginPage();
+                      return LoginWithEmailPage();
                     }
                     )
                 );
@@ -223,6 +218,7 @@ class _SignupPageState extends State<SignupPage> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             // logo,
+            
             SizedBox(height: 50.0),
             user,
             SizedBox(height: 15.0),

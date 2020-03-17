@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget{
          ),
          home: LoginPage(),
          initialRoute: '/login_route',
+
          routes: {
            '/login_route': (context) => LoginPage(),
            '/dashboard': (context) => Dashboard(),
@@ -38,8 +39,32 @@ class MyApp extends StatelessWidget{
 
          },
 
+
        );
+
+
   }
+
+
+}
+class Routing{
+Route _createRoute(Widget routes) {
+  return PageRouteBuilder(
+  pageBuilder: (context, animation, secondaryAnimation) => routes,
+  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    var begin = Offset(0.0, 1.0);
+    var end = Offset.zero;
+    var curve = Curves.ease;
+
+    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+    return SlideTransition(
+      position: animation.drive(tween),
+      child: child,
+    );
+  },
+);
+}
 }
 
 //M A Hafeez IUB RYK
