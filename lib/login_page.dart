@@ -6,7 +6,6 @@ import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
-//import 'package:sadaeniswa/login_resource.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'dart:async';
@@ -87,9 +86,8 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          dispose();
           Navigator.of(context).pushNamed('/loginpage_email');
-
+          super.deactivate();
 
           /* signInWithGoogle().whenComplete(() {
             Navigator.of(context).pushNamed('/dashboard');
@@ -122,9 +120,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           //Navigator.of(context).pushNamed(SignupPage.tag);
-          dispose();
+
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return SignupPage();
+            super.dispose();
           }));
         },
         padding: EdgeInsets.all(12),
@@ -158,9 +157,6 @@ class _LoginPageState extends State<LoginPage> {
         }));
       },
     );
-
-
-    void _signInButton() {}
 
     return Scaffold(
       appBar: AppBar(

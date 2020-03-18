@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget{
            '/signup':(context) => SignupPage(),
            '/loginpage_email':(context) => LoginWithEmailPage(),
 
-
          },
 
 
