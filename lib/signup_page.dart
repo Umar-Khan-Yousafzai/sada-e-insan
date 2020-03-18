@@ -129,7 +129,7 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(32.0)),
                     ),
                   ),
-             //     SizedBox(height: 24.0),
+                  //     SizedBox(height: 24.0),
                   Padding(
                       // signup button
                       padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -157,25 +157,44 @@ class _SignupPageState extends State<SignupPage> {
                       )),
                   //SizedBox(height: 24.0),
                   FlatButton(
-                      child: Text(
-                        'Signup with Google?',
-                        style: TextStyle(color: Colors.purple, fontSize: 15)
-                      ),
+                      child: Text('Signup with Google?',
+                          style: TextStyle(color: Colors.purple, fontSize: 15)),
                       onPressed: () {
                         authr.signInWithGoogle().whenComplete(() {
-                          AlertDialog(content: Text("Please Wait"));
-                          dispose();
-                          Navigator.of(context).pushNamed('/dashboard');
-                           //Navigator Push
+                          if (GestureDetector(onTapCancel: () {
+                                // Navigator.of(context).pushNamed('/dashboard');
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(builder: (context) {
+                                  return Dashboard();
+                                }
+                                )
+                                );
+                              }) ==
+                              null)
+                            ;
+                          else {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (context) {
+                              return SignupPage();
+                            }));
+                          }
+                          ;
                         });
                       }),
-                 // SizedBox(height: 9.0),
+                  // SizedBox(height: 9.0),
                   FlatButton(
                       child: Text(
                         'Already have an account?',
                         style: TextStyle(color: Colors.purple, fontSize: 15),
                       ),
-                      onPressed: () {  Navigator.of(context).pushNamed('/loginpage_email');} // On Pressed
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) {
+                          return LoginWithEmailPage();
+                        }
+                        )
+                        );
+                      } // On Pressed
                       )
                 ],
               ),

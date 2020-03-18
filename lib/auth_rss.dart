@@ -29,7 +29,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
-
     return 'signInWithGoogle succeeded: $user';
   }
 
@@ -58,7 +57,7 @@ import 'package:google_sign_in/google_sign_in.dart';
     return user;
 
   }
-
+//-------------------------------------------------------EmailPassword------------------------------------------------//
   Future<FirebaseUser> handleSignUp(email, password) async {
 
     AuthResult result = await auth.createUserWithEmailAndPassword(email: email, password: password);
