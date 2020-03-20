@@ -220,8 +220,6 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
               },
             )
           ],
-
-
         ),
         body: Center(
           child: ListView(
@@ -243,14 +241,5 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
           ),
         ),
       );
-
-
-
   }
   }
-
-class login_auth
-{
-
-
-}

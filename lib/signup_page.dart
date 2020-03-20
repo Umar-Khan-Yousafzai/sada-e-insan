@@ -91,6 +91,7 @@ class _SignupPageState extends State<SignupPage> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             Form(
+              key: _formKey,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 15.0),
@@ -107,7 +108,7 @@ class _SignupPageState extends State<SignupPage> {
                     decoration: InputDecoration(
                       labelText: 'Email',
                       hintText: 'Your Active Email Address',
-                      errorText: "Enter Correct Mail",
+                     // errorText: "Enter Correct Mail",
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
@@ -116,13 +117,20 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   SizedBox(height: 15.0),
                   TextFormField(
+                    validator: (value) {
+                      if (value.length<5) {
+                        return 'Password is Weak';
+                      }
+                      return null;
+                    },
+
                     controller: get_password,
                     autofocus: false,
                     obscureText: true,
                     decoration: InputDecoration(
                       labelText: 'New Password',
                       hintText: 'Enter New Password',
-                      errorText: "Error",
+                      //errorText: "Error",
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
@@ -138,16 +146,23 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                         onPressed: () {
-                          authr
-                              .handleSignUp(get_email.text.toString(),
-                                  get_password.text.toString())
-                              .whenComplete(() {
-                            Navigator.of(context).pushNamed('/login_route');
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return Dashboard();
-                            }));
-                          });
+
+
+                          if (_formKey.currentState.validate()) {
+                            // If the form is valid, display a Snackbar.
+
+                            authr.handleSignUp(get_email.text.toString(),
+                                get_password.text.toString())
+                                .whenComplete(() {
+                              Navigator.of(context).pushNamed('/login_route');
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return Dashboard();
+                                  }));
+                            });
+
+                          }
+
                         },
                         padding: EdgeInsets.all(12),
                         color: Colors.pinkAccent,
