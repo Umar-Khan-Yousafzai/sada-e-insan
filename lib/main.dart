@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sadaeniswa/loginwithemail.dart';
 import 'login_page.dart';
 import 'dashboard.dart';
 import 'about.dart';
@@ -9,6 +8,7 @@ import 'help.dart';
 import 'privacy_policy.dart';
 import 'report_problem.dart';
 import 'loginwithemail.dart';
+
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget{
   final routes = <String, WidgetBuilder>{
@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+       var pageRoute;
        return MaterialApp(
          title: 'SADA-E-NISWA',
          debugShowCheckedModeBanner: false,
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget{
            fontFamily: 'Canvas',
 
          ),
-         home: LoginPage(),
+
+         home: LoginWithEmailPage(),
          initialRoute: '/login_route',
 
          routes: {
@@ -37,7 +39,6 @@ class MyApp extends StatelessWidget{
            '/loginpage_email':(context) => LoginWithEmailPage(),
 
          },
-
 
        );
 

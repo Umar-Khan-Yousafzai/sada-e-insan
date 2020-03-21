@@ -1,6 +1,7 @@
 
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:flutter/material.dart';
@@ -38,6 +39,21 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
 {
   @override
   Widget build(BuildContext context) {
+
+    final place_of_peace = Container(
+      alignment: Alignment.topLeft,
+      child: Icon(Icons.people,color: Colors.pinkAccent,size: 40.0),
+    );
+
+    final text_1 = Text(
+      "Place of Peace\n",
+      style: TextStyle(
+        fontSize: 30.0,
+        color: Colors.black26,
+        fontWeight: FontWeight.normal,
+      ),
+    );
+
     final email = new Theme(
       data: new ThemeData(
         primaryColor: Colors.redAccent,
@@ -48,7 +64,7 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
         autofocus: false,
         decoration: InputDecoration(
           labelText: 'Email',
-          hintText: 'Enter your Email',
+          hintText: 'Enter your Email...',
           contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           border: OutlineInputBorder(
               borderSide: new BorderSide(color: Colors.pinkAccent),
@@ -61,24 +77,27 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
       ),
       );
 
-
-      final password = new Theme(
+    final password = new Theme(
       data: new ThemeData(
-      primaryColor: Colors.redAccent,
-      primaryColorDark: Colors.red,
-    ),
-
-      child:TextFormField(
-        keyboardType: TextInputType.text,
-        autofocus: false,
-        decoration: InputDecoration(
-          labelText: 'Password',
-          hintText: 'Enter Your Password',
-          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-
-        ),
-      )
+        primaryColor: Colors.redAccent,
+        primaryColorDark: Colors.red,
+      ),
+      child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          autofocus: false,
+          decoration: InputDecoration(
+            labelText: 'Password',
+            hintText: 'Enter your Password...',
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+            border: OutlineInputBorder(
+                borderSide: new BorderSide(color: Colors.pinkAccent),
+                borderRadius: BorderRadius.circular(32.0)),
+            prefixIcon: const Icon(
+              Icons.security,
+              color: Colors.pink,
+            ),
+          )
+      ),
     );
 
       final loginButton = Padding(
@@ -227,6 +246,8 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
               // logo,
+              place_of_peace,
+              text_1,
               SizedBox(height: 15.0),
               email,
               SizedBox(height: 15.0),
@@ -236,6 +257,7 @@ class _LoginWithEmail extends State<LoginWithEmailPage>
               loginButton,
 //            alreadyHaveAccountLabel,
               loginWithGoogle,
+
 
             ],
           ),

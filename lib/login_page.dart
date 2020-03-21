@@ -12,6 +12,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/loginwithemail.dart';
+
 final get_username = TextEditingController();
 final get_password = TextEditingController();
 
@@ -35,50 +36,52 @@ class _LoginPageState extends State<LoginPage> {
       style: TextStyle(
           fontSize: 38.0, color: Colors.black54, fontWeight: FontWeight.normal),
     );
-/*
-    final user = new Theme(
-        data: new ThemeData(
-          primaryColor: Colors.redAccent,
-          primaryColorDark: Colors.red,
-        ),
-        child: TextFormField(
-          controller: get_username,
-          keyboardType: TextInputType.text,
-          autofocus: false,
-          decoration: InputDecoration(
-            hintText: 'User Name',
-            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-            border: OutlineInputBorder(
-                borderSide: new BorderSide(color: Colors.teal),
-                borderRadius: BorderRadius.circular(32.0)),
-            prefixIcon: const Icon(
-              Icons.person,
-              color: Colors.pink,
-            ),
-          ),
-        ));
 
-    final password = new Theme(
-        data: new ThemeData(
-          primaryColor: Colors.redAccent,
-          primaryColorDark: Colors.red,
-        ),
-        child: TextFormField(
-            autofocus: false,
-            obscureText: true,
-            decoration: InputDecoration(
-              labelText: 'Password',
-              hintText: 'Password',
-              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-              border: OutlineInputBorder(
-                  borderSide: new BorderSide(color: Colors.teal),
-                  borderRadius: BorderRadius.circular(32.0)),
-              prefixIcon: const Icon(
-                Icons.security,
-                color: Colors.pink,
-              ),
-            )));
-*/
+//
+//    final user = new Theme(
+//        data: new ThemeData(
+//          primaryColor: Colors.redAccent,
+//          primaryColorDark: Colors.red,
+//        ),
+//        child: TextFormField(
+//          controller: get_username,
+//          keyboardType: TextInputType.text,
+//          autofocus: false,
+//          decoration: InputDecoration(
+//            hintText: 'User Name',
+//            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+//            border: OutlineInputBorder(
+//                borderSide: new BorderSide(color: Colors.teal),
+//                borderRadius: BorderRadius.circular(32.0)),
+//            prefixIcon: const Icon(
+//              Icons.person,
+//              color: Colors.pink,
+//            ),
+//          ),
+//        ));
+//
+//    final password = new Theme(
+//        data: new ThemeData(
+//          primaryColor: Colors.redAccent,
+//          primaryColorDark: Colors.red,
+//        ),
+//        child: TextFormField(
+//            autofocus: false,
+//            obscureText: true,
+//            decoration: InputDecoration(
+//              labelText: 'Password',
+//              hintText: 'Password',
+//              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+//              border: OutlineInputBorder(
+//                  borderSide: new BorderSide(color: Colors.teal),
+//                  borderRadius: BorderRadius.circular(32.0)),
+//              prefixIcon: const Icon(
+//                Icons.security,
+//                color: Colors.pink,
+//              ),
+//            )));
+
+
     final login_button = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
@@ -88,21 +91,23 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           Navigator.of(context).pushNamed('/loginpage_email');
           super.deactivate();
+//
+//          signInWithGoogle().whenComplete(() {
+//            Navigator.of(context).pushNamed('/dashboard');
+//            Navigator.push(context, MaterialPageRoute(builder: (context) {
+//              return Dashboard();
+//            }
+//            )
+//            );
+//          });
+//
+//           return showDialog(
+//              context: context,
+//                builder: (context)
+//                    {
+//
+//                      return AlertDialog(content: Text(get_username.text));
 
-          /* signInWithGoogle().whenComplete(() {
-            Navigator.of(context).pushNamed('/dashboard');
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return Dashboard();
-            }
-            )
-            );
-          });
-*/
-          // return showDialog(
-          //    context: context,
-          //      builder: (context)
-          //          {
-          //              return AlertDialog(content: Text(get_username.text));
            },//on pressed
 
         padding: EdgeInsets.all(12),
@@ -175,6 +180,9 @@ class _LoginPageState extends State<LoginPage> {
           )
         ],
       ),
+
+
+
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -208,6 +216,9 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+
+
+
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
