@@ -1,24 +1,11 @@
-
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/catagories.dart';
-import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
-//import 'package:sadaeniswa/login_resource.dart';
-import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
-import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'privacy_policy.dart';
 import 'package:sadaeniswa/auth_rss.dart';
 final get_username = TextEditingController();
