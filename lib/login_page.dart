@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
-import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:sadaeniswa/loginwithemail.dart';
+//import 'dart:async';
+//import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sadaeniswa/auth_rss.dart';
 
 final get_username = TextEditingController();
 final get_password = TextEditingController();
 
 class LoginPage extends StatefulWidget {
   static String tag = "login-page";
+
+  final get_username = TextEditingController();
+  final get_password = TextEditingController();
+//----------------------------------------------------------- Firebase-------------------------------------//
+//login_auth lauth;
+  auth_resources authr = new auth_resources();
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -25,61 +31,59 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
+
     final place_of_peace = Container(
-      alignment: Alignment.center,
+      alignment: Alignment.topLeft,
       child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
     );
 
     final text_1 = Text(
-      "Sada-e-Niswan",
-      textAlign: TextAlign.center,
+      "Place of Peace",
+      textAlign: TextAlign.left,
       style: TextStyle(
-          fontSize: 38.0, color: Colors.black54, fontWeight: FontWeight.normal),
+          fontSize: 45.0, color: Colors.black45, fontWeight: FontWeight.normal),
     );
 
-//
-//    final user = new Theme(
-//        data: new ThemeData(
-//          primaryColor: Colors.redAccent,
-//          primaryColorDark: Colors.red,
-//        ),
-//        child: TextFormField(
-//          controller: get_username,
-//          keyboardType: TextInputType.text,
-//          autofocus: false,
-//          decoration: InputDecoration(
-//            hintText: 'User Name',
-//            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-//            border: OutlineInputBorder(
-//                borderSide: new BorderSide(color: Colors.teal),
-//                borderRadius: BorderRadius.circular(32.0)),
-//            prefixIcon: const Icon(
-//              Icons.person,
-//              color: Colors.pink,
-//            ),
-//          ),
-//        ));
-//
-//    final password = new Theme(
-//        data: new ThemeData(
-//          primaryColor: Colors.redAccent,
-//          primaryColorDark: Colors.red,
-//        ),
-//        child: TextFormField(
-//            autofocus: false,
-//            obscureText: true,
-//            decoration: InputDecoration(
-//              labelText: 'Password',
-//              hintText: 'Password',
-//              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-//              border: OutlineInputBorder(
-//                  borderSide: new BorderSide(color: Colors.teal),
-//                  borderRadius: BorderRadius.circular(32.0)),
-//              prefixIcon: const Icon(
-//                Icons.security,
-//                color: Colors.pink,
-//              ),
-//            )));
+    final email = new Theme(
+      data: new ThemeData(
+        primaryColor: Colors.redAccent,
+        primaryColorDark: Colors.red,
+      ),
+      child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          autofocus: false,
+        decoration: InputDecoration(
+          labelText: 'Email',
+          hintText: 'Email Address...',
+          //errorText: "Error",
+          contentPadding:
+          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32.0)),
+        ),
+
+      ),
+    );
+
+    final password = new Theme(
+      data: new ThemeData(
+        primaryColor: Colors.redAccent,
+        primaryColorDark: Colors.red,
+      ),
+      child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          autofocus: false,
+        decoration: InputDecoration(
+          labelText: 'Password',
+          hintText: 'Your Password...',
+          //errorText: "Error",
+          contentPadding:
+          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(32.0)),
+        ),
+      ),
+    );
 
 
     final login_button = Padding(
@@ -88,10 +92,9 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
+
         onPressed: () {
-          Navigator.of(context).pushNamed('/loginpage_email');
-          super.deactivate();
-//
+          Navigator.of(context).pushNamed(Dashboard.tag);
 //          signInWithGoogle().whenComplete(() {
 //            Navigator.of(context).pushNamed('/dashboard');
 //            Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -100,21 +103,18 @@ class _LoginPageState extends State<LoginPage> {
 //            )
 //            );
 //          });
-//
 //           return showDialog(
 //              context: context,
 //                builder: (context)
 //                    {
 //
 //                      return AlertDialog(content: Text(get_username.text));
-
-           },//on pressed
-
+        },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
-        child: Text('Log In',
-            style: TextStyle(color: Colors.white, fontSize: 17.0)),
-    )
+        child: Text(
+            'Login', style: TextStyle(color: Colors.white, fontSize: 17.0)),
+      ),
     );
 
     final signup_button = Padding(
@@ -137,6 +137,7 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(color: Colors.white, fontSize: 17.0)),
       ),
     );
+
     final forgot_label = FlatButton(
       child: Text(
         'Forget Password?',
@@ -150,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    final test = FlatButton(
+    final catagory = FlatButton(
       child: Text(
         'Catagories',
         style: TextStyle(color: Colors.purple, fontSize: 15),
@@ -161,6 +162,24 @@ class _LoginPageState extends State<LoginPage> {
           return Catagories();
         }));
       },
+    );
+
+    final loginWithGoogle = new FlatButton(
+        child: Text(
+          'Login with Google?',
+          style: TextStyle(color: Colors.purple, fontSize: 15),
+        ),
+        onPressed: () {
+          authr.signInWithGoogle().whenComplete(() {
+            Navigator.of(context).pushNamed('/dashboard');
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Dashboard();
+            }
+            )
+            );
+          }
+          );
+        }
     );
 
     return Scaffold(
@@ -231,14 +250,15 @@ class _LoginPageState extends State<LoginPage> {
             place_of_peace,
             text_1,
             SizedBox(height: 35.0),
-  //          user,
-           // SizedBox(height: 15.0),
-    //        password,
-//            SizedBox(height: 10.0),
+            email,
+            SizedBox(height: 15.0),
+            password,
+            SizedBox(height: 10.0),
             login_button,
             signup_button,
             forgot_label,
-            test,
+            catagory,
+            loginWithGoogle,
           ],
         ),
       ),

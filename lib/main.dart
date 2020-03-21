@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'dashboard.dart';
-import 'about.dart';
+import 'login_page.dart';
 import 'signup_page.dart';
-import 'post_page.dart';
-import 'help.dart';
-import 'privacy_policy.dart';
-import 'report_problem.dart';
-import 'loginwithemail.dart';
 
 void main() => runApp(MyApp());
 class MyApp extends StatelessWidget{
@@ -20,7 +15,7 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
        var pageRoute;
        return MaterialApp(
-         title: 'SADA-E-NISWA',
+         title: 'Place of Peace',
          debugShowCheckedModeBanner: false,
          theme: ThemeData(
            primarySwatch: Colors.green,
@@ -29,24 +24,19 @@ class MyApp extends StatelessWidget{
 
          ),
 
-         home: LoginWithEmailPage(),
-         initialRoute: '/login_route',
+         home: LoginPage(),
+         //initialRoute: '/login_route',
 
          routes: {
            '/login_route': (context) => LoginPage(),
            '/dashboard': (context) => Dashboard(),
            '/signup':(context) => SignupPage(),
-           '/loginpage_email':(context) => LoginWithEmailPage(),
-
+           '/loginpage_email':(context) => LoginPage(),
          },
-
        );
-
-
   }
-
-
 }
+
 class Routing{
 Route _createRoute(Widget routes) {
   return PageRouteBuilder(

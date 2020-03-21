@@ -1,10 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/loginwithemail.dart';
 import 'package:sadaeniswa/post_page.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'package:sadaeniswa/report_problem.dart';
@@ -13,6 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/auth_rss.dart';
 
 auth_resources authr =new auth_resources();
+
 class Dashboard extends StatefulWidget {
   static String tag = 'dashboard';
   @override

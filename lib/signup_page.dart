@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/loginwithemail.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
-import 'package:sadaeniswa/auth_rss.dart';
 import 'dashboard.dart';
 
-auth_resources authr = new auth_resources();
 final get_email = TextEditingController();
 final get_password = TextEditingController();
+final get_cpassword = TextEditingController();
 
 class SignupPage extends StatefulWidget {
   static String tag = 'signup-page';
@@ -23,7 +20,20 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final place_of_peace = Container(
+      alignment: Alignment.topLeft,
+      child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
+    );
+    final text_1 = Text(
+      "Place of Peace\n",
+      textAlign: TextAlign.left,
+      style: TextStyle(
+          fontSize: 45.0, color: Colors.black45, fontWeight: FontWeight.normal),
+    );
+
     return Scaffold(
+
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
@@ -68,6 +78,7 @@ class _SignupPageState extends State<SignupPage> {
           ],
         ),
       ),
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.pink,
@@ -94,7 +105,9 @@ class _SignupPageState extends State<SignupPage> {
               key: _formKey,
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 15.0),
+                  SizedBox(height: 20.0),
+                  place_of_peace,
+                  text_1,
                   TextFormField(
                     validator: (value) {
                       if (value.isEmpty) {
@@ -115,7 +128,8 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(32.0)),
                     ),
                   ),
-                  SizedBox(height: 15.0),
+
+                  SizedBox(height: 25.0),
                   TextFormField(
                     validator: (value) {
                       if (value.length<5) {
@@ -137,20 +151,45 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(32.0)),
                     ),
                   ),
+
+
+                  SizedBox(height: 25.0),
+                  TextFormField(
+                    validator: (value) {
+                      if (get_password.value != get_password.value) {
+                        return 'Password Not Matched';
+                      }
+                      return null;
+                    },
+
+                    controller: get_cpassword,
+                    autofocus: false,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: 'Confirm Password',
+                      hintText: 'Re-enter New Password',
+                      //errorText: "Error",
+                      contentPadding:
+                      EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+
                   //     SizedBox(height: 24.0),
+
+
                   Padding(
                       // signup button
                       padding: EdgeInsets.symmetric(vertical: 16.0),
                       child: RaisedButton(
+
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
                         onPressed: () {
-
-
                           if (_formKey.currentState.validate()) {
                             // If the form is valid, display a Snackbar.
-
                             authr.handleSignUp(get_email.text.toString(),
                                 get_password.text.toString())
                                 .whenComplete(() {
@@ -160,16 +199,14 @@ class _SignupPageState extends State<SignupPage> {
                                     return Dashboard();
                                   }));
                             });
-
                           }
-
                         },
-                        padding: EdgeInsets.all(12),
+                        padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
                         color: Colors.pinkAccent,
                         child: Text('Sign Up',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 17.0)),
+                            style: TextStyle(color: Colors.white, fontSize: 17.0)),
                       )),
+
                   //SizedBox(height: 24.0),
                   FlatButton(
                       child: Text('Signup with Google?',
@@ -205,12 +242,15 @@ class _SignupPageState extends State<SignupPage> {
                       onPressed: () {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
-                          return LoginWithEmailPage();
+                          return SignupPage();
                         }
                         )
                         );
                       } // On Pressed
+
                       )
+
+
                 ],
               ),
             ),
