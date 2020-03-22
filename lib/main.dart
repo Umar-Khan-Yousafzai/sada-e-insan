@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'dashboard.dart';
-import 'login_page.dart';
 import 'signup_page.dart';
 
 void main() => runApp(MyApp());

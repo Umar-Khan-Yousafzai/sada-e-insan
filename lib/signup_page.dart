@@ -3,12 +3,17 @@ import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'dashboard.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 final get_email = TextEditingController();
 final get_password = TextEditingController();
 final get_cpassword = TextEditingController();
 
 class SignupPage extends StatefulWidget {
+  final DBRef = FirebaseDatabase.instance.reference();
+  final DocumentReference = Firestore.instance.document("/registered_users/users");
+
   static String tag = 'signup-page';
 
   @override
@@ -187,6 +192,7 @@ class _SignupPageState extends State<SignupPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
+
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             // If the form is valid, display a Snackbar.
@@ -201,6 +207,7 @@ class _SignupPageState extends State<SignupPage> {
                             });
                           }
                         },
+
                         padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
                         color: Colors.pinkAccent,
                         child: Text('Sign Up',
@@ -260,4 +267,12 @@ class _SignupPageState extends State<SignupPage> {
       ),
     );
   } //widget
+
+  void signUpData(){
+
+  }
+
+
 } //class
+
+
