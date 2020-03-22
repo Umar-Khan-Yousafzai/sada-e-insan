@@ -108,7 +108,7 @@ class _SignupPageState extends State<SignupPage> {
                     decoration: InputDecoration(
                       labelText: 'Email',
                       hintText: 'Your Active Email Address',
-                     // errorText: "Enter Correct Mail",
+                      // errorText: "Enter Correct Mail",
                       contentPadding:
                           EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                       border: OutlineInputBorder(
@@ -118,12 +118,11 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 15.0),
                   TextFormField(
                     validator: (value) {
-                      if (value.length<5) {
+                      if (value.length < 5) {
                         return 'Password is Weak';
                       }
                       return null;
                     },
-
                     controller: get_password,
                     autofocus: false,
                     obscureText: true,
@@ -146,23 +145,20 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(24),
                         ),
                         onPressed: () {
-
-
                           if (_formKey.currentState.validate()) {
                             // If the form is valid, display a Snackbar.
 
-                            authr.handleSignUp(get_email.text.toString(),
-                                get_password.text.toString())
+                            authr
+                                .handleSignUp(get_email.text.toString(),
+                                    get_password.text.toString())
                                 .whenComplete(() {
                               Navigator.of(context).pushNamed('/login_route');
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                    return Dashboard();
-                                  }));
+                                return Dashboard();
+                              }));
                             });
-
                           }
-
                         },
                         padding: EdgeInsets.all(12),
                         color: Colors.pinkAccent,
@@ -180,17 +176,14 @@ class _SignupPageState extends State<SignupPage> {
                                 // Navigator.of(context).pushNamed('/dashboard');
                                 Navigator.of(context)
                                     .push(MaterialPageRoute(builder: (context) {
-                                  return Dashboard();
-                                }
-                                )
-                                );
-                              }) ==
-                              null)
-                            ;
+                                  return SignupPage();
+                                }));
+                              }) !=
+                              null);
                           else {
-                            Navigator.of(context)
-                                .push(MaterialPageRoute(builder: (context) {
-                              return SignupPage();
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Dashboard();
                             }));
                           }
                           ;
@@ -206,9 +199,7 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (context) {
                           return LoginWithEmailPage();
-                        }
-                        )
-                        );
+                        }));
                       } // On Pressed
                       )
                 ],
