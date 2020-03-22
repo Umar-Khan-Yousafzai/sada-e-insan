@@ -12,7 +12,7 @@ final get_cpassword = TextEditingController();
 
 class SignupPage extends StatefulWidget {
   final DBRef = FirebaseDatabase.instance.reference();
-  final DocumentReference = Firestore.instance.document("/registered_users/users");
+  final DocumentReference = Firestore.instance.collection("registered_users").document("users");
 
   static String tag = 'signup-page';
 
