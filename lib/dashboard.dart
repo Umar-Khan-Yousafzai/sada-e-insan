@@ -1,8 +1,10 @@
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
+import 'package:sadaeniswa/loginwithemail.dart';
 import 'package:sadaeniswa/post_page.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'package:sadaeniswa/report_problem.dart';
@@ -11,7 +13,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/auth_rss.dart';
 
 auth_resources authr =new auth_resources();
-
 class Dashboard extends StatefulWidget {
   static String tag = 'dashboard';
   @override
@@ -19,10 +20,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   bool isSearching = false;
-
-
   @override
   Widget build(BuildContext context) {
 
@@ -53,11 +51,6 @@ class _DashboardState extends State<Dashboard> {
         persistentFooterButtons: <Widget>[
           Text("SADA-E-NISWA"),
         ],
-
-
-
-
-
         drawer: Drawer(
           child: ListView(
             children: <Widget>[
@@ -292,9 +285,7 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.add_a_photo),
               ),
             ),
-
             Divider(),
-
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
@@ -308,27 +299,11 @@ class _DashboardState extends State<Dashboard> {
           ),
       ),
 
-//
-//        floatingActionButton: FloatingActionButton(
-//          onPressed: () {
-//            Navigator.push(context,
-//                MaterialPageRoute(builder: (context){
-//                  return PostPage();
-//                }
-//                )
-//            );
-//
-//          },
-//          child: Icon(Icons.add),
-//          backgroundColor: Colors.pinkAccent,
-//
-//        ),
 
        floatingActionButton: FloatingActionButton.extended(
           icon: Icon(Icons.add),
          backgroundColor: Colors.pinkAccent,
           label: Text('Add Post'),
-
           onPressed: (){
             Navigator.push(context,
                 MaterialPageRoute(builder: (context){
@@ -338,16 +313,10 @@ class _DashboardState extends State<Dashboard> {
             );
           },
         ),
-
-
-
-
-
       );
 
-
-
 //Arslan hafeez
+
 
   }
 }

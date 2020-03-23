@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "1002352050401",
-    "firebase_url": "https://sada-e-niswa.firebaseio.com",
-    "project_id": "sada-e-niswa",
-    "storage_bucket": "sada-e-niswa.appspot.com"
+    "project_number": "626687958973",
+    "firebase_url": "https://sada-e-niswan.firebaseio.com",
+    "project_id": "sada-e-niswan",
+    "storage_bucket": "sada-e-niswan.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1002352050401:android:abb42a5546abe048b1b7a0",
+        "mobilesdk_app_id": "1:626687958973:android:9518c91807c1e2755ebcd4",
         "android_client_info": {
           "package_name": "com.extreamprojects.sadaeniswa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1002352050401-9ivgu6ln7rhmgkit273iddjt6dcib3d8.apps.googleusercontent.com",
+          "client_id": "626687958973-bm81vbff7q3kfdngljior9rjlgvljk5h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.extreamprojects.sadaeniswa",
+            "certificate_hash": "81c8c3dc798f4409c3c622f8ca0cc9f3519a2b36"
+          }
+        },
+        {
+          "client_id": "626687958973-d6i5nu079tdj6rrnu6mdggbior2v5upi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDCWroI-wod3BZvcymqaHDbu0srg4QMdkM"
+          "current_key": "AIzaSyD_Fmt34yI9FHPwBk7m1iKQF1zTFoySY54"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1002352050401-9ivgu6ln7rhmgkit273iddjt6dcib3d8.apps.googleusercontent.com",
+              "client_id": "626687958973-d6i5nu079tdj6rrnu6mdggbior2v5upi.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
