@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
@@ -12,7 +14,6 @@ final get_cpassword = TextEditingController();
 
 class SignupPage extends StatefulWidget {
   final DBRef = FirebaseDatabase.instance.reference();
-  final DocumentReference = Firestore.instance.document("/registered_users/users");
 
   static String tag = 'signup-page';
 
@@ -21,6 +22,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
+  final DocumentReference documentReference = Firestore.instance.document("/registered_users/users");
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -212,9 +214,11 @@ class _SignupPageState extends State<SignupPage> {
                         color: Colors.pinkAccent,
                         child: Text('Sign Up',
                             style: TextStyle(color: Colors.white, fontSize: 17.0)),
-                      )),
+                      )
+                  ),
 
                   //SizedBox(height: 24.0),
+
                   FlatButton(
                       child: Text('Signup with Google?',
                           style: TextStyle(color: Colors.purple, fontSize: 15)),
@@ -229,8 +233,8 @@ class _SignupPageState extends State<SignupPage> {
                                 )
                                 );
                               }) ==
-                              null)
-                            ;
+                              null);
+
                           else {
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
@@ -269,6 +273,16 @@ class _SignupPageState extends State<SignupPage> {
   } //widget
 
   void signUpData(){
+    Map<String, String> data = <String, String>{
+      "email" : "arslan@gmail.com",
+      "password" : "abcd",
+      "cpassword" : "abcd",
+    };
+    documentReference.setData(data).whenComplete((){
+      print("Document Added");
+    }).catchError((e) => (print(e)));
+
+
 
   }
 
