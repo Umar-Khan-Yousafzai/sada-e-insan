@@ -23,6 +23,7 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   final get_post = TextEditingController();
+  final get_postTitle = TextEditingController();
   final DateTime dateTime = new DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,22 @@ class _PostPageState extends State<PostPage> {
         labelText: 'Post',
         hintText: "What's on your mind...",
         contentPadding: EdgeInsets.fromLTRB(30.0, 100.0, 10.0, 100.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+      ),
+    );
+
+    final postTitle = TextField(
+      controller: get_postTitle,
+      keyboardType: TextInputType.text,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(100),
+      ],
+      maxLines: null,
+      autofocus: false,
+      decoration: InputDecoration(
+        labelText: 'Title',
+        hintText: "Title that you want to give...",
+        contentPadding: EdgeInsets.fromLTRB(8, 15, 8, 15),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
@@ -149,6 +166,8 @@ class _PostPageState extends State<PostPage> {
             ),
             place_of_peace,
             text_1,
+            postTitle,
+            SizedBox(width: 10,height: 10,),
             post,
             submit,
           ],
@@ -159,7 +178,7 @@ class _PostPageState extends State<PostPage> {
   Future<void> _add() async {
     Map<String, String> data = <String, String>{
       //"name": authr.googleSignIn.currentUser.toString(),
-      "Title": "Ar Rahman ",
+      "Title": get_postTitle.toString(),
       "post": get_post.text.toString(),
       "timestamp": dateTime.toString(),
     };
