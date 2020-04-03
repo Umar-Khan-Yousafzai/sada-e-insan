@@ -42,7 +42,33 @@ class _PostPageState extends State<PostPage> {
       ),
     );
 
-    final post = TextField(
+    final postTitle =new Theme(
+        data: new ThemeData(
+          primaryColor: Colors.pinkAccent.shade100,
+          primaryColorDark: Colors.pinkAccent.shade100,
+        ),
+        child: TextField(
+          controller: get_postTitle,
+          keyboardType: TextInputType.text,
+          inputFormatters: [
+            LengthLimitingTextInputFormatter(100),
+          ],
+          maxLines: null,
+          autofocus: false,
+          decoration: InputDecoration(
+            // labelText: 'Title',
+            hintText: "Title that you want to give...",
+            contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 10.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+          ),
+        )
+    );
+    final post =new Theme(
+      data: new ThemeData(
+        primaryColor: Colors.pinkAccent.shade100,
+        primaryColorDark: Colors.pinkAccent.shade100,
+      ),
+      child: TextField(
       controller: get_post,
       keyboardType: TextInputType.multiline,
       inputFormatters: [
@@ -51,28 +77,14 @@ class _PostPageState extends State<PostPage> {
       maxLines: null,
       autofocus: false,
       decoration: InputDecoration(
-        labelText: 'Post',
+       // labelText: 'Post',
         hintText: "What's on your mind...",
-        contentPadding: EdgeInsets.fromLTRB(30.0, 100.0, 10.0, 100.0),
+        contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
+    )
     );
 
-    final postTitle = TextField(
-      controller: get_postTitle,
-      keyboardType: TextInputType.text,
-      inputFormatters: [
-        LengthLimitingTextInputFormatter(100),
-      ],
-      maxLines: null,
-      autofocus: false,
-      decoration: InputDecoration(
-        labelText: 'Title',
-        hintText: "Title that you want to give...",
-        contentPadding: EdgeInsets.fromLTRB(8, 15, 8, 15),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
 
     final submit = Padding(
       padding: EdgeInsets.symmetric(vertical: 20.0),
@@ -179,7 +191,7 @@ class _PostPageState extends State<PostPage> {
   Future<void> _add() async {
     Map<String, String> data = <String, String>{
       //"name": authr.googleSignIn.currentUser.toString(),
-      "Title": get_postTitle.toString(),
+      "Title": get_postTitle.text.toString(),
       "post": get_post.text.toString(),
       "timestamp": dateTime.toString(),
     };
@@ -188,3 +200,4 @@ class _PostPageState extends State<PostPage> {
 
 
 }
+
