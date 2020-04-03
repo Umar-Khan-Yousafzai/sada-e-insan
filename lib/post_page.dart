@@ -51,7 +51,7 @@ class _PostPageState extends State<PostPage> {
       decoration: InputDecoration(
         labelText: 'Post',
         hintText: "What's on your mind...",
-        contentPadding: EdgeInsets.fromLTRB(30.0, 100.0, 10.0, 100.0),
+        contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0,10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
@@ -141,14 +141,14 @@ class _PostPageState extends State<PostPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
-          shrinkWrap: true,
+          //shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
+            place_of_peace,
+            text_1,
             SizedBox(
               height: 10,
             ),
-            place_of_peace,
-            text_1,
             post,
             submit,
           ],

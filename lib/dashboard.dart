@@ -137,22 +137,27 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       backgroundColor: Colors.white,
-      body:ListView.builder(
+      body:
+      ListView.builder(
           itemCount: post.documents.length,
           padding: EdgeInsets.all(5.0) ,
           itemBuilder: (context, i){
             return new ListTile(
               title: Text(post.documents[i].data['Title']),
               subtitle: Text(post.documents[i].data['post']),
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+                backgroundColor: Colors.pinkAccent.shade100,
+                foregroundColor: Colors.white,
+              ),
             );
+
           }),/*),
             Divider(),
             ListTile(
               title: Text("Post Title..."),
               subtitle: Text("meta data of post..."),
-              leading: CircleAvatar(
-                child: Icon(Icons.person),
-              ),*/
+             */
 
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
