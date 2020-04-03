@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/loginwithemail.dart';
 import 'package:sadaeniswa/post_page.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'package:sadaeniswa/report_problem.dart';

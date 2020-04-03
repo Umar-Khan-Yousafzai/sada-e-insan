@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
@@ -8,6 +9,9 @@ import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/auth_rss.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 final get_username = TextEditingController();
 final get_password = TextEditingController();
@@ -104,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
 //              context: context,
 //                builder: (context)
 //                    {
-//
 //                      return AlertDialog(content: Text(get_username.text));
         },
         padding: EdgeInsets.all(12),
