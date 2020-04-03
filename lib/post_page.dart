@@ -15,6 +15,10 @@ class PostPage extends StatefulWidget {
 
   @override
   _PostPageState createState() => _PostPageState();
+
+  getPosts() async {
+    return await Firestore.instance.collection('posts').getDocuments();
+  }
 }
 
 class _PostPageState extends State<PostPage> {
@@ -152,14 +156,15 @@ class _PostPageState extends State<PostPage> {
       ),
     );
   }
-
-  void _add() {
+  Future<void> _add() async {
     Map<String, String> data = <String, String>{
       //"name": authr.googleSignIn.currentUser.toString(),
       "Title": "Ar Rahman ",
       "post": get_post.text.toString(),
       "timestamp": dateTime.toString(),
     };
-      Firestore.instance.collection('posts').add(data).catchError((e){print(e);});
+    Firestore.instance.collection('posts').add(data).catchError((e){print(e);});
   }
+
+
 }

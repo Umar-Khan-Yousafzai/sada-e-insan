@@ -34,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
 
     final place_of_peace = Container(
-      alignment: Alignment.topLeft,
+      alignment: Alignment.topCenter,
       child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
     );
 

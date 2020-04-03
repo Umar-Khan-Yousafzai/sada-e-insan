@@ -88,10 +88,8 @@ return user;
 
 
 }
-
-class Authenticate_Email_Password
+class Database
 {
-
 }
 
 
