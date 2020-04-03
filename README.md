@@ -3,8 +3,10 @@
 SADA-E-NISWA application will make women&#x27;s life.
 This app is using Flutter and Firebase
 
-It is being developed by Developer Student Club Core-team member
-M.Arslan Hafeez
+It is being developed by Developer Student Club Core-team member and Lead
+M.Arslan Hafeez ~ Coreteam Member
+Umer Farooq Khan ~ Dsc Lead
+
 ## Getting Started
 Hello World!!!
 This project is a starting point for a Flutter application.
