@@ -191,7 +191,8 @@ class _DashboardState extends State<Dashboard> {
                 backgroundColor: Colors.pinkAccent.shade100,
                 foregroundColor: Colors.white,),
               title: Text(post.data.documents[i].data['Title']),
-              subtitle: Text(post.data.documents[i].data['post']).maxLines,
+              subtitle: Text(post.data.documents[i].data['post'],
+              maxLines: 1,),
             ),
           );
 
