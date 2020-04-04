@@ -184,15 +184,17 @@ class _DashboardState extends State<Dashboard> {
         itemCount: post.data.documents.length,
         padding: EdgeInsets.all(5.0) ,
         itemBuilder: (context, i){
-          return new ListTile(
-            title: Text(post.data.documents[i].data['Title']),
-            subtitle: Text(post.data.documents[i].data['post']),
-            leading: CircleAvatar(
-              child: Icon(Icons.person),
-              backgroundColor: Colors.pinkAccent.shade100,
-              foregroundColor: Colors.white,
+          return Card( //                           <-- Card widget
+            child: ListTile(
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+                backgroundColor: Colors.pinkAccent.shade100,
+                foregroundColor: Colors.white,),
+              title: Text(post.data.documents[i].data['Title']),
+              subtitle: Text(post.data.documents[i].data['post']).maxLines,
             ),
           );
+
         },
 
       );
