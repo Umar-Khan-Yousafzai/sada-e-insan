@@ -8,6 +8,7 @@ import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
 import 'package:sadaeniswa/auth_rss.dart';
+import 'ImagePicker.dart';
 
 auth_resources authr = new auth_resources();
 
@@ -25,7 +26,6 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   final get_post = TextEditingController();
   final get_postTitle = TextEditingController();
-  final DateTime dateTime = new DateTime.now();
   @override
   Widget build(BuildContext context) {
     final place_of_peace = Container(
@@ -53,7 +53,7 @@ class _PostPageState extends State<PostPage> {
           inputFormatters: [
             LengthLimitingTextInputFormatter(100),
           ],
-          //maxLines: null,
+          maxLines: null,
           autofocus: false,
           decoration: InputDecoration(
             // labelText: 'Title',
@@ -71,18 +71,26 @@ class _PostPageState extends State<PostPage> {
       child: TextFormField(
       controller: get_post,
       keyboardType: TextInputType.multiline,
-      inputFormatters: [
+        inputFormatters: [
         LengthLimitingTextInputFormatter(1000),
       ],
-     // maxLines: null,
+      maxLines: null,
       autofocus: false,
       decoration: InputDecoration(
-       // labelText: 'Post',
         hintText: "What's on your mind...",
+        suffixIcon: IconButton(icon: Icon(Icons.camera), onPressed: () {
+          //Navigator.of(context).pushNamed(SignupPage.tag);
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ImagePicker();
+          }));
+        },
+        ),
         contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
+        ),
+
       ),
-    )
+    ),
     );
 
 
@@ -188,6 +196,7 @@ class _PostPageState extends State<PostPage> {
       ),
     );
   }
+  final DateTime dateTime = new DateTime.now();
   Future<void> _add() async {
     Map<String, String> data = <String, String>{
       //"name": authr.googleSignIn.currentUser.toString(),

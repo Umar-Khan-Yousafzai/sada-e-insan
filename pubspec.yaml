@@ -28,7 +28,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   cloud_firestore: 0.13.4+2 #cloud fire store
   http: any
-
+  multi_image_picker: ^4.6.5+rc.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
