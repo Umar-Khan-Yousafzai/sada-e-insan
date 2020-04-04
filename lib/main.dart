@@ -21,7 +21,7 @@ void main() => runApp(MyApp());
            brightness: Brightness.light,
            fontFamily: 'Canvas',
          ),
-         home: Dashboard(),
+         home: LoginPage(),
          //initialRoute: '/login_route',
          routes: {
 

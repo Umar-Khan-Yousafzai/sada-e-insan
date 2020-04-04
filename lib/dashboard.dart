@@ -176,11 +176,9 @@ class _DashboardState extends State<Dashboard> {
     );
   }
   Widget _posts() {
-if(post != null){
     return StreamBuilder(
         stream: Firestore.instance.collection("posts").snapshots(),
     builder: (context, post) {
-
           if(post.data == null) return CircularProgressIndicator();{
     return ListView.builder(
         itemCount: post.data.documents.length,
@@ -200,11 +198,7 @@ if(post != null){
       );
     }
     });
-}
-else
-  {
-    return CircularProgressIndicator();
-  }
+
 }
 }
 
