@@ -21,7 +21,7 @@ void main() => runApp(MyApp());
            brightness: Brightness.light,
            fontFamily: 'Canvas',
          ),
-         home: LoginPage(),
+         home: validate(),
          //initialRoute: '/login_route',
          routes: {
 
@@ -34,6 +34,19 @@ void main() => runApp(MyApp());
            '/loginpage_email':(context) => LoginPage(),
          },
        );
+  }
+
+   validate()
+  {
+    if(authr.googleSignIn.currentUser != null)
+    {
+     return Dashboard();
+    }
+    else
+    {
+      return LoginPage();
+    }
+
   }
 }
 
