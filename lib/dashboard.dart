@@ -137,8 +137,8 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
       backgroundColor: Colors.white,
-      body:
-      ListView.builder(
+      body:_posts(),
+     /* ListView.builder(
           itemCount: post.documents.length,
           padding: EdgeInsets.all(5.0) ,
           itemBuilder: (context, i){
@@ -152,7 +152,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             );
 
-          }),/*),
+          }),*//*),
             Divider(),
             ListTile(
               title: Text("Post Title..."),
@@ -174,29 +174,39 @@ class _DashboardState extends State<Dashboard> {
 
 
     );
-
-
   }
-  Widget gposts()
-  {
-    if(post != null){
-      ListView.builder(
-        itemCount: post.documents.length,
+  Widget _posts() {
+if(post != null){
+    return StreamBuilder(
+        stream: Firestore.instance.collection("posts").snapshots(),
+    builder: (context, post) {
+
+          if(post.data == null) return CircularProgressIndicator();{
+    return ListView.builder(
+        itemCount: post.data.documents.length,
         padding: EdgeInsets.all(5.0) ,
         itemBuilder: (context, i){
           return new ListTile(
-            title: Text(post.documents[i].data['Title']),
-            subtitle: Text(post.documents[i].data['post']),
+            title: Text(post.data.documents[i].data['Title']),
+            subtitle: Text(post.data.documents[i].data['post']),
+            leading: CircleAvatar(
+              child: Icon(Icons.person),
+              backgroundColor: Colors.pinkAccent.shade100,
+              foregroundColor: Colors.white,
+            ),
           );
         },
 
       );
     }
-    else
-    {
-      return Text('Loading, Please Wait');
-    }
+    });
+}
+else
+  {
+    return CircularProgressIndicator();
   }
 }
+}
+
 //Arslan hafeez
 //Umar Farooq Khan Yousafzai

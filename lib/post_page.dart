@@ -18,7 +18,7 @@ class PostPage extends StatefulWidget {
   _PostPageState createState() => _PostPageState();
 
   getPosts() async {
-    return await Firestore.instance.collection('posts').getDocuments();
+    return await Firestore.instance.collection('posts').snapshots();
   }
 }
 
@@ -47,13 +47,13 @@ class _PostPageState extends State<PostPage> {
           primaryColor: Colors.pinkAccent.shade100,
           primaryColorDark: Colors.pinkAccent.shade100,
         ),
-        child: TextField(
+        child: TextFormField(
           controller: get_postTitle,
           keyboardType: TextInputType.text,
           inputFormatters: [
             LengthLimitingTextInputFormatter(100),
           ],
-          maxLines: null,
+          //maxLines: null,
           autofocus: false,
           decoration: InputDecoration(
             // labelText: 'Title',
@@ -68,13 +68,13 @@ class _PostPageState extends State<PostPage> {
         primaryColor: Colors.pinkAccent.shade100,
         primaryColorDark: Colors.pinkAccent.shade100,
       ),
-      child: TextField(
+      child: TextFormField(
       controller: get_post,
       keyboardType: TextInputType.multiline,
       inputFormatters: [
         LengthLimitingTextInputFormatter(1000),
       ],
-      maxLines: null,
+     // maxLines: null,
       autofocus: false,
       decoration: InputDecoration(
        // labelText: 'Post',
