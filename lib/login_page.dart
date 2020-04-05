@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final catagory = FlatButton(
       child: Text(
-        'Catagories',
+        'Categories',
         style: TextStyle(color: Colors.purple, fontSize: 15),
       ),
       onPressed: () {
@@ -171,6 +171,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           authr.signInWithGoogle().whenComplete(() {
+         // FirebaseUser getuser;
+           // print(getuser.uid+"Salam");
             Navigator.of(context).pushNamed('/dashboard');
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Dashboard();

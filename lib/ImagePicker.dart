@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:sadaeniswa/about.dart';
+import 'package:sadaeniswa/post_page.dart';
 
 import 'dashboard.dart';
 import 'help.dart';
@@ -42,13 +43,13 @@ class _ImagePicker extends State<ImagePicker> {
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
+        maxImages: 400,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
-          actionBarTitle: "Example App",
+          actionBarColor: "0xFFFF80AB",
+          actionBarTitle: "Sada-e-Niswan",
           allViewTitle: "All Photos",
           useDetailsView: false,
           selectCircleStrokeColor: "#000000",
@@ -143,7 +144,15 @@ class _ImagePicker extends State<ImagePicker> {
             ),
             Expanded(
               child: buildGridView(),
-            )
+            ),
+            RaisedButton(
+              child: Text("Cancel"),
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return PostPage();
+                }));
+              },
+            ),
           ],
         ),
       );

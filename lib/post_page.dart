@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/help.dart';
@@ -49,6 +50,7 @@ class _PostPageState extends State<PostPage> {
         ),
         child: TextFormField(
           controller: get_postTitle,
+
           keyboardType: TextInputType.text,
           inputFormatters: [
             LengthLimitingTextInputFormatter(100),
@@ -68,8 +70,9 @@ class _PostPageState extends State<PostPage> {
         primaryColor: Colors.pinkAccent.shade100,
         primaryColorDark: Colors.pinkAccent.shade100,
       ),
-      child: TextFormField(
-      controller: get_post,
+      child: TextField(
+
+       controller: get_post,
       keyboardType: TextInputType.multiline,
         inputFormatters: [
         LengthLimitingTextInputFormatter(1000),
@@ -109,7 +112,7 @@ class _PostPageState extends State<PostPage> {
         },
         padding: EdgeInsets.all(5),
         color: Colors.pinkAccent,
-        child: Text('Submit',
+        child: Text("Submit",
             style: TextStyle(color: Colors.white, fontSize: 15.0)),
       ),
     );
@@ -197,14 +200,28 @@ class _PostPageState extends State<PostPage> {
     );
   }
   final DateTime dateTime = new DateTime.now();
+  final String user_id = authr.gson().toString();
+
+  String checkforUser()
+  {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    //_auth.
+  }
+
+
+  DocumentReference documentReference = Firestore.instance.collection('posts').document();
   Future<void> _add() async {
     Map<String, String> data = <String, String>{
       //"name": authr.googleSignIn.currentUser.toString(),
-      "Title": get_postTitle.text.toString(),
+      "title": get_postTitle.text.toString(),
       "post": get_post.text.toString(),
-      "timestamp": dateTime.toString(),
+      "documentID": documentReference.documentID,
+      "userID":user_id,
+      "timestamp": dateTime.toString()
     };
-    Firestore.instance.collection('posts').add(data).catchError((e){print(e);});
+
+    documentReference.setData(data).catchError((e){print(e);});
+
   }
 
 

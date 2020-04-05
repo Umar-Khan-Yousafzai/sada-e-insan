@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
@@ -44,12 +45,13 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent.shade100,
         title: !isSearching
-            ? Text('SADA-E-NISWA')
+            ? Text('SADA-E-NISWA'
+        ,)
             : TextField(
                 decoration: InputDecoration(
                     //  icon: Icon(Icons.search),
-
                     hintText: "Search here..."),
+
               ),
         actions: <Widget>[
           IconButton(
@@ -177,7 +179,7 @@ class _DashboardState extends State<Dashboard> {
   }
   Widget _posts() {
     return StreamBuilder(
-        stream: Firestore.instance.collection("posts").snapshots(),
+        stream: Firestore.instance.collection('posts').orderBy('timestamp',descending: true).snapshots(),
     builder: (context, post) {
           if(post.data == null) return CircularProgressIndicator();{
     return ListView.builder(
@@ -190,8 +192,8 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
                 backgroundColor: Colors.pinkAccent.shade100,
                 foregroundColor: Colors.white,),
-              title: Text(post.data.documents[i].data['Title']),
-              subtitle: Text(post.data.documents[i].data['post'],
+              title: Text(post.data.documents[i].data['Title'].toString()),
+              subtitle: Text(post.data.documents[i].data['post'].toString(),
               maxLines: 1,),
             ),
           );

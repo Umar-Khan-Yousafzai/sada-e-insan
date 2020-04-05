@@ -13,7 +13,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-
   Future<String> signInWithGoogle() async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
@@ -22,10 +21,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
     final AuthCredential credential = GoogleAuthProvider.getCredential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
+
     );
 
     final AuthResult authResult = await _auth.signInWithCredential(credential);
-    final FirebaseUser user = authResult.user;
+         final FirebaseUser user = authResult.user;
 
     assert(!user.isAnonymous);
     assert(await user.getIdToken() != null);
@@ -34,11 +34,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
     assert(user.uid == currentUser.uid);
     return 'signInWithGoogle succeeded: $user';
   }
+String gson(){
 
+ //googleSignIn.currentUser.displayName;
+  return googleSignIn.currentUser.displayName;
+  }
   void signOutGoogle() async{
+
     await googleSignIn.signOut();
 
-    print("User Sign Out");
+
   }
 //----------------------------------------------------------------SignUp/Sign in With Email and Password--------------------------------//
 
