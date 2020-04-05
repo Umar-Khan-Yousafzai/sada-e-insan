@@ -1,28 +1,20 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/auth_rss.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
-final get_username = TextEditingController();
-final get_password = TextEditingController();
-
 class LoginPage extends StatefulWidget {
   static String tag = "login-page";
 
   final get_username = TextEditingController();
   final get_password = TextEditingController();
-//----------------------------------------------------------- Firebase-------------------------------------//
-//login_auth lauth;
+//------------------------------------------- Firebase----------------------------//
+//login_auth auth;
   auth_resources authr = new auth_resources();
 
   @override
@@ -33,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topCenter,
       child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
     );
@@ -62,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32.0)),
         ),
-
       ),
     );
 
@@ -87,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
 
-    final login_button = Padding(
+    final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -117,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final signup_button = Padding(
+    final signupButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -138,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final forgot_label = FlatButton(
+    final forgotLabel = FlatButton(
       child: Text(
         'Forget Password?',
         style: TextStyle(color: Colors.purple, fontSize: 15),
@@ -147,19 +138,6 @@ class _LoginPageState extends State<LoginPage> {
 //        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return ForgetPasswordEmail();
-        }));
-      },
-    );
-
-    final catagory = FlatButton(
-      child: Text(
-        'Catagories',
-        style: TextStyle(color: Colors.purple, fontSize: 15),
-      ),
-      onPressed: () {
-//        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Catagories();
         }));
       },
     );
@@ -247,17 +225,16 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 20.0,
             ),
-            place_of_peace,
+            placeOfPeace,
             text_1,
             SizedBox(height: 35.0),
             email,
             SizedBox(height: 15.0),
             password,
             SizedBox(height: 10.0),
-            login_button,
-            signup_button,
-            forgot_label,
-            catagory,
+            loginButton,
+            signupButton,
+            forgotLabel,
             loginWithGoogle,
           ],
         ),

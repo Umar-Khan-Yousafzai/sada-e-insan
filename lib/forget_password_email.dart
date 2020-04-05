@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/forget_password_verification_code.dart';
-import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
 
 class ForgetPasswordEmail extends StatefulWidget {
   static String tag = "forget-password-email";
@@ -14,7 +12,7 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
     );
@@ -28,7 +26,7 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
       ),
     );
 
-    final email_field = TextFormField(
+    final emailField = TextFormField(
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
@@ -42,7 +40,7 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
     );
 
 
-    final next_button = Padding(
+    final nextButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -97,10 +95,10 @@ class _ForgetPasswordEmailState extends State<ForgetPasswordEmail> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(height: 20.0,),
-            place_of_peace,
+            placeOfPeace,
             text_1,
-            email_field,
-            next_button,
+            emailField,
+            nextButton,
 
 
           ],

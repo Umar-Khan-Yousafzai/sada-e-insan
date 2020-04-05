@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
@@ -28,7 +27,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
     );
@@ -113,7 +112,7 @@ class _SignupPageState extends State<SignupPage> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20.0),
-                  place_of_peace,
+                  placeOfPeace,
                   text_1,
                   TextFormField(
                     validator: (value) {
