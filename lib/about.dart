@@ -14,7 +14,7 @@ class _AboutState extends State<About> {
 
 
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.people,color: Colors.pinkAccent,size: 40.0),
     );
@@ -28,7 +28,7 @@ class _AboutState extends State<About> {
       ),
     );
 
-    final text_about= Text(
+    final textAbout= Text(
       "This app is created for the Women's, who could not confess their problems with their families and friends. This app provide the platform which they can use and ask their problems and fine the solution without any identification. They also can post the solution for any problem. \n\n\n\n\n",
       style: TextStyle(
         fontSize: 22.0,
@@ -73,9 +73,9 @@ class _AboutState extends State<About> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(height: 20.0,),
-            place_of_peace,
+            placeOfPeace,
             text_1,
-            text_about,
+            textAbout,
 
           ],
         ),

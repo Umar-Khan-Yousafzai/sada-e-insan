@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'dashboard.dart';
 import 'signup_page.dart';
+
 void main() => runApp(MyApp());
   class MyApp extends StatelessWidget{
   final routes = <String, WidgetBuilder>{

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   static String tag = "privacy-policy";
@@ -12,7 +10,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.people,color: Colors.pinkAccent,size: 40.0),
     );
@@ -27,7 +25,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     );
 
 
-    final text_privacy_policy= Text(
+    final textPrivacyPolicy= Text(
       "This app provide the full profe security for the users. Developers tried their best to make app properly secure which can't be hack, user privacy will be the safe on their accounts. \n\n\n\n\n",
       style: TextStyle(
         fontSize: 22.0,
@@ -65,9 +63,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       children: <Widget>[
         SizedBox(height: 20.0,),
 
-        place_of_peace,
+        placeOfPeace,
         text_1,
-        text_privacy_policy,
+        textPrivacyPolicy,
 
       ],
     ),

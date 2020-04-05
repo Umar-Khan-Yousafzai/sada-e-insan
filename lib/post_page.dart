@@ -20,7 +20,7 @@ class PostPage extends StatefulWidget {
   _PostPageState createState() => _PostPageState();
 
   getPosts() async {
-    return await Firestore.instance.collection('posts').snapshots();
+    return Firestore.instance.collection('posts').snapshots();
   }
 }
 
@@ -29,7 +29,7 @@ class _PostPageState extends State<PostPage> {
   final get_postTitle = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.people, color: Colors.pinkAccent, size: 40.0),
     );
@@ -188,7 +188,7 @@ class _PostPageState extends State<PostPage> {
             SizedBox(
               height: 10,
             ),
-            place_of_peace,
+            placeOfPeace,
             text_1,
             postTitle,
             SizedBox(width: 10,height: 10,),

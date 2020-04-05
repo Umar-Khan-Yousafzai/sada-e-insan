@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
 
 class ForgetPasswordVerificationCode extends StatefulWidget {
   static String tag = "forget-password-verification-code";
@@ -13,7 +11,7 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
     );
@@ -27,7 +25,7 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
       ),
     );
 
-    final code_field = TextFormField(
+    final codeField = TextFormField(
       keyboardType: TextInputType.text,
       autofocus: false,
       decoration: InputDecoration(
@@ -41,7 +39,7 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
     );
 
 
-    final verify_button = Padding(
+    final verifyButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -97,10 +95,10 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(height: 20.0,),
-            place_of_peace,
+            placeOfPeace,
             text_1,
-            code_field,
-            verify_button,
+            codeField,
+            verifyButton,
 
           ],
         ),

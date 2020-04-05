@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
 
 class Help extends StatefulWidget {
   static String tag = "help";
@@ -12,7 +10,7 @@ class _HelpState extends State<Help> {
   @override
   Widget build(BuildContext context) {
 
-    final place_of_peace = Container(
+    final placeOfPeace = Container(
       alignment: Alignment.topLeft,
       child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
     );
@@ -58,7 +56,7 @@ class _HelpState extends State<Help> {
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(height: 20.0,),
-            place_of_peace,
+            placeOfPeace,
             text_1,
 
           ],
