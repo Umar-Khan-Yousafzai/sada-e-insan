@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'login_page.dart';
 import 'dashboard.dart';
 import 'signup_page.dart';
@@ -11,7 +12,7 @@ void main() => runApp(MyApp());
 
   };
   @override
-
+ // Routing rout = new Routing();
   Widget build(BuildContext context) {
        var pageRoute;
        return MaterialApp(
@@ -39,7 +40,7 @@ void main() => runApp(MyApp());
 
    validate()
   {
-    if(authr.googleSignIn.currentUser != null)
+    if(GoogleSignIn().isSignedIn()==true)
     {
      return Dashboard();
     }
@@ -51,25 +52,6 @@ void main() => runApp(MyApp());
   }
 }
 
-class Routing{
-Route _createRoute(Widget routes) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => routes,
-
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-    var begin = Offset(0.0, 1.0);
-    var end = Offset.zero;
-    var curve = Curves.ease;
-    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-    return SlideTransition(
-      position: animation.drive(tween),
-      child: child,
-    );
-    },
-
-  );
-}
-
-}
 
 //M A Hafeez IUB RYK +923088384344
+//Umar Farooq Khan Yousafzai

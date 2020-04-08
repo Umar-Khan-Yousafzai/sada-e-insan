@@ -11,10 +11,10 @@ import 'help.dart';
 
 class ImagePicker extends StatefulWidget {
   @override
-  _ImagePicker createState() => new _ImagePicker();
+  FImagePicker createState() => new FImagePicker();
 }
 
-class _ImagePicker extends State<ImagePicker> {
+class FImagePicker extends State<ImagePicker> {
   List<Asset> images = List<Asset>();
   String _error = 'No Error Dectected';
 
@@ -30,8 +30,8 @@ class _ImagePicker extends State<ImagePicker> {
         Asset asset = images[index];
         return AssetThumb(
           asset: asset,
-          width: 300,
-          height: 300,
+          width: 200,
+          height: 200,
         );
       }),
     );
@@ -43,13 +43,13 @@ class _ImagePicker extends State<ImagePicker> {
 
     try {
       resultList = await MultiImagePicker.pickImages(
-        maxImages: 400,
+        maxImages: 300,
         enableCamera: true,
         selectedAssets: images,
         cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
         materialOptions: MaterialOptions(
-          actionBarColor: "0xFFFF80AB",
-          actionBarTitle: "Sada-e-Niswan",
+          actionBarColor: "#000000",
+          actionBarTitle: "Sada-E-Niswan",
           allViewTitle: "All Photos",
           useDetailsView: false,
           selectCircleStrokeColor: "#000000",
@@ -69,7 +69,6 @@ class _ImagePicker extends State<ImagePicker> {
       _error = error;
     });
   }
-
   @override
   Widget build(BuildContext context) {
 
@@ -146,11 +145,12 @@ class _ImagePicker extends State<ImagePicker> {
               child: buildGridView(),
             ),
             RaisedButton(
-              child: Text("Cancel"),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return PostPage();
-                }));
+              child: Text("Submit"),
+              onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) {
+                if(images !=null)
+                  {print("Images not null");}
+                return PostPage();
+              }));
               },
             ),
           ],

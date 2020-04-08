@@ -61,12 +61,25 @@ class _DashboardState extends State<Dashboard> {
           ),
         ],
       ),
-      persistentFooterButtons: <Widget>[
-        Text("SADA-E-NISWA"),
-      ],
+      //persistentFooterButtons: <Widget>[
+        //Text("SADA-E-NISWA"),
+      //],
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                child: Icon(Icons.person_outline),
+              ),
+              title: Text(authr.googleSignIn.currentUser.displayName),
+              subtitle: Text("How are you doing?"),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return About();
+                }));
+              },
+            ),
+            Divider(),
             ListTile(
               leading: CircleAvatar(
                 child: Icon(Icons.apps),
@@ -126,7 +139,7 @@ class _DashboardState extends State<Dashboard> {
               subtitle: Text("session will be closed"),
               onTap: () {
                 authr.signOutGoogle();
-                dispose();
+              //  dispose();
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return LoginPage();
                 }));
@@ -137,41 +150,22 @@ class _DashboardState extends State<Dashboard> {
       ),
       backgroundColor: Colors.white,
       body:_posts(),
-     /* ListView.builder(
-          itemCount: post.documents.length,
-          padding: EdgeInsets.all(5.0) ,
-          itemBuilder: (context, i){
-            return new ListTile(
-              title: Text(post.documents[i].data['Title']),
-              subtitle: Text(post.documents[i].data['post']),
-              leading: CircleAvatar(
-                child: Icon(Icons.person),
-                backgroundColor: Colors.pinkAccent.shade100,
-                foregroundColor: Colors.white,
-              ),
-            );
-
-          }),*//*),
-            Divider(),
-            ListTile(
-              title: Text("Post Title..."),
-              subtitle: Text("meta data of post..."),
-             */
-
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
         backgroundColor: Colors.pinkAccent,
         label: Text('Add Post'),
         onPressed: () {
+       //   authr.signInWithGoogle();
+
           Navigator.push(context, MaterialPageRoute(builder: (context) {
+          authr.googleSignIn.signInSilently();
             return PostPage();
+
           }
           )
           );
         },
       ),
-
-
     );
   }
   Widget _posts() {
@@ -189,20 +183,16 @@ class _DashboardState extends State<Dashboard> {
                 child: Icon(Icons.person),
                 backgroundColor: Colors.pinkAccent.shade100,
                 foregroundColor: Colors.white,),
-              title: Text(post.data.documents[i].data['Title'].toString()),
+              title: Text(post.data.documents[i].data['title'].toString()),
               subtitle: Text(post.data.documents[i].data['post'].toString(),
               maxLines: 1,),
             ),
           );
-
         },
-
       );
     }
     });
-
 }
 }
-
 //Arslan hafeez
 //Umar Farooq Khan Yousafzai

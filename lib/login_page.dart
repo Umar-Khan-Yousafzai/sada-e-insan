@@ -27,6 +27,13 @@ class LoginPage extends StatefulWidget {
 
   @override
   _LoginPageState createState() => _LoginPageState();
+
+  String getSign()
+  {
+    return authr.googleSignIn.currentUser.displayName.toString();
+  }
+
+
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -53,8 +60,8 @@ class _LoginPageState extends State<LoginPage> {
       child: TextFormField(
           keyboardType: TextInputType.emailAddress,
           autofocus: false,
-        decoration: InputDecoration(
-          labelText: 'Email',
+          decoration: InputDecoration(
+          //labelText: 'Email',
           hintText: 'Email Address...',
           //errorText: "Error",
           contentPadding:
@@ -75,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
           keyboardType: TextInputType.emailAddress,
           autofocus: false,
         decoration: InputDecoration(
-          labelText: 'Password',
+          //labelText: 'Password',
           hintText: 'Your Password...',
           //errorText: "Error",
           contentPadding:
@@ -172,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           authr.signInWithGoogle().whenComplete(() {
          // FirebaseUser getuser;
-           // print(getuser.uid+"Salam");
+           print(authr.googleSignIn.currentUser.displayName+"Salam");
             Navigator.of(context).pushNamed('/dashboard');
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return Dashboard();

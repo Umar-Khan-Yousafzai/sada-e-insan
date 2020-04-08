@@ -28,19 +28,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
-    return 'signInWithGoogle succeeded: $user';
+    return user.uid;
   }
-String gson(){
 
- //googleSignIn.currentUser.displayName;
-  return googleSignIn.currentUser.displayName;
-  }
   void signOutGoogle() async{
-
-    await googleSignIn.signOut();
+      print("Signed Out with Email ID"+googleSignIn.currentUser.id);
+        await googleSignIn.signOut();
 
 
   }
+
+
 //----------------------------------------------------------------SignUp/Sign in With Email and Password--------------------------------//
 
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -88,9 +86,6 @@ return user;
 
 
 
-}
-class Database
-{
 }
 
 

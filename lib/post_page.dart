@@ -1,18 +1,23 @@
-
+import 'dart:io';
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
 import 'package:sadaeniswa/auth_rss.dart';
-import 'ImagePicker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+auth_resources authorize = new auth_resources();
+LoginPage lpg = new LoginPage();
+final get_post = TextEditingController();
+final get_postTitle = TextEditingController();
 
-auth_resources authr = new auth_resources();
-
+//FImagePicker imagePicker = new FImagePicker();
+//final List<Image> images = imagePicker.returnImages();
 class PostPage extends StatefulWidget {
   static String tag = 'post-page';
 
@@ -25,8 +30,28 @@ class PostPage extends StatefulWidget {
 }
 
 class _PostPageState extends State<PostPage> {
-  final get_post = TextEditingController();
-  final get_postTitle = TextEditingController();
+
+  File _Image;
+  StorageReference imageReference;
+
+  Future getImage() async {
+    File image;
+    image = (await ImagePicker.pickImage(source: ImageSource.gallery));
+    setState(()
+    {
+     _Image = image;
+    });
+  }//getImage();
+
+  //Upload Image
+  Future uploadImage() async{
+    imageReference = FirebaseStorage.instance.ref().child(_Image.toString());
+    StorageUploadTask storageUploadTask = imageReference.putFile(_Image);
+    StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final placeOfPeace = Container(
@@ -82,10 +107,8 @@ class _PostPageState extends State<PostPage> {
       decoration: InputDecoration(
         hintText: "What's on your mind...",
         suffixIcon: IconButton(icon: Icon(Icons.camera), onPressed: () {
-          //Navigator.of(context).pushNamed(SignupPage.tag);
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return ImagePicker();
-          }));
+          getImage();
+
         },
         ),
         contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 10.0),
@@ -105,7 +128,14 @@ class _PostPageState extends State<PostPage> {
         ),
         onPressed: () {
           //Navigator.of(context).pushNamed(SignupPage.tag);
-          _add();
+          if(_Image != null)
+            {
+              uploadImage();
+              _add();
+            }
+          else {
+            _add();
+          }
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Dashboard();
           }));
@@ -137,6 +167,21 @@ class _PostPageState extends State<PostPage> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                child: Icon(Icons.person),
+              ),
+              title: Text(
+              " "+authorize.googleSignIn.currentUser.toString()),
+              subtitle: Text("How are you doing?"),
+              onTap: () {
+              },
+            ),
+            Divider(),
+
+
+
+
             ListTile(
               leading: CircleAvatar(
                 child: Icon(Icons.home),
@@ -182,47 +227,55 @@ class _PostPageState extends State<PostPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
-          shrinkWrap: true,
+          //shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(
-              height: 10,
+            //  height: 10,
             ),
             placeOfPeace,
             text_1,
             postTitle,
             SizedBox(width: 10,height: 10,),
+
             post,
-            submit,
-          ],
-        ),
-      ),
-    );
-  }
-  final DateTime dateTime = new DateTime.now();
-  final String user_id = authr.gson().toString();
+          // child:   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+        //height: MediaQuery.of(context).size.height * 0.35,
+            Row(
+              children: <Widget>[
+              Expanded(
+                child: _Image == null ? Container() : Image.file(_Image,
+                height: 100,
+                width: 100,)
+              )
+              ],
+            ),
+submit,
+// GetImages(),
+],
+),
+),
+);
+}
+final DateTime dateTime = new DateTime.now();
+//final String user_id = authr.googleSignIn.currentUser.displayName.toString();
 
-  String checkforUser()
-  {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    //_auth.
-  }
+String user_id = " jhj";//authorize.googleSignIn.currentUser.displayName;
+DocumentReference documentReference = Firestore.instance.collection('posts').document();
+Future<void> _add() async {
+  user_id = lpg.getSign();
+  Map<String, String> data = <String, String>{
+    "title": get_postTitle.text.toString(),
+    "post": get_post.text.toString(),
+    "documentID": documentReference.documentID,
+    "userID":user_id,
+    "timestamp": dateTime.toString(),
+    "reference": imageReference.toString(),
+  };
 
+  documentReference.setData(data).catchError((e){print(e);});
 
-  DocumentReference documentReference = Firestore.instance.collection('posts').document();
-  Future<void> _add() async {
-    Map<String, String> data = <String, String>{
-      //"name": authr.googleSignIn.currentUser.toString(),
-      "title": get_postTitle.text.toString(),
-      "post": get_post.text.toString(),
-      "documentID": documentReference.documentID,
-      "userID":user_id,
-      "timestamp": dateTime.toString()
-    };
-
-    documentReference.setData(data).catchError((e){print(e);});
-
-  }
+}
 
 
 }
