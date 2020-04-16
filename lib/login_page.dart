@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sadaeniswa/about.dart';
-//import 'package:sadaeniswa/catagories.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/signup_page.dart';
@@ -182,7 +181,9 @@ class _LoginPageState extends State<LoginPage> {
            print(authr.googleSignIn.currentUser.displayName+"Salam");
             Navigator.of(context).pushNamed('/dashboard');
             Navigator.push(context, MaterialPageRoute(builder: (context) {
+              print("AAAAA"+userid);
               return Dashboard();
+
             }
             )
             );

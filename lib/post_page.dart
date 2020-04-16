@@ -1,5 +1,6 @@
 import 'dart:io';
-import 'dart:ui';
+import 'package:path/path.dart' as path;
+//import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,18 +10,21 @@ import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/auth_rss.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-auth_resources authorize = new auth_resources();
-LoginPage lpg = new LoginPage();
+import 'package:sadaeniswa/Database/blocdata.dart';
+Bloc bloc = new Bloc();
+String imageaddress;
 final get_post = TextEditingController();
 final get_postTitle = TextEditingController();
+// ignore: non_constant_identifier_names
+
+File _Image;
+StorageReference imageReference;
 
 //FImagePicker imagePicker = new FImagePicker();
 //final List<Image> images = imagePicker.returnImages();
 class PostPage extends StatefulWidget {
   static String tag = 'post-page';
-
   @override
   _PostPageState createState() => _PostPageState();
 
@@ -31,8 +35,6 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
 
-  File _Image;
-  StorageReference imageReference;
 
   Future getImage() async {
     File image;
@@ -41,17 +43,28 @@ class _PostPageState extends State<PostPage> {
     {
      _Image = image;
     });
-  }//getImage();
 
-  //Upload Image
-  Future uploadImage() async{
-    imageReference = FirebaseStorage.instance.ref().child(_Image.toString());
-    StorageUploadTask storageUploadTask = imageReference.putFile(_Image);
-    StorageTaskSnapshot storageTaskSnapshot = await storageUploadTask.onComplete;
-    setState(() {
+  }//getImage
 
-    });
+  Future<String> UploadImage() async{
+    String name;
+    if(await _Image.exists()){
+      name = path.basename(_Image.path).toString();
+    }
+    StorageReference ref = FirebaseStorage.instance.ref().child(name);
+    StorageUploadTask uploadTask = ref.putFile(_Image);
+    var downloadUrl = await(await uploadTask.onComplete).ref.getDownloadURL();
+    print("download address"+downloadUrl);
+setState(() {
+  imageaddress = downloadUrl.toString();
+
+  print("Variable imageaddress"+imageaddress);
+  return downloadUrl;
+});
+  
+
   }
+
   @override
   Widget build(BuildContext context) {
     final placeOfPeace = Container(
@@ -128,14 +141,15 @@ class _PostPageState extends State<PostPage> {
         ),
         onPressed: () {
           //Navigator.of(context).pushNamed(SignupPage.tag);
-          if(_Image != null)
-            {
-              uploadImage();
-              _add();
+
+            if(_Image != null) {
+           UploadImage() ;
+              bloc.createDocument();
             }
-          else {
-            _add();
-          }
+          else{ print("Image was null submitting without image");
+            bloc.createDocument();}
+
+
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Dashboard();
           }));
@@ -172,7 +186,7 @@ class _PostPageState extends State<PostPage> {
                 child: Icon(Icons.person),
               ),
               title: Text(
-              " "+authorize.googleSignIn.currentUser.toString()),
+              " "+userdisplayname),
               subtitle: Text("How are you doing?"),
               onTap: () {
               },
@@ -257,26 +271,7 @@ submit,
 ),
 );
 }
-final DateTime dateTime = new DateTime.now();
-//final String user_id = authr.googleSignIn.currentUser.displayName.toString();
-
-String user_id = " jhj";//authorize.googleSignIn.currentUser.displayName;
-DocumentReference documentReference = Firestore.instance.collection('posts').document();
-Future<void> _add() async {
-  user_id = lpg.getSign();
-  Map<String, String> data = <String, String>{
-    "title": get_postTitle.text.toString(),
-    "post": get_post.text.toString(),
-    "documentID": documentReference.documentID,
-    "userID":user_id,
-    "timestamp": dateTime.toString(),
-    "reference": imageReference.toString(),
-  };
-
-  documentReference.setData(data).catchError((e){print(e);});
-
 }
 
 
-}
 

@@ -6,11 +6,13 @@ import 'signup_page.dart';
 
 void main() => runApp(MyApp());
   class MyApp extends StatelessWidget{
-  final routes = <String, WidgetBuilder>{
+
+
+  /*final routes = <String, WidgetBuilder>{
 
     LoginPage.tag: (context) => LoginPage(),
 
-  };
+  };*/
   @override
  // Routing rout = new Routing();
   Widget build(BuildContext context) {
