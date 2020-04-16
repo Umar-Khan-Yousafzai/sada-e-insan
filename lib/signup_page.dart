@@ -7,9 +7,9 @@ import 'dashboard.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-final get_email = TextEditingController();
-final get_password = TextEditingController();
-final get_cpassword = TextEditingController();
+final getEmail = TextEditingController();
+final getPassword = TextEditingController();
+final getCPassword = TextEditingController();
 
 class SignupPage extends StatefulWidget {
   final DBRef = FirebaseDatabase.instance.reference();
@@ -122,7 +122,7 @@ class _SignupPageState extends State<SignupPage> {
                       return null;
                     },
                     keyboardType: TextInputType.text,
-                    controller: get_email,
+                    controller: getEmail,
                     autofocus: false,
                     decoration: InputDecoration(
                       labelText: 'Email',
@@ -144,7 +144,7 @@ class _SignupPageState extends State<SignupPage> {
                       return null;
                     },
 
-                    controller: get_password,
+                    controller: getPassword,
                     autofocus: false,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -162,13 +162,13 @@ class _SignupPageState extends State<SignupPage> {
                   SizedBox(height: 25.0),
                   TextFormField(
                     validator: (value) {
-                      if (get_password.value != get_password.value) {
+                      if (getPassword.value != getPassword.value) {
                         return 'Password Not Matched';
                       }
                       return null;
                     },
 
-                    controller: get_cpassword,
+                    controller: getCPassword,
                     autofocus: false,
                     obscureText: true,
                     decoration: InputDecoration(
@@ -197,8 +197,8 @@ class _SignupPageState extends State<SignupPage> {
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             // If the form is valid, display a Snackbar.
-                            authr.handleSignUp(get_email.text.toString(),
-                                get_password.text.toString())
+                            authr.handleSignUp(getEmail.text.toString(),
+                                getPassword.text.toString())
                                 .whenComplete(() {
                               Navigator.of(context).pushNamed('/login_route');
                               Navigator.push(context,
