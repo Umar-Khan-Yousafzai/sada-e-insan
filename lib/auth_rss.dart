@@ -35,7 +35,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
       print("Signed Out with Email ID"+googleSignIn.currentUser.id);
         await googleSignIn.signOut();
 
-
   }
 
 

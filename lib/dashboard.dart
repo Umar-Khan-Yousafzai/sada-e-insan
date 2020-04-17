@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
@@ -173,6 +174,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Widget _posts() {
+    GoogleSignIn gsn;
+
     return StreamBuilder(
         stream: Firestore.instance
             .collection('posts')
@@ -181,105 +184,128 @@ class _DashboardState extends State<Dashboard> {
         builder: (context, post) {
           if (post.data == null) return CircularProgressIndicator();
           {
-            return ListView.builder(
+            GoogleSignIn signIn;
 
+            return ListView.builder(
               itemCount: post.data.documents.length,
               //padding: EdgeInsets.all(16.0) ,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, i) {
-                return Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Container(
+              return Container(
+               padding: EdgeInsets.fromLTRB(10,17,10,17), height: 530,
+            width: 400,
+                child:Material(
 
-                    child: new FittedBox(
-                      fit: BoxFit.contain,
-                      child: Card(
-                        color: Colors.white,
-                        elevation: 24,
-                        //borderRadius: BorderRadius.vertical(),
-                        //shadowColor: Color(0x802196F3),
-                        child:
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                    borderRadius: BorderRadius.circular(20.00),
+                    shadowColor: Colors.blueGrey,
+                    elevation: 24,
+                    color: Colors.white,
+                    child : Column(
+                    children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
                         Container(
-                          width: 300,
-                          height: 300,
-                        color: Colors.red,
-                        alignment: Alignment.topCenter,
-                       child: Column(
-                         children: <Widget>[
+                          padding: const EdgeInsets.all(16),
+                          child:FittedBox(
+                            fit:BoxFit.contain,
+                            child: Text(post.data.documents[i].data['title'].toString(),
+                              style: TextStyle(
+                                  fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),),
+                          ) ,
+                        )
 
-                           Padding(
-                             padding: const EdgeInsets.all(4.0), child: Text(post.data.documents[i].data['title'].toString(),
-                             style: TextStyle(color: Color(0xffe6020a), fontSize: 20.0,fontWeight: FontWeight.bold),textAlign: TextAlign.center,),),
-                           Padding(
-                             padding: const EdgeInsets.all(4.0), child: Text(post.data.documents[i].data['post'].toString(),
-                             style: TextStyle(color: Colors.blueGrey, fontSize: 14.0),textAlign: TextAlign.left, maxLines: 1,),),
+                      ],
+                    ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                     mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
 
-                           Row(
-
-//mainAxisAlignment: MainAxisAlignment.end,
-                             children: <Widget>[
-                            Column(
-                              children: <Widget>[
-                                Container(
-                                  color: Colors.amberAccent,
-                                  child:Divider(color: Colors.green),
-                                )
-                              ],
+                          height: 240,
+                          width: 330,
+                        //  padding: const EdgeInsets.all(16),
+                          child: FittedBox(
+                            fit: BoxFit.fitWidth,
+                            child: Image.network(
+                                post.data.documents[i].data['imageUri'].toString()
+                            ,width: 330,
                             ),
+                          ),
 
-                               Container(
-                            padding: EdgeInsets.all(3.0),
-                                   color: Colors.blue,
-
-                                 child:ClipOval(
-
-                                     child: Image.network(
-
-                                         post.data.documents[i].data['userPhotoUrluserName'],
-                                         width: 30,
-                                         height: 30,
-                                         fit: BoxFit.cover
-                                     )
-
-                               ))
-                             ],
-                           ),
-                         ],
-                       ),
+                        ) ,
                       ),
 
-                         SizedBox(
-                              width: 10,
-                              height: 300,
+                      ],
+                    ), //IMAGE Container
+                    Column(
+                      //mainAxisAlignment: MainAxisAlignment.start,
+
+                      children: <Widget>[
+                        Container(
+
+                          height: 110,
+                          padding: const EdgeInsets.fromLTRB(14, 2, 10, 14),
+                          child: Text(
+                            post.data.documents[i].data['post'].toString()+"..."
+                            ,
+                            maxLines: 5,
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(
+                              fontSize: 16
                             ),
-                             Container(  width: 230,
-                               height: 300,
+                         ),
 
-                               alignment: Alignment.topRight,
-                              child: ClipRRect(
-                                  borderRadius: new BorderRadius.vertical(),
-                                  child: FittedBox(
-                                    fit: BoxFit.fill,
-                                    child: Image(
-                                      width: 230,
-                                      height: 300,
+                        ),
 
-                                      alignment: Alignment.topRight,
-                                      fit: BoxFit.fill,
-                                      // alignment: Alignment.centerRight,
-                                      image: NetworkImage(
-                                          post.data.documents[i].data['imageUri']),),
-                                  )),
-                            )
+                      ],
+                    ),
+Divider(),
+                    Row(
+         //crossAxisAlignment: CrossAxisAlignment.start,
+                 //    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //              mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+
+                     Container(
+                       padding: EdgeInsets.fromLTRB(10, 1, 10, 10),
+                       child: ClipOval(
+                         child: Image.network(post.data.documents[i].data['userPhotoUrluserName'].toString()
+                         ,width: 60,
+                         height: 60,),
+                       ),
+                     ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+
+                            Container(
+                              padding: EdgeInsets.fromLTRB(4, 1, 10, 0),
+                              child:  Text("Umar Khan Yousafzai"
+                              ),
+                            ),Container(
+                              padding: EdgeInsets.fromLTRB(4, 0, 10,0),
+                              child:  Text("17th April 2020"
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
-                  ),
-                );
+
+                      ]
+                      )
+
+
+                  ]
+
+
+                    )));
+
               },
             );
           }

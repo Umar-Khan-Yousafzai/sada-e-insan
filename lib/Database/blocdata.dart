@@ -1,9 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-//import 'package:observable/observable.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sadaeniswa/login_page.dart';
 import 'Firestore_database.dart';
 import 'dart:core';
 import 'package:sadaeniswa/dashboard.dart';

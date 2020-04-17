@@ -1,7 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+
 
 Firestore firestore = Firestore.instance;
 DocumentReference postreference = firestore.collection('posts').document();
