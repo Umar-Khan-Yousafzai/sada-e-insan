@@ -9,9 +9,6 @@ import 'package:sadaeniswa/signup_page.dart';
 import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/auth_rss.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-
 final get_username = TextEditingController();
 final get_password = TextEditingController();
 
@@ -93,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
 
-    final login_button = Padding(
+    final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -134,7 +131,6 @@ class _LoginPageState extends State<LoginPage> {
 
           Navigator.push(context, MaterialPageRoute(builder: (context) {
             return SignupPage();
-            super.dispose();
           }));
         },
         padding: EdgeInsets.all(12),
@@ -264,7 +260,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 15.0),
             password,
             SizedBox(height: 10.0),
-            login_button,
+            loginButton,
             signup_button,
             forgot_label,
             catagory,

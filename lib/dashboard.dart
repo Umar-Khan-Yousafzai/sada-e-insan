@@ -50,8 +50,8 @@ class _DashboardState extends State<Dashboard> {
         backgroundColor: Colors.pinkAccent.shade100,
         title: !isSearching
             ? Text(
-                'SADA-E-NISWA',
-              )
+                'SADA-E-INSAN',
+              textAlign: TextAlign.center,)
             : TextField(
                 decoration: InputDecoration(
                     //  icon: Icon(Icons.search),
@@ -160,7 +160,7 @@ class _DashboardState extends State<Dashboard> {
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
         backgroundColor: Colors.pinkAccent,
-        label: Text('Add Post'),
+        label: Text('New Post'),
         onPressed: () {
           //   authr.signInWithGoogle();
 
@@ -192,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, i) {
               return Container(
-               padding: EdgeInsets.fromLTRB(10,17,10,17), height: 530,
+               padding: EdgeInsets.fromLTRB(10,14,10,14), height: 530,
             width: 400,
                 child:Material(
 
@@ -272,13 +272,12 @@ Divider(),
                  //    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           //              mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-
                      Container(
-                       padding: EdgeInsets.fromLTRB(10, 1, 10, 10),
+                       padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
                        child: ClipOval(
                          child: Image.network(post.data.documents[i].data['userPhotoUrluserName'].toString()
-                         ,width: 60,
-                         height: 60,),
+                         ,width: 40,
+                         height: 40,),
                        ),
                      ),
                         Column(
@@ -286,16 +285,48 @@ Divider(),
                           children: <Widget>[
 
                             Container(
-                              padding: EdgeInsets.fromLTRB(4, 1, 10, 0),
-                              child:  Text("Umar Khan Yousafzai"
+                              padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
+                              child:  Text("Umar Khan Yousafzai",
+                                style: TextStyle(fontWeight: FontWeight.w900,
+                                fontSize: 13),
                               ),
                             ),Container(
-                              padding: EdgeInsets.fromLTRB(4, 0, 10,0),
-                              child:  Text("17th April 2020"
+                              padding: EdgeInsets.fromLTRB(2  , 0, 10,0),
+                              child:  Text("17th April 2020",
+                              style: TextStyle(color: Color(0xffe5452e),
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 13),
                               ),
+
                             ),
                           ],
                         ),
+
+
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.fromLTRB(70, 0, 0, 0),
+                          child: Icon(FontAwesomeIcons.thumbsUp,
+                            color: Colors.indigo,
+
+                          ),),
+
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Icon(FontAwesomeIcons.comment,
+                            color: Colors.indigo,
+
+                          ),),
+                        Container(
+                          alignment: Alignment.centerRight,
+                          padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: Icon(FontAwesomeIcons.heart,
+                            color: Colors.indigo,
+
+                          ),),
+
+
 
                       ]
                       )

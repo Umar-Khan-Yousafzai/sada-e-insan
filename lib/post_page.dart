@@ -50,6 +50,7 @@ class _PostPageState extends State<PostPage> {
     String name;
     if(await _Image.exists()){
       name = path.basename(_Image.path).toString();
+
     }
     StorageReference ref = FirebaseStorage.instance.ref().child(name);
     StorageUploadTask uploadTask = ref.putFile(_Image);
@@ -61,8 +62,8 @@ setState(() {
   print("Variable imageaddress"+imageaddress);
   return downloadUrl;
 });
-  
 
+    return name;
   }
 
   @override
@@ -192,8 +193,6 @@ setState(() {
               },
             ),
             Divider(),
-
-
 
 
             ListTile(
