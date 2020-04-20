@@ -16,7 +16,9 @@ class Repository
   Stream<DocumentSnapshot> getPostData(String documentId) {
     return firestore.collection('posts').document(documentId).snapshots();
   }
+Future<QuerySnapshot> getSingleDocument(String documentId) async{
 
+}
   Stream<DocumentSnapshot> getUserData(String documentId) {
     return firestore.collection('users').document(documentId).snapshots();
   }

@@ -11,15 +11,21 @@ Repository _repository = new Repository();
   void initState(){
     getAllDocuments();
   }
+
   final _documentData = BehaviorSubject<QuerySnapshot>();
 //To listen documents data from StreamBuilder
  Stream<QuerySnapshot> get documentData => _documentData.stream;
 //Our method we called into init state
-  getAllDocuments() async{
-    QuerySnapshot allDocuments= await _repository.getAllDocuments();
+  getAllDocuments() async {
+    QuerySnapshot allDocuments = await _repository.getAllDocuments();
 
     _documentData.sink.add(allDocuments);
+  }
     //After retrieve all documents, we sink into the pipe (stream)
+
+  getSingleDocument(documentId) async
+  {
+    return firestore.collection("posts").document(documentId);
   }
 //Do not forget to close our stream
   void dispose() async {

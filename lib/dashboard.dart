@@ -5,10 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sadaeniswa/Models/PostModel.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/login_page.dart';
 import 'package:sadaeniswa/post_page.dart';
+import 'package:sadaeniswa/post_view.dart';
 import 'package:sadaeniswa/privacy_policy.dart';
 import 'package:sadaeniswa/report_problem.dart';
 import 'package:sadaeniswa/auth_rss.dart';
@@ -176,36 +178,46 @@ class _DashboardState extends State<Dashboard> {
   Widget _posts() {
     GoogleSignIn gsn;
 
-    return StreamBuilder(
+    return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('posts')
-            .orderBy('timestamp', descending: true)
-            .snapshots(),
-        builder: (context, post) {
+            .orderBy('timestamp', descending: true).snapshots(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> post) {
           if (post.data == null) return CircularProgressIndicator();
           {
-            GoogleSignIn signIn;
-
             return ListView.builder(
               itemCount: post.data.documents.length,
               //padding: EdgeInsets.all(16.0) ,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, i) {
+                DocumentSnapshot ds = post.data.documents[i];
               return Container(
                padding: EdgeInsets.fromLTRB(10,14,10,14), height: 530,
-            width: 400,
-                child:Material(
+               width: 400,
 
+                child:Material(
                     borderRadius: BorderRadius.circular(20.00),
                     shadowColor: Colors.blueGrey,
                     elevation: 24,
                     color: Colors.white,
-                    child : Column(
+                    child: InkWell(
+                      onTap: (){
+                        var route = new MaterialPageRoute(
+                          builder: (BuildContext context) =>
+
+                          new PostView(documentID: post.data.documents[i].documentID)
+                        );
+                        print(post.data.documents[i].documentID+"yeh document ID hai");
+                        Navigator.of(context).push(route);
+                      },
+                    child: Column(
                     children: <Widget>[
+
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+
                         Container(
                           padding: const EdgeInsets.all(16),
                           child:FittedBox(
@@ -216,7 +228,7 @@ class _DashboardState extends State<Dashboard> {
                                 fontWeight: FontWeight.bold,
                               ),),
                           ) ,
-                        )
+                        ),
 
                       ],
                     ),
@@ -272,6 +284,7 @@ Divider(),
                  //    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           //              mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
+
                      Container(
                        padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
                        child: ClipOval(
@@ -335,7 +348,7 @@ Divider(),
                   ]
 
 
-                    )));
+                    ))));
 
               },
             );
