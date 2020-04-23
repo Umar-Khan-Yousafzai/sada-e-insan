@@ -4,7 +4,7 @@
 
 
     <style parent="@android:style/Theme.Black.NoTitleBar" name="LaunchTheme">
-
+        <item name="android:defaultFocusHighlightEnabled">false</item>
     <!-- Show a splash screen on the activity. Automatically removed whenFlutter draws its first frame -->
 
 
