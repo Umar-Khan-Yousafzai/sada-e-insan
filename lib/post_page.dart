@@ -162,7 +162,9 @@ setState(() {
       ),
     );
 
-    return Scaffold(
+    return SafeArea(
+
+    child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
         title: Center(child: Text("SADA-E-NISWA")),
@@ -268,7 +270,7 @@ submit,
 ],
 ),
 ),
-);
+));
 }
 }
 

@@ -23,9 +23,24 @@ Repository _repository = new Repository();
   }
     //After retrieve all documents, we sink into the pipe (stream)
 
-  getSingleDocument(documentId) async
+  Stream<QuerySnapshot> getAnything(String ComparisionItem,ItemNeeded )
   {
-    return firestore.collection("posts").document(documentId);
+   var item = _repository.getAnything(ComparisionItem, ItemNeeded);
+  return item;
+  }
+  Future <List<Map<dynamic, dynamic>>> getCollection(String ComparisionItem,String ItemNeeded ) async{
+    List<DocumentSnapshot> tempList;
+    List<Map<dynamic, dynamic>> list = new List();
+    CollectionReference collectionRef = Firestore.instance.collection("users");
+    QuerySnapshot collectionSnapshot = await collectionRef.where(ComparisionItem,isEqualTo: ItemNeeded).getDocuments();
+
+    tempList = collectionSnapshot.documents; // <--- ERROR
+
+    list = tempList.map((DocumentSnapshot docSnapshot){
+      return docSnapshot.data;
+    }).toList();
+
+    return list;
   }
 //Do not forget to close our stream
   void dispose() async {

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/Models/PostModel.dart';
@@ -47,8 +48,11 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+return Scaffold(
+
       appBar: AppBar(
+        elevation: 23,
         backgroundColor: Colors.pinkAccent.shade100,
         title: !isSearching
             ? Text(
@@ -159,10 +163,9 @@ class _DashboardState extends State<Dashboard> {
       ),
       backgroundColor: Colors.white,
       body: _posts(),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
         backgroundColor: Colors.pinkAccent,
-        label: Text('New Post'),
         onPressed: () {
           //   authr.signInWithGoogle();
 
@@ -191,6 +194,10 @@ class _DashboardState extends State<Dashboard> {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, i) {
                 DocumentSnapshot ds = post.data.documents[i];
+
+                if(ds['imageUri']==null){
+
+                }
               return Container(
                padding: EdgeInsets.fromLTRB(10,14,10,14), height: 530,
                width: 400,

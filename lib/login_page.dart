@@ -33,9 +33,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   @override
   Widget build(BuildContext context) {
-
     final place_of_peace = Container(
       alignment: Alignment.topCenter,
       child: Icon(Icons.person, color: Colors.pinkAccent.shade200, size: 75.0),
@@ -43,9 +43,9 @@ class _LoginPageState extends State<LoginPage> {
 
     final text_1 = Text(
       "Place of Peace",
-      textAlign: TextAlign.left,
+      textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: 45.0, color: Colors.black45, fontWeight: FontWeight.normal),
+          fontSize: 45.0, color: Colors.black45, fontWeight: FontWeight.w400),
     );
 
     final email = new Theme(
@@ -54,9 +54,9 @@ class _LoginPageState extends State<LoginPage> {
         primaryColorDark: Colors.red,
       ),
       child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          autofocus: false,
-          decoration: InputDecoration(
+        keyboardType: TextInputType.emailAddress,
+        autofocus: false,
+        decoration: InputDecoration(
           //labelText: 'Email',
           hintText: 'Email Address...',
           //errorText: "Error",
@@ -75,8 +75,8 @@ class _LoginPageState extends State<LoginPage> {
         primaryColorDark: Colors.red,
       ),
       child: TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          autofocus: false,
+        keyboardType: TextInputType.emailAddress,
+        autofocus: false,
         decoration: InputDecoration(
           //labelText: 'Password',
           hintText: 'Your Password...',
@@ -153,19 +153,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
-    final catagory = FlatButton(
-      child: Text(
-        'Categories',
-        style: TextStyle(color: Colors.purple, fontSize: 15),
-      ),
-      onPressed: () {
-//        Navigator.of(context).pushNamed(ForgetPasswordEmail.tag);
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          //return Catagories();
-        }));
-      },
-    );
-
     final loginWithGoogle = new FlatButton(
         child: Text(
           'Login with Google?',
@@ -173,13 +160,12 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           authr.signInWithGoogle().whenComplete(() {
-         // FirebaseUser getuser;
-           print(authr.googleSignIn.currentUser.displayName+"Salam");
+            // FirebaseUser getuser;
+            print(authr.googleSignIn.currentUser.displayName + "Salam");
             Navigator.of(context).pushNamed('/dashboard');
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              print("AAAAA"+userid);
+              print("AAAAA" + userid);
               return Dashboard();
-
             }
             )
             );
@@ -187,88 +173,68 @@ class _LoginPageState extends State<LoginPage> {
           );
         }
     );
+      return Scaffold(
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Center(child: Text("SADA-E-NISWA")),
-        actions: <Widget>[
-          PopupMenuButton(
-            // ignore: missing_return
-            itemBuilder: (context) {
-              var popupMenuItem = PopupMenuItem(
-                child: ListView(
-                  children: <Widget>[],
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.apps),
                 ),
-              );
-            },
-          )
-        ],
-      ),
-
-
-
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.apps),
+                title: Text("About"),
+                subtitle: Text("app development"),
+                onTap: () {
+                  Navigator.push(context,
+                      // ignore: missing_return
+                      MaterialPageRoute(builder: (context) {
+                        return About();
+                      }));
+                },
               ),
-              title: Text("About"),
-              subtitle: Text("app development"),
-              onTap: () {
-                Navigator.push(context,
-                    // ignore: missing_return
-                    MaterialPageRoute(builder: (context) {
-                  return About();
-                }));
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.help),
+              Divider(),
+              ListTile(
+                leading: CircleAvatar(
+                  child: Icon(Icons.help),
+                ),
+                title: Text("Help"),
+                subtitle: Text("any problem?"),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Help();
+                  }));
+                },
               ),
-              title: Text("Help"),
-              subtitle: Text("any problem?"),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Help();
-                }));
-              },
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
 
 
+        backgroundColor: Colors.white,
+        body: SafeArea(
+//minimum: ,
+          child: ListView(
 
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            SizedBox(
-              height: 20.0,
-            ),
-            place_of_peace,
-            text_1,
-            SizedBox(height: 35.0),
-            email,
-            SizedBox(height: 15.0),
-            password,
-            SizedBox(height: 10.0),
-            loginButton,
-            signup_button,
-            forgot_label,
-            catagory,
-            loginWithGoogle,
-          ],
+            shrinkWrap: true,
+            padding: EdgeInsets.fromLTRB(24, 36, 24, 24),
+            children: <Widget>[
+              SizedBox(
+                height: 20.0,
+              ),
+              place_of_peace,
+              text_1,
+              SizedBox(height: 35.0),
+              email,
+              SizedBox(height: 15.0),
+              password,
+              SizedBox(height: 10.0),
+              loginButton,
+              signup_button,
+              forgot_label,
+              loginWithGoogle,
+            ],
+          ),
         ),
-      ),
-    );
-
+      );
   }
 }

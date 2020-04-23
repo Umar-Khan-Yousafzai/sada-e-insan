@@ -1,8 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
-        <!-- Show a splash screen on the activity. Automatically removed when
-             Flutter draws its first frame -->
-        <item name="android:windowBackground">@drawable/launch_background</item>
-    </style>
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <resources>
+
+
+    <style parent="@android:style/Theme.Black.NoTitleBar" name="LaunchTheme">
+
+    <!-- Show a splash screen on the activity. Automatically removed whenFlutter draws its first frame -->
+
+
+    <item name="android:windowBackground">@drawable/launch_background</item>
+
+</style>
+
 </resources>
+    <!---
+    <?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+            <!- Show a splash screen on the activity. Automatically removed when
+                 Flutter draws its first frame -->
+    <!--<item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        </style>
+        </resources>
+    -->
