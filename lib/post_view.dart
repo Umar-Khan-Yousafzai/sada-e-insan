@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sadaeniswa/Database/Firestore_database.dart';
 import 'package:sadaeniswa/about.dart';
@@ -19,6 +20,7 @@ import 'dashboard.dart';
 
 String doc;
 Bloc bloc = new Bloc();
+final _get_comment = TextEditingController();
 
 class PostView extends StatelessWidget {
   bool isSearching = false;
@@ -38,10 +40,6 @@ class PostView extends StatelessWidget {
             return new Text("Loading");
           }
           var userDocument = snapshot.data;
-          var DocumentSimple = Firestore.instance
-              .collection('users')
-              .where('postID', isEqualTo: userDocument['postID'])
-              .getDocuments();
 
           String date = DateFormat.yMMMd()
               .format(userDocument['timestamp'].toDate())
@@ -49,7 +47,7 @@ class PostView extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              elevation: 2 ,
+              elevation: 2,
               title: Column(
                 children: <Widget>[
                   FittedBox(
@@ -137,24 +135,58 @@ class PostView extends StatelessWidget {
                       ),
                     ],
                   ),
-Row(children: <Widget>[
-  Expanded(
-    child: Container( padding:EdgeInsets.all(4),child:TextFormField(
-      keyboardType: TextInputType.text,
-      autofocus: false,
-      decoration: InputDecoration(
-        //labelText: 'Email',
-        hintText: 'Enter Your Comment',
-        //errorText: "Error",
-        contentPadding:
-        EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(2.0)),
-      ),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: TextField(
+                            controller: _get_comment,
+                            keyboardType: TextInputType.multiline,
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(1000),
+                            ],
+                            maxLines: null,
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              hintText: "What's on your mind?",
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.comment),
+                                onPressed: () {
+                                  DateTime dateTime = DateTime.now();
+                                  bloc.createComment(
+                                    userPhotoUrl,
+                                    userdisplayname,
+                                    dateTime,
+                                    _get_comment.text,
+                                    documentID,
+                                    0,
+                                  );
+                                },
+                              ),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(32.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                 Row(
+                   children: <Widget>[
+                     StreamBuilder(stream: Firestore.instance
+                     .collection('comments').where("postID",isEqualTo: documentID)
+                     .snapshots(),
+                       builder: (BuildContext context, AsyncSnapshot snapshot) {
+                       return ListView.builder(itemBuilder: )
 
-    )),
-  )
-],)                ]),
+                       },)
+                   ],
+                 )
+                ]),
               ),
             ),
           );

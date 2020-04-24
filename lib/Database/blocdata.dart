@@ -88,4 +88,14 @@ print("Image Address bloc"+ imageaddress.toString());
     _repository.createPostDocument(PostDocument).catchError((e){print(e);});
     _repository.createUserDocument(UserDocument).catchError((e){print(e);});
     }
+    Future<void>createComment(String userPhoto,String userName, DateTime datetStamp, String Comment, String postReference, int Replies){
+  Map<String, dynamic> PostComment = <String, dynamic>{
+    "userPhotoUrl": userPhoto,
+    "userName": userName,
+    "timestamp": datetStamp,
+    "Comment": commentReference.documentID,
+    "postID":  postReference,
+    "Replies": Replies,
+  };
+    _repository.createCommentDocument(PostComment);}
 }

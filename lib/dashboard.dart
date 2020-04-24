@@ -257,15 +257,12 @@ return Scaffold(
                             ,width: 330,
                             ),
                           ),
-
-                        ) ,
+                        ),
                       ),
-
                       ],
                     ), //IMAGE Container
                     Column(
                       //mainAxisAlignment: MainAxisAlignment.start,
-
                       children: <Widget>[
                         Container(
 

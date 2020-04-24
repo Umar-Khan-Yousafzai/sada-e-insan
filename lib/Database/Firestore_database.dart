@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Firestore firestore = Firestore.instance;
 DocumentReference postreference = firestore.collection('posts').document();
 DocumentReference userreference = firestore.collection('users').document();
+DocumentReference commentReference = firestore.collection('users').document();
 class Repository
 {
   Future<QuerySnapshot>  getAllDocuments() async {
@@ -33,5 +34,9 @@ await  postreference.setData(mapPostDocument);
     await  userreference.setData(mapUserDocument);
     //await reference.collection('posts').document().setData(mapDoc);
     //print("Posted Data Online");
+  }
+  Future<void> createCommentDocument(Map<String,dynamic> mapCommentDocument)async
+  {
+    await commentReference.setData(mapCommentDocument);
   }
 }
