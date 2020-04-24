@@ -1,7 +1,8 @@
-# sadaeniswa
+# Sada-E-Insan
 
-SADA-E-NISWA application will make women&#x27;s life.
-This app is using Flutter and Firebase
+SADA-E-Insan application will aims to help women and men suffering from trauma and issues like rape, domestic violence, sexual harrasement death threats, rape threats and much more.
+
+It is Unique Social Media platform with experts and organizations that helps the people in need for free.
 
 It is being developed by Developer Student Club Core-team member and Lead
 M.Arslan Hafeez ~ Coreteam Member
