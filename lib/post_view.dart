@@ -155,12 +155,12 @@ class PostView extends StatelessWidget {
                                 onPressed: () {
                                   DateTime dateTime = DateTime.now();
                                   bloc.createComment(
-                                    userPhotoUrl,
-                                    userdisplayname,
-                                    dateTime,
-                                    _get_comment.text,
-                                    documentID,
-                                    0,
+                                    _get_comment.text.toString(),
+                                    documentID.toString(),
+                                  ).whenComplete((){
+                                  _get_comment.clear();
+                                  print("Comment Posted SuccessFully");
+                                  }
                                   );
                                 },
                               ),
@@ -175,17 +175,6 @@ class PostView extends StatelessWidget {
                       )
                     ],
                   ),
-                 Row(
-                   children: <Widget>[
-                     StreamBuilder(stream: Firestore.instance
-                     .collection('comments').where("postID",isEqualTo: documentID)
-                     .snapshots(),
-                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                       return ListView.builder(itemBuilder: )
-
-                       },)
-                   ],
-                 )
                 ]),
               ),
             ),

@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 Firestore firestore = Firestore.instance;
 DocumentReference postreference = firestore.collection('posts').document();
 DocumentReference userreference = firestore.collection('users').document();
-DocumentReference commentReference = firestore.collection('users').document();
+DocumentReference commentReference = firestore.collection('comments').document();
 class Repository
 {
   Future<QuerySnapshot>  getAllDocuments() async {
