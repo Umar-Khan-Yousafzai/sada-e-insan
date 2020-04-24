@@ -157,11 +157,8 @@ class PostView extends StatelessWidget {
                                   bloc.createComment(
                                     _get_comment.text.toString(),
                                     documentID.toString(),
-                                  ).whenComplete((){
-                                  _get_comment.clear();
-                                  print("Comment Posted SuccessFully");
-                                  }
                                   );
+                                  _get_comment.clear();
                                 },
                               ),
                               contentPadding:
@@ -175,7 +172,24 @@ class PostView extends StatelessWidget {
                       )
                     ],
                   ),
-                ]),
+
+                  Row(
+                    verticalDirection: VerticalDirection.down,
+                    children: <Widget>[
+                      Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(6),
+                            child: Text(
+                              userDocument['post'].toString(),
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                fontSize: 19,
+                              ),
+                            ),
+                          ))
+                    ],
+                  )
+                            ]),
               ),
             ),
           );
