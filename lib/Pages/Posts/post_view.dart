@@ -1,25 +1,16 @@
 import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sadaeniswa/Database/Firestore_database.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/post_page.dart';
-import 'package:sadaeniswa/post_view.dart';
-import 'package:sadaeniswa/privacy_policy.dart';
-import 'package:sadaeniswa/report_problem.dart';
-import 'package:sadaeniswa/auth_rss.dart';
 import 'package:intl/intl.dart';
-import 'Database/blocdata.dart';
-import 'dashboard.dart';
+import '../../Resources/blocdata.dart';
+import '../../Screens/dashboard.dart';
 
-String doc;
 Bloc bloc = new Bloc();
+DateTime dateTime = DateTime.now();
+
 // ignore: non_constant_identifier_names
 final _get_comment = TextEditingController();
 
@@ -141,12 +132,60 @@ class _PostViewState extends State<PostView> {
                       ),
                     ],
                   ),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    verticalDirection: VerticalDirection.down,
+                    children: <Widget>[
+                      StreamBuilder(
+                        stream: Firestore.instance
+                            .collection('comments')
+                            .where('postID', isEqualTo: widget.documentID)
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> docShot) {
+                          if (docShot.hasData) {
+                            //  print("MOM"+docShot.data.documents[0].data['commentContent'].toString());
+                            return Container(
+                                // height: double.maxFinite,
+                                child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: docShot.data.documents.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ListTile(
+                                    leading: ClipOval(
+                                      child: Image.network(
+                                        docShot.data.documents[index]
+                                            .data['userPhotoUrl'].toString(),
+                                        width: 30,
+                                        height: 30,
+                                      ),
+                                    ),
+
+                                    title: Text(
+                                  docShot.data.documents[index]
+                                      .data['commentContent']
+                                      .toString(),
+
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 20),
+                                ));
+                              },
+                            ));
+                          }
+                          return Container();
+                        },
+                      ),
+                    ],
+                  ),
                   Row(
                     children: <Widget>[
                       Expanded(
                         child: Container(
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          child: TextField(
+                          child: TextFormField(
+                            textAlign: TextAlign.center,
                             controller: _get_comment,
                             keyboardType: TextInputType.multiline,
                             inputFormatters: [
@@ -156,25 +195,36 @@ class _PostViewState extends State<PostView> {
                             autofocus: false,
                             decoration: InputDecoration(
                               hintText: "What's on your mind?",
-                              suffix: IconButton(
+                              suffixIcon: IconButton(
                                 icon: Icon(Icons.comment),
-                                onPressed: () {
-                                //  DateTime dateTime = DateTime.now();
-                                 // bloc.createComment(
-                                   // _get_comment.text.toString(),
-                                   // widget.documentID.toString(),
-                                 // );
-                                  bloc.createComment(_get_comment.text.toString(), widget.documentID).whenComplete((){print("hello world");}).catchError((e) {
-                                    print("We caught an error"+e);
-                                  });
-                                  _get_comment.clear();
-                                },
-                              ),
+                                onPressed: () {/*
+                                  DocumentReference CommentReference = Firestore
+                                      .instance
+                                      .collection('comments')
+                                      .document();
+                                  Future<void> createCommentDocument() async {
+                                    Map<String, dynamic> postComment =
+                                    <String, dynamic>{
+                                      "postID": widget.documentID,
+                                      //"commentID":commentReference.documentID,
+                                      "commentContent":
+                                      _get_comment.text.toString(),
+                                      "userID": userid,
+                                      "userEmail": userEmail,
+                                      "userPhotoUrl": userPhotoUrl,
+                                      "userName": userdisplayname,
+                                      "timestamp": dateTime,
+                                      "commentID": CommentReference.documentID
+                                    };
+                                    CommentReference.setData(postComment);
+                                  }
 
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
+                                  createCommentDocument();
+                                */},
+                              ),
+                              contentPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(32.0),
+                                borderRadius: BorderRadius.circular(4.0),
                               ),
                             ),
                           ),
@@ -182,43 +232,6 @@ class _PostViewState extends State<PostView> {
                       )
                     ],
                   ),
-/*
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    verticalDirection: VerticalDirection.down,
-                    children: <Widget>[
-                      StreamBuilder(
-                        stream: Firestore.instance.collection('comments').where('postID',isEqualTo: widget.documentID).snapshots(),
-                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> docShot){
-                          if(docShot.hasData){
-                          //  print("MOM"+docShot.data.documents[0].data['commentContent'].toString());
-                            return Container(
-                              // height: double.maxFinite,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: docShot.data.documents.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return ListTile(
-                                      title:Text(docShot.data.documents[index].data['commentContent'].toString(),
-                                      style:
-                                      TextStyle(color: Colors.black, fontSize: 16),
-                                    ));
-                                  },
-                                ));
-
-                          }
-                          return Container();
-                      },
-                      ),
-
-
-
-
-                    ],
-                  )*/
-
                 ]),
               ),
             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'login_page.dart';
-import 'dashboard.dart';
-import 'signup_page.dart';
+import 'Screens/login_page.dart';
+import 'Screens/dashboard.dart';
+import 'Pages/signup_page.dart';
 
 void main() => runApp(MyApp());
   class MyApp extends StatelessWidget{

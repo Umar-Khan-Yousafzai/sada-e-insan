@@ -4,14 +4,12 @@ import 'package:path/path.dart' as path;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-//import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/dashboard.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_page.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/about.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/help.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:sadaeniswa/Database/blocdata.dart';
+import 'package:sadaeniswa/Resources/blocdata.dart';
 Bloc bloc = new Bloc();
 String imageaddress;
 final get_post = TextEditingController();
@@ -145,10 +143,11 @@ setState(() {
 
             if(_Image != null) {
            UploadImage() ;
-              bloc.createDocument();
+            // bloc.createDocument();
             }
           else{ print("Image was null submitting without image");
-            bloc.createDocument();}
+          //  bloc.createDocument();
+          }
 
 
           Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -189,7 +188,7 @@ setState(() {
                 child: Icon(Icons.person),
               ),
               title: Text(
-              " "+userdisplayname),
+              " "),//userdisplayname),
               subtitle: Text("How are you doing?"),
               onTap: () {
               },

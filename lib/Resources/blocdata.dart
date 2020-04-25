@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'Firestore_database.dart';
 import 'dart:core';
-import 'package:sadaeniswa/dashboard.dart';
-import 'package:sadaeniswa/post_page.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
+import 'package:sadaeniswa/Pages/Posts/post_page.dart';
 
 Repository _repository = new Repository();
 
@@ -11,6 +11,7 @@ class Bloc {
   void initState() {
     getAllDocuments();
   }
+
 
   final _documentData = BehaviorSubject<QuerySnapshot>();
 
@@ -45,16 +46,16 @@ class Bloc {
     return await _repository.getRequiredDocument(collectionName, whereAttribute, isEqualTo);
   }
   DateTime dateTime = DateTime.now();
-
+/*
   Future<void> createDocument() async {
    // print("Image Address bloc" + imageaddress.toString());
     Map<String, dynamic> PostDocument = <String, dynamic>{
       "title": get_postTitle.text.toString(),
       "post": get_post.text.toString(),
-      "userID": userid,
-      "userEmail": userEmail,
-      "userPhotoUrl": userPhotoUrl,
-      "userName": userdisplayname,
+      "userID": authr.googleSignIn.currentUser.id,
+      "userEmail": authr.googleSignIn.currentUser.email,
+      "userPhotoUrl": authr.googleSignIn.currentUser.photoUrl,
+      "userName": authr.googleSignIn.currentUser.displayName,
       "timestamp": dateTime,
       "imageUri": imageaddress.toString(),
       "postID": postreference.documentID,
@@ -76,27 +77,26 @@ class Bloc {
     _repository.createUserDocument(UserDocument).catchError((e) {
       print(e);
     });
-
-
-
-
   }
-
-  Future<void> createComment( String comment, String postReference) async {
-
-    DateTime dateTime = DateTime.now();
-
+  Future<void> createCommentDocument(String Comment,String ReferenceID) async {
+    // print("Image Address bloc" + imageaddress.toString());
     Map<String, dynamic> postComment = <String, dynamic>{
+      "userID": userid,
+      "userEmail": userEmail,
       "userPhotoUrl": userPhotoUrl,
       "userName": userdisplayname,
-      "userID":  userid,
       "timestamp": dateTime,
-      "commentID": commentReference.documentID,
-      "postID": postReference,
-      "commentContent": comment,
+      "postID": ReferenceID,
+      "commentID":commentReference.documentID,
+      "commentContent":Comment,
     };
-   await _repository.createCommentDocument(postComment).catchError((e) {
+
+
+    _repository.createCommentDocument(postComment).catchError((e) {
       print(e);
     });
+
+
   }
+*/
 }

@@ -2,13 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sadaeniswa/about.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/about.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
-import 'package:sadaeniswa/auth_rss.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/help.dart';
+import 'package:sadaeniswa/Pages/signup_page.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
 
+import '../Resources/FirebaseAuthenticationMethods.dart';
 final get_username = TextEditingController();
 final get_password = TextEditingController();
 
@@ -19,21 +19,14 @@ class LoginPage extends StatefulWidget {
   final get_password = TextEditingController();
 //----------------------------------------------------------- Firebase-------------------------------------//
 //login_auth lauth;
-  auth_resources authr = new auth_resources();
 
   @override
   _LoginPageState createState() => _LoginPageState();
 
-  String getSign()
-  {
-    return authr.googleSignIn.currentUser.displayName.toString();
-  }
-
-
 }
 
 class _LoginPageState extends State<LoginPage> {
-
+  FirebaseRepository _repository = FirebaseRepository();
   @override
   Widget build(BuildContext context) {
     final place_of_peace = Container(
@@ -99,19 +92,6 @@ class _LoginPageState extends State<LoginPage> {
 
         onPressed: () {
           Navigator.of(context).pushNamed(Dashboard.tag);
-//          signInWithGoogle().whenComplete(() {
-//            Navigator.of(context).pushNamed('/dashboard');
-//            Navigator.push(context, MaterialPageRoute(builder: (context) {
-//              return Dashboard();
-//            }
-//            )
-//            );
-//          });
-//           return showDialog(
-//              context: context,
-//                builder: (context)
-//                    {
-//                      return AlertDialog(content: Text(get_username.text));
         },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
@@ -158,20 +138,7 @@ class _LoginPageState extends State<LoginPage> {
           'Login with Google?',
           style: TextStyle(color: Colors.purple, fontSize: 15),
         ),
-        onPressed: () {
-          authr.signInWithGoogle().whenComplete(() {
-            // FirebaseUser getuser;
-            print(authr.googleSignIn.currentUser.displayName + "Salam");
-            Navigator.of(context).pushNamed('/dashboard');
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              print("AAAAA" + userid);
-              return Dashboard();
-            }
-            )
-            );
-          }
-          );
-        }
+        onPressed: () => performLogin(),
     );
       return Scaffold(
 
@@ -228,13 +195,45 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 15.0),
               password,
               SizedBox(height: 10.0),
-              loginButton,
-              signup_button,
-              forgot_label,
               loginWithGoogle,
+   //           signup_button,
+              forgot_label,
+     //,
             ],
           ),
         ),
       );
   }
+
+  void performLogin() {
+    print("tring to perform login");
+    _repository.signIn().then((FirebaseUser user) {
+      print("something");
+      if (user != null) {
+        authenticateUser(user);
+      } else {
+        print("There was an error");
+      }
+    });
+  }
+
+  void authenticateUser(FirebaseUser user) {
+    _repository.authenticateUser(user).then((isNewUser) {
+      if (isNewUser) {
+        _repository.addDataToDb(user).then((value) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) {
+                return Dashboard();
+              }));
+        });
+      } else {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+              return Dashboard();
+            }));
+      }
+    });
+  }
+
+
 }

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sadaeniswa/Models/UserModel.dart';
-import 'package:sadaeniswa/Models/CommentModel.dart';
 class PostModel {
   final String title;
   final String postBody;

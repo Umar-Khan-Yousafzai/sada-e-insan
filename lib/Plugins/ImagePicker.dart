@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:multi_image_picker/multi_image_picker.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/post_page.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/about.dart';
+import 'package:sadaeniswa/Pages/Posts/post_page.dart';
 
-import 'dashboard.dart';
-import 'help.dart';
+import '../Screens/dashboard.dart';
+import '../Pages/DrawerPages/help.dart';
 
 
 class ImagePicker extends StatefulWidget {

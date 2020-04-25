@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/privacy_policy.dart';
-import 'dashboard.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/about.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/help.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/privacy_policy.dart';
+import '../Screens/dashboard.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -195,6 +195,7 @@ class _SignupPageState extends State<SignupPage> {
                         ),
 
                         onPressed: () {
+                          /*
                           if (_formKey.currentState.validate()) {
                             // If the form is valid, display a Snackbar.
                             authr.handleSignUp(getEmail.text.toString(),
@@ -207,7 +208,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }));
                             });
                           }
-                        },
+                        */},
 
                         padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
                         color: Colors.pinkAccent,
@@ -221,7 +222,7 @@ class _SignupPageState extends State<SignupPage> {
                   FlatButton(
                       child: Text('Signup with Google?',
                           style: TextStyle(color: Colors.purple, fontSize: 15)),
-                      onPressed: () {
+                      onPressed: () {/*
                         authr.signInWithGoogle().whenComplete(() {
                           if (GestureDetector(onTapCancel: () {
                                 // Navigator.of(context).pushNamed('/dashboard');
@@ -242,7 +243,7 @@ class _SignupPageState extends State<SignupPage> {
                           }
                           ;
                         });
-                      }),
+                 */     }),
                   // SizedBox(height: 9.0),
                   FlatButton(
                       child: Text(

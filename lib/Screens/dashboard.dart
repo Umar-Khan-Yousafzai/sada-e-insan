@@ -7,20 +7,15 @@ import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sadaeniswa/Models/PostModel.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_page.dart';
-import 'package:sadaeniswa/post_page.dart';
-import 'package:sadaeniswa/post_view.dart';
-import 'package:sadaeniswa/privacy_policy.dart';
-import 'package:sadaeniswa/report_problem.dart';
-import 'package:sadaeniswa/auth_rss.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/about.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/help.dart';
+import 'package:sadaeniswa/Screens/login_page.dart';
+import 'package:sadaeniswa/Pages/Posts/post_page.dart';
+import 'package:sadaeniswa/Pages/Posts/post_view.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/privacy_policy.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/report_problem.dart';
 
-final userdisplayname = authr.googleSignIn.currentUser.displayName;
-final userid = authr.googleSignIn.currentUser.id;
-final userEmail = authr.googleSignIn.currentUser.email;
-final userPhotoUrl = authr.googleSignIn.currentUser.photoUrl;
-auth_resources authr = new auth_resources();
+
 PostPage posts = new PostPage();
 
 class Dashboard extends StatefulWidget {
@@ -84,7 +79,7 @@ return Scaffold(
               leading: CircleAvatar(
                 child: Icon(Icons.person_outline),
               ),
-              title: Text(authr.googleSignIn.currentUser.displayName),
+              title: Text("Wilco"),
               subtitle: Text("How are you doing?"),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -151,7 +146,7 @@ return Scaffold(
               title: Text("Logout"),
               subtitle: Text("session will be closed"),
               onTap: () {
-                authr.signOutGoogle();
+
                 //  dispose();
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return LoginPage();
@@ -170,7 +165,7 @@ return Scaffold(
           //   authr.signInWithGoogle();
 
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            authr.googleSignIn.signInSilently();
+
             return PostPage();
           }));
         },
@@ -199,8 +194,8 @@ return Scaffold(
 
                 }
               return Container(
-               padding: EdgeInsets.fromLTRB(10,14,10,14), height: 530,
-               width: 400,
+               padding: EdgeInsets.fromLTRB(10,14,10,14), //height: 530,
+              // width: 400,
 
                 child:Material(
                     borderRadius: BorderRadius.circular(20.00),
@@ -239,11 +234,14 @@ return Scaffold(
 
                       ],
                     ),
-                    Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                     mainAxisSize: MainAxisSize.max,
+                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                      Align(
+                            Expanded(
+                              child: Image.network(post.data.documents[i].data['imageUri']),
+                            ),
+                     /*   Align(
                         alignment: Alignment.center,
                         child: Container(
 
@@ -258,9 +256,9 @@ return Scaffold(
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       ],
-                    ), //IMAGE Container
+                      ), //IMAGE Container
                     Column(
                       //mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -303,7 +301,7 @@ Divider(),
 
                             Container(
                               padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
-                              child:  Text("Umar Khan Yousafzai",
+                              child:  Text(post.data.documents[i].data['userPhotoUrluserName'].toString(),
                                 style: TextStyle(fontWeight: FontWeight.w900,
                                 fontSize: 13),
                               ),

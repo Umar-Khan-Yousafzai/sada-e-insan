@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sadaeniswa/dashboard.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
 
 class ReportProblem extends StatefulWidget {
   static String tag = "report-problem";

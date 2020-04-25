@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
+import 'package:sadaeniswa/Pages/signup_page.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
 
 class About extends StatefulWidget {
   static String tag = "about";
