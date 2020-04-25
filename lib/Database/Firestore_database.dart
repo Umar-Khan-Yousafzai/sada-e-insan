@@ -13,8 +13,9 @@ class Repository
 
     await  Firestore.instance.collection('posts').orderBy('timestamp',descending: true).getDocuments();
   }
-  Stream<QuerySnapshot> getAnything(String ComparisionItem,ItemNeeded ) {
-    return firestore.collection('smartphone').where(ComparisionItem, isEqualTo: ItemNeeded).snapshots();
+
+  Future<QuerySnapshot> getRequiredDocument(String collectionName,String whereAttribute,String isEqualTo )async {
+    return await Firestore.instance.collection(collectionName).where(whereAttribute, isEqualTo: isEqualTo).getDocuments();
   }
   Stream<DocumentSnapshot> getPostData(String documentId) {
     return firestore.collection('posts').document(documentId).snapshots();
@@ -35,7 +36,7 @@ await  postreference.setData(mapPostDocument);
     //await reference.collection('posts').document().setData(mapDoc);
     //print("Posted Data Online");
   }
-  Future<void> createCommentDocument(Map<String,dynamic> mapCommentDocument)async
+  Future<void> createCommentDocument(Map<String,dynamic> mapCommentDocument) async
   {
     await commentReference.setData(mapCommentDocument);
   }

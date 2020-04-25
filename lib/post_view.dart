@@ -20,27 +20,33 @@ import 'dashboard.dart';
 
 String doc;
 Bloc bloc = new Bloc();
+// ignore: non_constant_identifier_names
 final _get_comment = TextEditingController();
 
-class PostView extends StatelessWidget {
-  bool isSearching = false;
+class PostView extends StatefulWidget {
   final String documentID;
 
   PostView({Key key, @required this.documentID}) : super(key: key);
+
+  @override
+  _PostViewState createState() => _PostViewState();
+}
+
+class _PostViewState extends State<PostView> {
+  bool isSearching = false;
 
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder(
         stream: Firestore.instance
             .collection('posts')
-            .document(documentID)
+            .document(widget.documentID)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return new Text("Loading");
           }
           var userDocument = snapshot.data;
-
           String date = DateFormat.yMMMd()
               .format(userDocument['timestamp'].toDate())
               .toString();
@@ -150,17 +156,21 @@ class PostView extends StatelessWidget {
                             autofocus: false,
                             decoration: InputDecoration(
                               hintText: "What's on your mind?",
-                              suffixIcon: IconButton(
+                              suffix: IconButton(
                                 icon: Icon(Icons.comment),
                                 onPressed: () {
-                                  DateTime dateTime = DateTime.now();
-                                  bloc.createComment(
-                                    _get_comment.text.toString(),
-                                    documentID.toString(),
-                                  );
+                                //  DateTime dateTime = DateTime.now();
+                                 // bloc.createComment(
+                                   // _get_comment.text.toString(),
+                                   // widget.documentID.toString(),
+                                 // );
+                                  bloc.createComment(_get_comment.text.toString(), widget.documentID).whenComplete((){print("hello world");}).catchError((e) {
+                                    print("We caught an error"+e);
+                                  });
                                   _get_comment.clear();
                                 },
                               ),
+
                               contentPadding:
                                   EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 10.0),
                               border: OutlineInputBorder(
@@ -172,24 +182,44 @@ class PostView extends StatelessWidget {
                       )
                     ],
                   ),
-
-                  Row(
+/*
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     verticalDirection: VerticalDirection.down,
                     children: <Widget>[
-                      Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(6),
-                            child: Text(
-                              userDocument['post'].toString(),
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                fontSize: 19,
-                              ),
-                            ),
-                          ))
+                      StreamBuilder(
+                        stream: Firestore.instance.collection('comments').where('postID',isEqualTo: widget.documentID).snapshots(),
+                        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> docShot){
+                          if(docShot.hasData){
+                          //  print("MOM"+docShot.data.documents[0].data['commentContent'].toString());
+                            return Container(
+                              // height: double.maxFinite,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: docShot.data.documents.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return ListTile(
+                                      title:Text(docShot.data.documents[index].data['commentContent'].toString(),
+                                      style:
+                                      TextStyle(color: Colors.black, fontSize: 16),
+                                    ));
+                                  },
+                                ));
+
+                          }
+                          return Container();
+                      },
+                      ),
+
+
+
+
                     ],
-                  )
-                            ]),
+                  )*/
+
+                ]),
               ),
             ),
           );
