@@ -1,11 +1,13 @@
 /*;*/
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+<<<<<<< Updated upstream:lib/dashboard.dart
 import 'package:sadaeniswa/Models/PostModel.dart';
 import 'package:sadaeniswa/about.dart';
 import 'package:sadaeniswa/help.dart';
@@ -23,32 +25,34 @@ final userPhotoUrl = authr.googleSignIn.currentUser.photoUrl;
 auth_resources authr = new auth_resources();
 PostPage posts = new PostPage();
 
+=======
+import 'package:sadaeniswa/Models/UserModel.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/about.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/help.dart';
+import 'package:sadaeniswa/Screens/login_page.dart';
+import 'package:sadaeniswa/Pages/Posts/post_page.dart';
+import 'package:sadaeniswa/Pages/Posts/post_view.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/privacy_policy.dart';
+import 'package:sadaeniswa/Pages/DrawerPages/report_problem.dart';
+import 'package:sadaeniswa/Resources/FirebaseAuthenticationMethods.dart';
+FirebaseAuthenticationRepository _fbAuth = new FirebaseAuthenticationRepository();
+>>>>>>> Stashed changes:lib/Screens/dashboard.dart
 class Dashboard extends StatefulWidget {
   static String tag = 'dashboard';
+UserModel user = new UserModel();
 
   @override
   _DashboardState createState() => _DashboardState();
 }
 
-PostPage posted = new PostPage();
-
 class _DashboardState extends State<Dashboard> {
+
   bool isSearching = false;
   QuerySnapshot post;
 
-  @override
-  void initState() {
-    posted.getPosts().then((results) {
-      setState(() {
-        post = results;
-      });
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-
 return Scaffold(
 
       appBar: AppBar(
@@ -84,7 +88,11 @@ return Scaffold(
               leading: CircleAvatar(
                 child: Icon(Icons.person_outline),
               ),
+<<<<<<< Updated upstream:lib/dashboard.dart
               title: Text(authr.googleSignIn.currentUser.displayName),
+=======
+              title: Text("Sham e Firaq"),
+>>>>>>> Stashed changes:lib/Screens/dashboard.dart
               subtitle: Text("How are you doing?"),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -151,8 +159,12 @@ return Scaffold(
               title: Text("Logout"),
               subtitle: Text("session will be closed"),
               onTap: () {
+<<<<<<< Updated upstream:lib/dashboard.dart
                 authr.signOutGoogle();
                 //  dispose();
+=======
+                _fbAuth.signOut();
+>>>>>>> Stashed changes:lib/Screens/dashboard.dart
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return LoginPage();
                 }));
@@ -167,10 +179,11 @@ return Scaffold(
         child: Icon(Icons.add),
         backgroundColor: Colors.pinkAccent,
         onPressed: () {
-          //   authr.signInWithGoogle();
-
           Navigator.push(context, MaterialPageRoute(builder: (context) {
+<<<<<<< Updated upstream:lib/dashboard.dart
             authr.googleSignIn.signInSilently();
+=======
+>>>>>>> Stashed changes:lib/Screens/dashboard.dart
             return PostPage();
           }));
         },
@@ -179,8 +192,6 @@ return Scaffold(
   }
 
   Widget _posts() {
-    GoogleSignIn gsn;
-
     return StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance
             .collection('posts')

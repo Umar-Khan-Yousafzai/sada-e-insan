@@ -33,7 +33,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+<<<<<<< Updated upstream:lib/login_page.dart
 
+=======
+  FirebaseAuthenticationRepository _repository = FirebaseAuthenticationRepository();
+>>>>>>> Stashed changes:lib/Screens/login_page.dart
   @override
   Widget build(BuildContext context) {
     final place_of_peace = Container(
