@@ -1,17 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:sadaeniswa/Models/PostModel.dart';
+import 'package:sadaeniswa/Models/UserModel.dart';
+import 'package:sadaeniswa/Resources/FirebaseAuthenticationMethods.dart';
 import 'Firestore_database.dart';
 import 'dart:core';
-import 'package:sadaeniswa/dashboard.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
 import 'package:sadaeniswa/post_page.dart';
-
+import 'package:sadaeniswa/Resources/auth_rss.dart';
 Repository _repository = new Repository();
+PostModel _postModel;
+FirebaseAuthenticationRepository _authenticationRepository = new FirebaseAuthenticationRepository();
 
 class Bloc {
   void initState() {
     getAllDocuments();
-  }
 
+  }
   final _documentData = BehaviorSubject<QuerySnapshot>();
 
 //To listen documents data from StreamBuilder
@@ -46,41 +52,86 @@ class Bloc {
   }
   DateTime dateTime = DateTime.now();
 
-  Future<void> createDocument() async {
+UserModel mymodel;
+
+  Future<void> createPostDocument() async {
    // print("Image Address bloc" + imageaddress.toString());
-    Map<String, dynamic> PostDocument = <String, dynamic>{
+   _postModel = PostModel(
+     post: get_post.text.toString(),
+     postID: postreference.documentID,
+     //userEmail: auth_resources.email,
+     userName: mymodel.username.toString(),
+     userPhotoUrl: mymodel.profilePhoto.toString(),
+     imageUri:imageaddress.toString(),
+     title: get_postTitle.text.toString(),
+     timestamp: dateTime,
+   );
+
+   _repository.createPostDocument(_postModel.toPostMap(_postModel)).catchError((e) {
+     print(e);
+   });
+
+
+    /*   Map<String, dynamic> PostDocument = <String, dynamic>{
       "title": get_postTitle.text.toString(),
       "post": get_post.text.toString(),
-      "userID": userid,
       "userEmail": userEmail,
       "userPhotoUrl": userPhotoUrl,
       "userName": userdisplayname,
       "timestamp": dateTime,
       "imageUri": imageaddress.toString(),
       "postID": postreference.documentID,
-    };
-
-    Map<String, dynamic> UserDocument = <String, dynamic>{
-      "userID": userid,
-      "userEmail": userEmail,
-      "userPhotoUrl": userPhotoUrl,
-      "userName": userdisplayname,
-      "timestamp": dateTime,
-      "postID": postreference.documentID,
-      "userDocumentID": userreference.documentID,
-    };
-
-    _repository.createPostDocument(PostDocument).catchError((e) {
-      print(e);
-    });
-    _repository.createUserDocument(UserDocument).catchError((e) {
-      print(e);
-    });
-
+    };*/
 
 
 
   }
+
+
+  Future<void> addPostToDb(FirebaseUser currentUser) async {
+    //String username = Utils.getUsername(currentUser.email);
+
+    _postModel = PostModel(
+      post: get_post.text.toString(),
+      postID: postreference.documentID,
+      userEmail: currentUser.email,
+      userName: currentUser.displayName,
+      userPhotoUrl: currentUser.photoUrl,
+      imageUri: imageaddress.toString(),
+      title: get_postTitle.text.toString(),
+      timestamp: dateTime,
+    );
+
+
+    _repository.createPostDocument(_postModel.toPostMap(_postModel))
+        .catchError((e) {
+      print(e);
+    });}
+
+    void authenticateUser(FirebaseUser user) {
+      _authenticationRepository.authenticateUser(user).then((checkUser) {
+        if (checkUser != null) {
+          _authenticationRepository.addPostToDb(user);
+
+        }
+        else
+          print("error user" + user.uid);
+      });
+    }
+
+  Future<void> postDocument() {
+    _authenticationRepository.getCurrentUser().then((user) {
+      if (user.uid != null) {
+        authenticateUser(user);
+      }
+      else {
+        print("Error");
+      }
+    });
+  }
+
+
+
 
   Future<void> createComment( String comment, String postReference) async {
 
@@ -99,4 +150,11 @@ class Bloc {
       print(e);
     });
   }
+
+
+
+
+
+
+
 }

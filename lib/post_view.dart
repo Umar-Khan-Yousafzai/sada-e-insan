@@ -6,20 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sadaeniswa/Database/Firestore_database.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_page.dart';
+import 'package:sadaeniswa/Pages/about.dart';
+import 'package:sadaeniswa/Pages/help.dart';
+import 'package:sadaeniswa/Resources/FirebaseAuthenticationMethods.dart';
+import 'package:sadaeniswa/Screens/login_page.dart';
 import 'package:sadaeniswa/post_page.dart';
 import 'package:sadaeniswa/post_view.dart';
-import 'package:sadaeniswa/privacy_policy.dart';
-import 'package:sadaeniswa/report_problem.dart';
-import 'package:sadaeniswa/auth_rss.dart';
+import 'package:sadaeniswa/Pages/privacy_policy.dart';
+import 'package:sadaeniswa/Pages/report_problem.dart';
+import 'package:sadaeniswa/Resources/auth_rss.dart';
 import 'package:intl/intl.dart';
 import 'Database/blocdata.dart';
-import 'dashboard.dart';
+import 'Screens/dashboard.dart';
 
 String doc;
 Bloc bloc = new Bloc();
+FirebaseAuthenticationRepository _authenticationRepository = new FirebaseAuthenticationRepository();
 // ignore: non_constant_identifier_names
 final _get_comment = TextEditingController();
 
@@ -159,15 +161,42 @@ class _PostViewState extends State<PostView> {
                               suffix: IconButton(
                                 icon: Icon(Icons.comment),
                                 onPressed: () {
-                                //  DateTime dateTime = DateTime.now();
-                                 // bloc.createComment(
-                                   // _get_comment.text.toString(),
-                                   // widget.documentID.toString(),
-                                 // );
-                                  bloc.createComment(_get_comment.text.toString(), widget.documentID).whenComplete((){print("hello world");}).catchError((e) {
-                                    print("We caught an error"+e);
-                                  });
-                                  _get_comment.clear();
+
+                                  DateTime dateTime = DateTime.now();
+                                  DocumentReference CommentReference = Firestore
+                                      .instance
+                                      .collection('comments')
+                                      .document();
+                                  Future<void> createCommentDocument() async {
+                                    String userDisplayName;
+                                    String userId ;
+                                    String userEmail;
+                                    String userPhotoUrl ;
+
+                                    DateTime dateTime = DateTime.now();
+                                    _authenticationRepository.getCurrentUser().then((user){
+                                      userDisplayName = user.displayName;
+                                      userPhotoUrl = user.photoUrl;
+                                      userEmail = user.email;
+                                    });
+
+                                    Map<String, dynamic> postComment =
+                                    <String, dynamic>{
+                                      "postID": widget.documentID,
+                                      //"commentID":commentReference.documentID,
+                                      "commentContent":
+                                      _get_comment.text.toString(),
+                                      "userID": userId,
+                                      "userEmail": userEmail,
+                                      "userPhotoUrl": userPhotoUrl,
+                                      "userName": userDisplayName,
+                                      "timestamp": dateTime,
+                                      "commentID": CommentReference.documentID
+                                    };
+                                    CommentReference.setData(postComment);
+                                  }
+
+                                  createCommentDocument();
                                 },
                               ),
 

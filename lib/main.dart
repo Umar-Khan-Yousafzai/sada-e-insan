@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'login_page.dart';
-import 'dashboard.dart';
-import 'signup_page.dart';
-
+import 'Screens/login_page.dart';
+import 'Screens/dashboard.dart';
+import 'Pages/signup_page.dart';
+import 'package:sadaeniswa/post_page.dart';
 void main() => runApp(MyApp());
-  class MyApp extends StatelessWidget{
+  class MyApp extends StatefulWidget{
 
 
   /*final routes = <String, WidgetBuilder>{
@@ -13,6 +13,11 @@ void main() => runApp(MyApp());
     LoginPage.tag: (context) => LoginPage(),
 
   };*/
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
  // Routing rout = new Routing();
   Widget build(BuildContext context) {
@@ -29,13 +34,13 @@ void main() => runApp(MyApp());
          //initialRoute: '/login_route',
          routes: {
 
-           '/login_route': (context) => LoginPage(),
+           'Screens/login_route': (context) => LoginPage(),
 
-           '/dashboard': (context) => Dashboard(),
+           'Screens/dashboard': (context) => Dashboard(),
 
            '/signup':(context) => SignupPage(),
-
            '/loginpage_email':(context) => LoginPage(),
+           'Pages/post_page':(context) => PostPage(),
          },
        );
   }

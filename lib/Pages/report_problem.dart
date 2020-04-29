@@ -1,37 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:sadaeniswa/Screens/login_page.dart';
+import 'package:flutter/services.dart';
+import 'package:sadaeniswa/Screens/dashboard.dart';
 
-class ForgetPasswordVerificationCode extends StatefulWidget {
-  static String tag = "forget-password-verification-code";
+class ReportProblem extends StatefulWidget {
+  static String tag = "report-problem";
   @override
-  _ForgetPasswordVerificationCodeState createState() => _ForgetPasswordVerificationCodeState();
+  _ReportProblemState createState() => _ReportProblemState();
 }
 
-class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificationCode> {
+class _ReportProblemState extends State<ReportProblem> {
   @override
   Widget build(BuildContext context) {
 
-    final placeOfPeace = Container(
+
+    final place_of_peace = Container(
       alignment: Alignment.topLeft,
-      child: Icon(Icons.people,color: Colors.pinkAccent,size: 75.0),
+      child: Icon(Icons.people,color: Colors.pinkAccent,size: 40.0),
     );
 
-    final text_1= Text(
+    final text_1 = Text(
       "Place of Peace\n",
       style: TextStyle(
-        fontSize: 45.0,
+        fontSize: 30.0,
         color: Colors.black26,
         fontWeight: FontWeight.normal,
       ),
     );
 
-    final codeField = TextFormField(
-      keyboardType: TextInputType.text,
+    final problem = TextField(
+      keyboardType: TextInputType.multiline,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(1000),
+      ],
+      maxLines: null,
       autofocus: false,
       decoration: InputDecoration(
-        labelText: 'Verification Code',
-        hintText: 'Enter verification code...',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        labelText: 'Tell us Problem',
+        hintText: "What's on your mind...",
+        contentPadding: EdgeInsets.fromLTRB(30.0, 100.0, 10.0, 100.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
 
       ),
@@ -39,28 +45,35 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
     );
 
 
-    final verifyButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
+    final submit = Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(14),
         ),
+
         onPressed: () {
+
           //Navigator.of(context).pushNamed(SignupPage.tag);
+
           Navigator.push(context,
               MaterialPageRoute(builder: (context){
-                return LoginPage();
+                return Dashboard();
               }
               )
           );
 
         },
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(5),
         color: Colors.pinkAccent,
         child: Text(
-            'Verify', style: TextStyle(color: Colors.white, fontSize: 17.0)),
+            'Submit', style: TextStyle(color: Colors.white, fontSize: 15.0)),
       ),
     );
+
+
+
+
 
 
     return Scaffold(
@@ -84,7 +97,6 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
           )
         ],
 
-
       ),
 
       backgroundColor: Colors.white,
@@ -95,15 +107,17 @@ class _ForgetPasswordVerificationCodeState extends State<ForgetPasswordVerificat
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
             SizedBox(height: 20.0,),
-            placeOfPeace,
+            place_of_peace,
             text_1,
-            codeField,
-            verifyButton,
+            problem,
+            submit,
 
           ],
         ),
       ),
     );
+
+
 
 
   }

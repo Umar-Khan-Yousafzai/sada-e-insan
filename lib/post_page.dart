@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:path/path.dart' as path;
 //import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,18 +7,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sadaeniswa/about.dart';
-import 'package:sadaeniswa/dashboard.dart';
-import 'package:sadaeniswa/help.dart';
-import 'package:sadaeniswa/login_page.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:sadaeniswa/Database/blocdata.dart';
+
+import 'Pages/about.dart';
+import 'Pages/help.dart';
+import 'Screens/dashboard.dart';
 Bloc bloc = new Bloc();
 String imageaddress;
 final get_post = TextEditingController();
 final get_postTitle = TextEditingController();
 // ignore: non_constant_identifier_names
-
+FirebaseUser user;
 File _Image;
 StorageReference imageReference;
 
@@ -39,9 +40,10 @@ class _PostPageState extends State<PostPage> {
   Future getImage() async {
     File image;
     image = (await ImagePicker.pickImage(source: ImageSource.gallery));
+
     setState(()
     {
-     _Image = image;
+      _Image = image;
     });
 
   }//getImage
@@ -49,19 +51,18 @@ class _PostPageState extends State<PostPage> {
   Future<String> UploadImage() async{
     String name;
     if(await _Image.exists()){
-      name = path.basename(_Image.path).toString();
-
+      name = await path.basename(_Image.path.toString()).toString();
+    print("File path" + name);
     }
+
     StorageReference ref = FirebaseStorage.instance.ref().child(name);
     StorageUploadTask uploadTask = ref.putFile(_Image);
     var downloadUrl = await(await uploadTask.onComplete).ref.getDownloadURL();
     print("download address"+downloadUrl);
-setState(() {
-  imageaddress = downloadUrl.toString();
-
-  print("Variable imageaddress"+imageaddress);
-  return downloadUrl;
-});
+    setState(() {
+      imageaddress = downloadUrl.toString();
+      print("Variable Image Address"+imageaddress);
+    });
 
     return name;
   }
@@ -111,26 +112,26 @@ setState(() {
       ),
       child: TextField(
 
-       controller: get_post,
-      keyboardType: TextInputType.multiline,
+        controller: get_post,
+        keyboardType: TextInputType.multiline,
         inputFormatters: [
-        LengthLimitingTextInputFormatter(1000),
-      ],
-      maxLines: null,
-      autofocus: false,
-      decoration: InputDecoration(
-        hintText: "What's on your mind...",
-        suffixIcon: IconButton(icon: Icon(Icons.camera), onPressed: () {
-          getImage();
+          LengthLimitingTextInputFormatter(1000),
+        ],
+        maxLines: null,
+        autofocus: false,
+        decoration: InputDecoration(
+          hintText: "What's on your mind...",
+          suffixIcon: IconButton(icon: Icon(Icons.camera), onPressed: () {
+            getImage();
 
-        },
-        ),
-        contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
-        ),
+          },
+          ),
+          contentPadding: EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 10.0),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0),
+          ),
 
+        ),
       ),
-    ),
     );
 
 
@@ -140,20 +141,21 @@ setState(() {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
         ),
-        onPressed: () {
+        onPressed: () async {
           //Navigator.of(context).pushNamed(SignupPage.tag);
-
-            if(_Image != null) {
-           UploadImage() ;
-              bloc.createDocument();
-            }
+          if(_Image != null) {
+             await UploadImage();
+           await bloc.postDocument();
+          }
           else{ print("Image was null submitting without image");
-            bloc.createDocument();}
+          bloc.postDocument();
+          }
 
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
             return Dashboard();
           }));
+
         },
         padding: EdgeInsets.all(5),
         color: Colors.pinkAccent,
@@ -164,114 +166,121 @@ setState(() {
 
     return SafeArea(
 
-    child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: Center(child: Text("SADA-E-NISWA")),
-        actions: <Widget>[
-          PopupMenuButton(
-            // ignore: missing_return
-            itemBuilder: (context) {
-              var popupMenuItem = PopupMenuItem(
-                child: ListView(
-                  children: <Widget>[],
-                ),
-              );
-            },
-          )
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.person),
-              ),
-              title: Text(
-              " "+userdisplayname),
-              subtitle: Text("How are you doing?"),
-              onTap: () {
-              },
-            ),
-            Divider(),
-
-
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.home),
-              ),
-              title: Text("Home"),
-              subtitle: Text("dashboard"),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Dashboard();
-                }));
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.apps),
-              ),
-              title: Text("About"),
-              subtitle: Text("app development"),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return About();
-                }));
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: CircleAvatar(
-                child: Icon(Icons.help),
-              ),
-              title: Text("Help"),
-              subtitle: Text("any problem?"),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Help();
-                }));
-              },
-            ),
-            Divider(),
-          ],
-        ),
-      ),
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          //shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            SizedBox(
-            //  height: 10,
-            ),
-            placeOfPeace,
-            text_1,
-            postTitle,
-            SizedBox(width: 10,height: 10,),
-
-            post,
-          // child:   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-        //height: MediaQuery.of(context).size.height * 0.35,
-            Row(
-              children: <Widget>[
-              Expanded(
-                child: _Image == null ? Container() : Image.file(_Image,
-                height: 100,
-                width: 100,)
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.pink,
+            title: Center(child: Text("SADA-E-NISWA")),
+            actions: <Widget>[
+              PopupMenuButton(
+                // ignore: missing_return
+                itemBuilder: (context) {
+                  var popupMenuItem = PopupMenuItem(
+                    child: ListView(
+                      children: <Widget>[],
+                    ),
+                  );
+                },
               )
+            ],
+          ),
+          drawer: Drawer(
+            child: ListView(
+              children: <Widget>[
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(Icons.person),
+                  ),
+                  title: Text(
+                      " "),
+                  subtitle: Text("How are you doing?"),
+                  onTap: () {
+                  },
+                ),
+                Divider(),
+
+
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(Icons.home),
+                  ),
+                  title: Text("Home"),
+                  subtitle: Text("dashboard"),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return Dashboard();
+                    }));
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(Icons.apps),
+                  ),
+                  title: Text("About"),
+                  subtitle: Text("app development"),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return About();
+                    }));
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(Icons.help),
+                  ),
+                  title: Text("Help"),
+                  subtitle: Text("any problem?"),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return Help();
+                    }));
+                  },
+                ),
+                Divider(),
               ],
             ),
-submit,
+          ),
+          backgroundColor: Colors.white,
+          body: Center(
+            child: ListView(
+              //shrinkWrap: true,
+              padding: EdgeInsets.only(left: 24.0, right: 24.0),
+              children: <Widget>[
+                SizedBox(
+                  //  height: 10,
+                ),
+                placeOfPeace,
+                text_1,
+                postTitle,
+                SizedBox(width: 10,height: 10,),
+
+                post,
+                // child:   padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+                //height: MediaQuery.of(context).size.height * 0.35,
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: _Image == null ? Container() : Image.file(_Image,
+                          height: 300,
+                          width: 300,
+                        )
+
+                    )
+                  ],
+                ),
+                submit,
 // GetImages(),
-],
-),
-),
-));
-}
+              ],
+            ),
+          ),
+        ));
+  }
+  @override
+  void dispose()
+  {
+    super.dispose();
+  }
 }
 
 
