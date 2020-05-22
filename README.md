@@ -45,9 +45,9 @@ M.Arslan Hafeez ~ Coreteam Member
 # Special Thanks:
 
 Thank you very Google Team you guys have done a great job and flutter is such an amazing, easy and challenging SDK that gives you something new to learn everyday it is powerful and effective tool. The powerful of dart and flutter made me switch from desktop to mobile development.
-Love you DSC team and shad and all you guys
+Love you DSC team, shad and all you guys
 
 Regards:
-Umer Farooq Khan,
+Umer Farooq Khan(Dsc Lead) and
 Arslan Hafeez
-(Dsc Lead) 
+ 
