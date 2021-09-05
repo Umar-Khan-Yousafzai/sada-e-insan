@@ -1,13 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sadaeniswa/about.dart';
+import 'package:sadaeniswa/auth_rss.dart';
+import 'package:sadaeniswa/dashboard.dart';
 import 'package:sadaeniswa/forget_password_email.dart';
 import 'package:sadaeniswa/help.dart';
 import 'package:sadaeniswa/signup_page.dart';
-import 'package:sadaeniswa/dashboard.dart';
-import 'package:sadaeniswa/auth_rss.dart';
+
+import 'Resources/FirebaseAuthenticationMethods.dart';
 
 final get_username = TextEditingController();
 final get_password = TextEditingController();
@@ -24,20 +25,14 @@ class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 
-  String getSign()
-  {
+  String getSign() {
     return authr.googleSignIn.currentUser.displayName.toString();
   }
-
-
 }
 
 class _LoginPageState extends State<LoginPage> {
-<<<<<<< Updated upstream:lib/login_page.dart
-
-=======
-  FirebaseAuthenticationRepository _repository = FirebaseAuthenticationRepository();
->>>>>>> Stashed changes:lib/Screens/login_page.dart
+  FirebaseAuthenticationRepository _repository =
+      FirebaseAuthenticationRepository();
   @override
   Widget build(BuildContext context) {
     final place_of_peace = Container(
@@ -64,12 +59,9 @@ class _LoginPageState extends State<LoginPage> {
           //labelText: 'Email',
           hintText: 'Email Address...',
           //errorText: "Error",
-          contentPadding:
-          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32.0)),
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
-
       ),
     );
 
@@ -85,14 +77,11 @@ class _LoginPageState extends State<LoginPage> {
           //labelText: 'Password',
           hintText: 'Your Password...',
           //errorText: "Error",
-          contentPadding:
-          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32.0)),
+          contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
         ),
       ),
     );
-
 
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -100,7 +89,6 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-
         onPressed: () {
           Navigator.of(context).pushNamed(Dashboard.tag);
 //          signInWithGoogle().whenComplete(() {
@@ -119,8 +107,8 @@ class _LoginPageState extends State<LoginPage> {
         },
         padding: EdgeInsets.all(12),
         color: Colors.pinkAccent,
-        child: Text(
-            'Login', style: TextStyle(color: Colors.white, fontSize: 17.0)),
+        child: Text('Login',
+            style: TextStyle(color: Colors.white, fontSize: 17.0)),
       ),
     );
 
@@ -170,75 +158,67 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               print("AAAAA" + userid);
               return Dashboard();
-            }
-            )
-            );
-          }
-          );
-        }
-    );
-      return Scaffold(
-
-        drawer: Drawer(
-          child: ListView(
-            children: <Widget>[
-              ListTile(
-                leading: CircleAvatar(
-                  child: Icon(Icons.apps),
-                ),
-                title: Text("About"),
-                subtitle: Text("app development"),
-                onTap: () {
-                  Navigator.push(context,
-                      // ignore: missing_return
-                      MaterialPageRoute(builder: (context) {
-                        return About();
-                      }));
-                },
+            }));
+          });
+        });
+    return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                child: Icon(Icons.apps),
               ),
-              Divider(),
-              ListTile(
-                leading: CircleAvatar(
-                  child: Icon(Icons.help),
-                ),
-                title: Text("Help"),
-                subtitle: Text("any problem?"),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Help();
-                  }));
-                },
+              title: Text("About"),
+              subtitle: Text("app development"),
+              onTap: () {
+                Navigator.push(context,
+                    // ignore: missing_return
+                    MaterialPageRoute(builder: (context) {
+                  return About();
+                }));
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: CircleAvatar(
+                child: Icon(Icons.help),
               ),
-            ],
-          ),
+              title: Text("Help"),
+              subtitle: Text("any problem?"),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return Help();
+                }));
+              },
+            ),
+          ],
         ),
-
-
-        backgroundColor: Colors.white,
-        body: SafeArea(
+      ),
+      backgroundColor: Colors.white,
+      body: SafeArea(
 //minimum: ,
-          child: ListView(
-
-            shrinkWrap: true,
-            padding: EdgeInsets.fromLTRB(24, 36, 24, 24),
-            children: <Widget>[
-              SizedBox(
-                height: 20.0,
-              ),
-              place_of_peace,
-              text_1,
-              SizedBox(height: 35.0),
-              email,
-              SizedBox(height: 15.0),
-              password,
-              SizedBox(height: 10.0),
-              loginButton,
-              signup_button,
-              forgot_label,
-              loginWithGoogle,
-            ],
-          ),
+        child: ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.fromLTRB(24, 36, 24, 24),
+          children: <Widget>[
+            SizedBox(
+              height: 20.0,
+            ),
+            place_of_peace,
+            text_1,
+            SizedBox(height: 35.0),
+            email,
+            SizedBox(height: 15.0),
+            password,
+            SizedBox(height: 10.0),
+            loginButton,
+            signup_button,
+            forgot_label,
+            loginWithGoogle,
+          ],
         ),
-      );
+      ),
+    );
   }
 }
